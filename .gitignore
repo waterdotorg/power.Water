@@ -14,6 +14,7 @@ settings_dev_private.py
 settings_current.py
 celerybeat.pid
 celerybeat-schedule
+TODO
 
 # Django #
 ##########
