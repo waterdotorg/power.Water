@@ -1,0 +1,8 @@
+Django
+Markdown
+South
+django-debug-toolbar
+easy-thumbnails
+-e git+https://github.com/tweepy/tweepy.git#egg=tweepy
+-e git+https://github.com/bitly/bitly-api-python.git#egg=bitly_api-dev
+-e git+https://github.com/pythonforfacebook/facebook-sdk.git#egg=facebook-sdk
