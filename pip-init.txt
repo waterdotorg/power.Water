@@ -1,8 +1,10 @@
-Django
-Markdown
-South
-django-debug-toolbar
-easy-thumbnails
--e git+https://github.com/tweepy/tweepy.git#egg=tweepy
--e git+https://github.com/bitly/bitly-api-python.git#egg=bitly_api-dev
--e git+https://github.com/pythonforfacebook/facebook-sdk.git#egg=facebook-sdk
+Django==1.4.1
+Markdown==2.2.0
+South==0.7.6
+-e git+https://github.com/bitly/bitly-api-python.git@3b19d8ab89e0ba821c4b413676cd0c8d157a33fa#egg=bitly_api-dev
+distribute==0.6.24
+django-debug-toolbar==0.9.4
+easy-thumbnails==1.1
+-e git+https://github.com/pythonforfacebook/facebook-sdk.git@2fd825ba0b1121bc76b84c829b6cb43c7094cdc4#egg=facebook_sdk-dev
+gunicorn==0.14.6
+-e git+https://github.com/tweepy/tweepy.git@0fd129e866a28cb610b4c4f157b2b23b0560d2a1#egg=tweepy-dev
