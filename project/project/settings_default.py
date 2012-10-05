@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'south',
     'easy_thumbnails',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging
