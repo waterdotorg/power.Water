@@ -24,6 +24,7 @@ local_settings.py
 # Python #
 ##########
 *.py[co]
+.Python
 
 # Packages
 *.egg
