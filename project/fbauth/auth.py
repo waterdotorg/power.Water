@@ -2,7 +2,7 @@ import cgi
 import facebook
 import urllib
 
-from django.config import settings
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
