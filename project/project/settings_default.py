@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'gunicorn',
     'fbauth',
+    'custom',
 )
 
 AUTHENTICATION_BACKENDS = (
