@@ -33,6 +33,11 @@ SECRET_KEY = ''
 
 DEFAULT_FROM_EMAIL = ''
 SERVER_EMAIL = ''
+
+# Facebook API keys
+FACEBOOK_APP_ID = ''
+FACEBOOK_API_KEY = ''
+FACEBOOK_API_SECRET = ''
 """
 
 # Local time zone for this installation. Choices can be found here:
@@ -135,6 +140,13 @@ INSTALLED_APPS = (
     'south',
     'easy_thumbnails',
     'gunicorn',
+    'fbauth',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'fbauth.auth.FbAuth',
+    #'twauth.auth.TwAuth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -168,3 +180,8 @@ LOGGING = {
 
 # easy_thumbnails config
 THUMBNAIL_SUBDIR = 'thumbs'
+
+# Facebook settings
+FACEBOOK_PERMISSIONS_SCOPE = ['publish_stream', 'email']
+FACEBOOK_LOGIN_SUCCESS_REDIRECT = '/'
+FACEBOOK_LOGIN_ERROR_REDIRECT = '/'
