@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     (r'^fbauth/', include('fbauth.urls')),
+    (r'^twauth/', include('twauth.urls')),
     (r'', include('custom.urls')),
 )

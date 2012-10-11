@@ -38,6 +38,10 @@ SERVER_EMAIL = ''
 FACEBOOK_APP_ID = ''
 FACEBOOK_API_KEY = ''
 FACEBOOK_API_SECRET = ''
+
+# Twitter API keys
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET = ''
 """
 
 # Local time zone for this installation. Choices can be found here:
@@ -141,13 +145,14 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'gunicorn',
     'fbauth',
+    'twauth',
     'custom',
 )
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'fbauth.auth.FbAuth',
-    #'twauth.auth.TwAuth',
+    'twauth.auth.TwAuth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -186,3 +191,7 @@ THUMBNAIL_SUBDIR = 'thumbs'
 FACEBOOK_PERMISSIONS_SCOPE = ['publish_stream', 'email']
 FACEBOOK_LOGIN_SUCCESS_REDIRECT = '/'
 FACEBOOK_LOGIN_ERROR_REDIRECT = '/'
+
+# Twitter settings
+TWITTER_LOGIN_SUCCESS_REDIRECT = '/'
+TWITTER_LOGIN_ERROR_REDIRECT = '/'
