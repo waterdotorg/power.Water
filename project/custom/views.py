@@ -4,7 +4,14 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 
 def homepage(request):
-    return render(request, 'homepage.html')
+    user = None
+    if request.user.is_authenticated():
+        user = request.user
+
+    dict_context = {
+        'user': user,
+    }
+    return render(request, 'homepage.html', dict_context)
 
 def signout(request):
     logout(request)
