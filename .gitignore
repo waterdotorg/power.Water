@@ -7,6 +7,7 @@ local/
 logs/
 public/media/
 project/public/media/
+project/project/public/media/
 src/
 .idea/
 settings_production_private.py

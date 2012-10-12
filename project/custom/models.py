@@ -3,6 +3,7 @@ import requests
 import urllib
 
 from django.contrib.auth.models import User
+from django.contrib.auth.signals import user_logged_in
 from django.core.files.base import File
 from django.db import models
 from django.db.models.signals import post_save
@@ -52,7 +53,7 @@ class Profile(models.Model):
             fql_query = 'SELECT friend_count FROM user WHERE uid=me()'
             r = requests.get('https://graph.facebook.com/fql', params={'q': fql_query, 'access_token': facebook_user.access_token})
             if r.json['data'][0]['friend_count']:
-                self.followers = r.json['data'][0]['friend_count']
+                self.followers = int(r.json['data'][0]['friend_count'])
 
             self.social_data_completed = True
             self.save()
@@ -66,14 +67,14 @@ class Profile(models.Model):
 
 
 ### Signals ###
-def post_save_user(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+def user_signed_in(sender, request, user, **kwargs):
+    try:
+        profile = user.get_profile()
+    except Profile.DoesNotExist:
+        profile = Profile(user=user)
+        profile.save()
 
-post_save.connect(post_save_user, sender=User)
+    if not profile.social_data_completed:
+        profile.social_data_process()
 
-def post_save_profile(sender, instance, created, **kwargs):
-    if created or not instance.social_data_completed:
-        instance.social_data_process()
-
-post_save.connect(post_save_profile, sender=Profile)
+user_logged_in.connect(user_signed_in)
