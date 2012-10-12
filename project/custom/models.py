@@ -1,7 +1,9 @@
 import facebook
 import requests
+import tweepy
 import urllib
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
 from django.core.files.base import File
@@ -61,7 +63,29 @@ class Profile(models.Model):
             pass
 
         try:
-            TwitterUser.objects.get(user=self.user)
+            twitter_user = TwitterUser.objects.get(user=self.user)
+            auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+            auth.set_access_token(twitter_user.oauth_token, twitter_user.oauth_token_secret)
+            api = tweepy.API(auth_handler=auth, api_root='/1.1')
+
+            # TW Profile Image
+            tweepy_user = api.get_user(screen_name=auth.get_username())
+            partition = tweepy_user.profile_image_url.rpartition('_normal')
+            if partition[0]:
+                profile_image_url = partition[0] + partition[2]
+            else:
+                profile_image_url = tweepy_user.profile_image_url
+            tw_image = urllib.urlretrieve(profile_image_url)
+            if tw_image[0]:
+                tw_image_contents = File(open(tw_image[0]))
+                self.image.save('profile-image.png', tw_image_contents, save=True)
+
+            # TW Followers Count
+            if tweepy_user.followers_count:
+                self.followers = int(tweepy_user.followers_count)
+
+            self.social_data_completed = True
+            self.save()
         except:
             pass
 
