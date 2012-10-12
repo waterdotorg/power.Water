@@ -8,10 +8,26 @@ from django.contrib.auth.models import User
 from django.contrib.auth.signals import user_logged_in
 from django.core.files.base import File
 from django.db import models
-from django.db.models.signals import post_save
 
 from fbauth.models import FacebookUser
 from twauth.models import TwitterUser
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
+    image = models.ImageField(upload_to='post', max_length=256)
+    content = models.TextField()
+    published_date = models.DateTimeField()
+    homepage = models.BooleanField(default=True, help_text='Display on homepage.')
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('post', (), {'slug': self.slug,})
 
 def get_profile_image_path(instance, filename):
     extension = filename.split('.')[-1]
