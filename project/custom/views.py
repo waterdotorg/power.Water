@@ -5,8 +5,11 @@ from django.shortcuts import render, redirect
 
 def homepage(request):
     user = None
+    profile = None
+
     if request.user.is_authenticated():
         user = request.user
+        profile = user.get_profile()
 
     dict_context = {
         'user': user,
