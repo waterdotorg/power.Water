@@ -4,13 +4,30 @@ import tweepy
 import urllib
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in
 from django.core.files.base import File
 from django.db import models
 
 from fbauth.models import FacebookUser
 from twauth.models import TwitterUser
+
+class TwitterStatusUpdate(models.Model):
+    link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
+    content = models.TextField(help_text="Context variables: {{ short_link }}")
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    groups = models.ManyToManyField(Group, verbose_name='groups', help_text='Leave blank for everybody.', blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s (%s - %s)" % (self.text.strip(), self.start_date, self.end_date)
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.start_date > self.end_date:
+            raise ValidationError('Start date may not be after end date.')
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
