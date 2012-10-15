@@ -148,7 +148,23 @@ def user_signed_in(sender, request, user, **kwargs):
     try:
         profile = user.get_profile()
     except Profile.DoesNotExist:
-        profile = Profile(user=user)
+        user_referrer = request.session.get('ur')
+        if user_referrer:
+            del request.session['ur']
+            try:
+                User.objects.get(id=user_referrer)
+            except:
+                user_referrer = None
+
+        source_referrer = request.session.get('sr')
+        if source_referrer:
+            del request.session['sr']
+
+        profile = Profile(
+            user=user,
+            user_referrer = user_referrer,
+            source_referrer = source_referrer,
+        )
         profile.save()
 
     if not profile.social_data_completed:
