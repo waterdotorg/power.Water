@@ -47,11 +47,33 @@ def signout(request):
     return redirect(reverse('homepage'))
 
 def post(request, slug=None):
-    utc_now = datetime.datetime.utcnow().replace(tzinfo=utc)
+    now = datetime.datetime.utcnow().replace(tzinfo=utc)
+    profile = None
+    user_referrer = request.session.get('ur', None)
+    source_referrer = request.session.get('sr', None)
+
+    if request.user.is_authenticated():
+        profile = request.user.get_profile()
+
+    site = Site.objects.get_current()
+    total_followers_qs = Profile.objects.aggregate(Sum('followers'))
+    try:
+        total_followers = int(total_followers_qs['followers__sum'])
+    except:
+        total_followers = 0
 
     if request.user.is_staff:
         post = get_object_or_404(Post, slug=slug)
     else:
-        post = get_object_or_404(Post, slug=slug, published_date__lte=utc_now)
+        post = get_object_or_404(Post, slug=slug, published_date__lte=now)
 
-    return render(request, 'post/post.html', {'post': post})
+    dict_context = {
+        'profile': profile,
+        'user_referrer': user_referrer,
+        'source_referrer': source_referrer,
+        'site': site,
+        'total_followers': total_followers,
+        'post': post,
+    }
+
+    return render(request, 'post/post.html', dict_context)
