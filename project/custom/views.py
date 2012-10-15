@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
@@ -14,10 +15,18 @@ def homepage(request):
     now = datetime.datetime.utcnow().replace(tzinfo=utc)
     profile = None
     user_referrer = request.session.get('ur', None)
+    user_referrer_profile = None
     source_referrer = request.session.get('sr', None)
 
     if request.user.is_authenticated():
         profile = request.user.get_profile()
+
+    if user_referrer:
+        try:
+            user_referrer_object = User.objects.get(id=user_referrer)
+            user_referrer_profile = user_referrer_object.get_profile()
+        except:
+            pass
 
     site = Site.objects.get_current()
     total_followers_qs = Profile.objects.aggregate(Sum('followers'))
@@ -34,6 +43,7 @@ def homepage(request):
     dict_context = {
         'profile': profile,
         'user_referrer': user_referrer,
+        'user_referrer_profile': user_referrer_profile,
         'source_referrer': source_referrer,
         'site': site,
         'total_followers': total_followers,
@@ -50,10 +60,18 @@ def post(request, slug=None):
     now = datetime.datetime.utcnow().replace(tzinfo=utc)
     profile = None
     user_referrer = request.session.get('ur', None)
+    user_referrer_profile = None
     source_referrer = request.session.get('sr', None)
 
     if request.user.is_authenticated():
         profile = request.user.get_profile()
+
+    if user_referrer:
+        try:
+            user_referrer_object = User.objects.get(id=user_referrer)
+            user_referrer_profile = user_referrer_object.get_profile()
+        except:
+            pass
 
     site = Site.objects.get_current()
     total_followers_qs = Profile.objects.aggregate(Sum('followers'))
@@ -70,6 +88,7 @@ def post(request, slug=None):
     dict_context = {
         'profile': profile,
         'user_referrer': user_referrer,
+        'user_referrer_profile': user_referrer_profile,
         'source_referrer': source_referrer,
         'site': site,
         'total_followers': total_followers,
