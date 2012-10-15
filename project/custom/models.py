@@ -4,13 +4,50 @@ import tweepy
 import urllib
 
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in
 from django.core.files.base import File
 from django.db import models
 
 from fbauth.models import FacebookUser
 from twauth.models import TwitterUser
+
+class FacebookStatusUpdate(models.Model):
+    link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
+    picture = models.ImageField(upload_to="facebook-status-update")
+    name = models.CharField(max_length=100, help_text="The name of the link")
+    caption = models.CharField(max_length=100, help_text="The caption of the link which appears beneath the link name", blank=True)
+    description = models.TextField(blank=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    groups = models.ManyToManyField(Group, verbose_name='groups', help_text='Leave blank for everybody.', blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.start_date > self.end_date:
+            raise ValidationError('Start date may not be after end date.')
+
+class TwitterStatusUpdate(models.Model):
+    link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
+    content = models.TextField(help_text="Context variables: {{ short_link }}")
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    groups = models.ManyToManyField(Group, verbose_name='groups', help_text='Leave blank for everybody.', blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s" % self.content
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.start_date > self.end_date:
+            raise ValidationError('Start date may not be after end date.')
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -111,7 +148,23 @@ def user_signed_in(sender, request, user, **kwargs):
     try:
         profile = user.get_profile()
     except Profile.DoesNotExist:
-        profile = Profile(user=user)
+        user_referrer = None
+        if request.session.get('ur'):
+            try:
+                user_referrer = User.objects.get(id=request.session.get('ur'))
+            except:
+                user_referrer = None
+            del request.session['ur']
+
+        source_referrer = request.session.get('sr')
+        if source_referrer:
+            del request.session['sr']
+
+        profile = Profile(user=user,)
+        if user_referrer:
+            profile.user_referrer = user_referrer
+        if source_referrer:
+            profile.source_referrer = source_referrer
         profile.save()
 
     if not profile.social_data_completed:

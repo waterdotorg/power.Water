@@ -19,6 +19,9 @@
     {% endblock %}
 
     <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+    <!--[if gte IE 9]>
+      <style type="text/css"> .gradient { filter: none; } </style>
+    <![endif]-->
 </head>
 <body class="{% block body_class %}{% endblock %}">
     <!--[if lt IE 7]>
@@ -34,28 +37,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="#">power.Water.org</a>
+                <a class="brand" href="#"><img src="{{ STATIC_URL }}image/logo.png" alt="Water.org | Donate Your Voice" ></a>
                 <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="nav-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                     <form class="navbar-form pull-right">
-                        <input class="span2" type="text" placeholder="Email">
-                        <input class="span2" type="password" placeholder="Password">
                         <button type="submit" class="btn">Sign in</button>
                     </form>
                 </div><!--/.nav-collapse -->
@@ -80,17 +64,12 @@
 
 {% block main_wrap %}
     <div id="main-wrap">
-        <div id="main" role="main" class="container">
-            <div id="main-inner" class="container-inner">
-                {% block main %}{% endblock %}
-            </div>
-        </div>
+        {% block main %}{% endblock %}
     </div>
 {% endblock %}
     
 {% block footer %}
     <footer>
-        <p>&copy; Company 2012</p>
     </footer>
 {% endblock %}
 
@@ -101,6 +80,32 @@
 
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/main.js"></script>
+
+<!-- Initiate Background Image -->
+<script type="text/javascript">
+    $('.featured-background-image').anystretch("{{ STATIC_URL }}image/featured-image.jpg", {speed: 150});
+</script>
+
+<!-- Initiate Collapse Pluggin -->
+<script>
+    $(".collapse").collapse();
+</script>
+
+<!-- Start Shareaholic Classic Bookmarks settings -->
+<script type="text/javascript">
+    var SHRCB_Settings = {"shr_classic":{"size":16,"link":"","service":"5,7,309,304,88","apikey":"2fc518bd8c0bb3cf45bdade11877971c1","shortener":"bitly","shortener_key":"","designer_toolTips":true,"twitter_template":"${title} - ${short_link} via @Shareaholic"}};
+    var SHRCB_Globals = {"perfoption":"1"};
+</script>
+<!-- End Shareaholic Classic Bookmarks settings -->
+<!-- Start Shareaholic Classic Bookmarks script -->
+<script type="text/javascript">
+    (function() {
+    var sb = document.createElement("script"); sb.type = "text/javascript";sb.async = true;
+    sb.src = ("https:" == document.location.protocol ? "https://dtym7iokkjlif.cloudfront.net" : "http://cdn.shareaholic.com") + "/media/js/jquery.shareaholic-publishers-cb.min.js";
+    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(sb, s);
+    })();
+</script>
+<!-- End Shareaholic Classic Bookmarks script -->
 
 <script>
     var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
