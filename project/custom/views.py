@@ -35,6 +35,7 @@ def homepage(request):
 
     dict_context = {
         'user': user,
+        'profile': profile,
         'user_referrer': user_referrer,
         'source_referrer': source_referrer,
         'site': site,
