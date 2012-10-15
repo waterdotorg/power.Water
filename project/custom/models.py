@@ -12,6 +12,26 @@ from django.db import models
 from fbauth.models import FacebookUser
 from twauth.models import TwitterUser
 
+class FacebookStatusUpdate(models.Model):
+    link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
+    picture = models.ImageField(upload_to="facebook-status-update")
+    name = models.CharField(max_length=100, help_text="The name of the link")
+    caption = models.CharField(max_length=100, help_text="The caption of the link which appears beneath the link name", blank=True)
+    description = models.TextField(blank=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    groups = models.ManyToManyField(Group, verbose_name='groups', help_text='Leave blank for everybody.', blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.start_date > self.end_date:
+            raise ValidationError('Start date may not be after end date.')
+
 class TwitterStatusUpdate(models.Model):
     link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
     content = models.TextField(help_text="Context variables: {{ short_link }}")
@@ -22,7 +42,7 @@ class TwitterStatusUpdate(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return "%s (%s - %s)" % (self.text.strip(), self.start_date, self.end_date)
+        return "%s" % self.content
 
     def clean(self):
         from django.core.exceptions import ValidationError

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from custom.models import Profile, Post, TwitterStatusUpdate
+from custom.models import Profile, Post, TwitterStatusUpdate, FacebookStatusUpdate
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'followers', 'user_referrer', 'source_referrer', 'type', 'social_data_completed']
@@ -19,6 +19,13 @@ class TwitterStatusUpdateAdmin(admin.ModelAdmin):
     ordering = ['-created_date']
     filter_horizontal = ('groups',)
 
+class FacebookStatusUpdateAdmin(admin.ModelAdmin):
+    list_display = ['name', 'link', 'caption', 'start_date', 'end_date', 'created_date']
+    search_fields = ['link', 'name', 'caption', 'description']
+    ordering = ['-created_date']
+    filter_horizontal = ('groups',)
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(TwitterStatusUpdate, TwitterStatusUpdateAdmin)
+admin.site.register(FacebookStatusUpdate, FacebookStatusUpdateAdmin)
