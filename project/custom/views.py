@@ -12,14 +12,12 @@ from custom.models import Post, Profile
 
 def homepage(request):
     now = datetime.datetime.utcnow().replace(tzinfo=utc)
-    user = None
     profile = None
     user_referrer = request.session.get('ur', None)
     source_referrer = request.session.get('sr', None)
 
     if request.user.is_authenticated():
-        user = request.user
-        profile = user.get_profile()
+        profile = request.user.get_profile()
 
     site = Site.objects.get_current()
     total_followers_qs = Profile.objects.aggregate(Sum('followers'))
@@ -34,7 +32,6 @@ def homepage(request):
         post = None
 
     dict_context = {
-        'user': user,
         'profile': profile,
         'user_referrer': user_referrer,
         'source_referrer': source_referrer,
