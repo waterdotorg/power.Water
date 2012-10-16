@@ -40,6 +40,8 @@ def homepage(request):
     except:
         post = None
 
+    recent_posts = Post.objects.filter(published_date__lte=now).order_by('-published_date')[1:5]
+
     dict_context = {
         'profile': profile,
         'user_referrer': user_referrer,
@@ -48,8 +50,14 @@ def homepage(request):
         'site': site,
         'total_followers': total_followers,
         'post': post,
+        'recent_posts': recent_posts,
     }
-    return render(request, 'homepage.html', dict_context)
+
+    response = render(request, 'homepage.html', dict_context)
+    if request.user.is_authenticated():
+        expire_date = now + datetime.timedelta(days=30)
+        response.set_cookie('returning_user', value=True, expires=expire_date, httponly=False)
+    return response
 
 def signout(request):
     logout(request)
