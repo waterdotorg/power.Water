@@ -2,13 +2,17 @@ import datetime
 
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import simplejson as json
 from django.utils.timezone import utc
 
+from custom.forms import EmailForm
 from custom.models import Post, Profile
 
 def homepage(request):
@@ -104,3 +108,16 @@ def post(request, slug=None):
     }
 
     return render(request, 'post/post.html', dict_context)
+
+@login_required
+def ajax_email_form(request):
+    if request.method == 'POST' and request.is_ajax():
+        form = EmailForm(request.POST, request.FILES, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse(json.dumps('success'), mimetype="application/json")
+        else:
+            return HttpResponseBadRequest(json.dumps(form.errors), mimetype="application/json")
+
+    return HttpResponseBadRequest(json.dumps('Invalid request.'), mimetype="application/json")
