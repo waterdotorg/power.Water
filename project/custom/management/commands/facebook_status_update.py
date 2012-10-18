@@ -44,6 +44,12 @@ class Command(BaseCommand):
         r = requests.get('https://graph.facebook.com/oauth/access_token', params=params)
         return r.text.replace('access_token=', '')
 
+    def graph_api_error_handle(self, e, facebook_user):
+        if e.result.get('error'):
+            if e.result['error'].get('type') == 'OAuthException':
+                facebook_user.status = False
+                facebook_user.save()
+
     def worker(self, *args, **kwargs):
         while True:
             try:
@@ -94,7 +100,11 @@ class Command(BaseCommand):
                 }
                 facebook_user = FacebookUser.objects.get(user=profile.user)
                 graph = facebook.GraphAPI(self.app_access_token)
-                graph.put_wall_post(message='', attachment=attachment, profile_id=facebook_user.uid)
+                try:
+                    graph.put_wall_post(message='', attachment=attachment, profile_id=facebook_user.uid)
+                except facebook.GraphAPIError, e:
+                    self.graph_api_error_handle(e, facebook_user)
+                    raise Exception('Error pushing facebook post to wall of user id %d. Error: %s' % (profile.user.pk, str(e)))
 
                 logger.info('Successfully sent facebook status update %d to profile %d' % (facebook_status_update.pk, profile.pk))
                 FacebookStatusUpdateLog.objects.create(user=profile.user, facebook_status_update=facebook_status_update)
