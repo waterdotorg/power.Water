@@ -1,4 +1,4 @@
-Django==1.4.1
+Django==1.4.2
 Markdown==2.2.0
 South==0.7.6
 -e git+https://github.com/bitly/bitly-api-python.git@3b19d8ab89e0ba821c4b413676cd0c8d157a33fa#egg=bitly_api-dev

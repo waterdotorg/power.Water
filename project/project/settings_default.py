@@ -175,6 +175,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -185,12 +193,25 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'facebook_status_update': {
+            'level': 'INFO',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': path.join(PROJECT_ROOT, "../../logs/facebook_status_update/log.log"),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
         }
     },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
+            'propagate': True,
+        },
+        'custom.management.commands.facebook_status_update': {
+            'handlers': ['facebook_status_update'],
+            'level': 'INFO',
             'propagate': True,
         },
     }
