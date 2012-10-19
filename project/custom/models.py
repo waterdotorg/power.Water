@@ -58,6 +58,15 @@ class TwitterStatusUpdate(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError('Start date may not be after end date.')
 
+class TwitterAutoFriendshipLog(models.Model):
+    user = models.ForeignKey(User)
+    success = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s Auto Friend" % self.user
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
