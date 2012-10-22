@@ -58,6 +58,15 @@ class TwitterStatusUpdate(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError('Start date may not be after end date.')
 
+class TwitterStatusUpdateLog(models.Model):
+    twitter_status_update = models.ForeignKey(TwitterStatusUpdate)
+    user = models.ForeignKey(User)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('twitter_status_update', 'user')
+
 class TwitterAutoFriendshipLog(models.Model):
     user = models.ForeignKey(User)
     success = models.BooleanField(default=True)

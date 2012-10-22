@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from custom.models import Profile, Post, TwitterStatusUpdate, FacebookStatusUpdate, FacebookStatusUpdateLog, \
-    TwitterAutoFriendshipLog
+    TwitterAutoFriendshipLog, TwitterStatusUpdateLog
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'followers', 'user_referrer', 'source_referrer', 'social_data_completed']
@@ -19,6 +19,11 @@ class TwitterStatusUpdateAdmin(admin.ModelAdmin):
     search_fields = ['content','link']
     ordering = ['-created_date']
     filter_horizontal = ('groups',)
+
+class TwitterStatusUpdateLogAdmin(admin.ModelAdmin):
+    list_display = ['user', 'twitter_status_update', 'created_date']
+    search_fields = ['user__username', 'user__first_name', 'user__last_name', 'twitter_status_update__content']
+    ordering = ['-created_date']
 
 class TwitterAutoFriendshipLogAdmin(admin.ModelAdmin):
     list_display = ['user', 'success', 'created_date']
@@ -38,6 +43,7 @@ class FacebookStatusUpdateLogAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(TwitterStatusUpdate, TwitterStatusUpdateAdmin)
+admin.site.register(TwitterStatusUpdateLog, TwitterStatusUpdateLogAdmin)
 admin.site.register(TwitterAutoFriendshipLog, TwitterAutoFriendshipLogAdmin)
 admin.site.register(FacebookStatusUpdate, FacebookStatusUpdateAdmin)
 admin.site.register(FacebookStatusUpdateLog, FacebookStatusUpdateLogAdmin)

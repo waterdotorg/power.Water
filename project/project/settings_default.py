@@ -201,6 +201,14 @@ LOGGING = {
             'maxBytes': 1024*1024*5, # 5 MB
             'backupCount': 5,
             'formatter':'verbose',
+        },
+        'twitter_status_update': {
+            'level': 'INFO',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': path.join(PROJECT_ROOT, "../../logs/twitter_status_update/log.log"),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
         }
     },
     'loggers': {
@@ -211,6 +219,11 @@ LOGGING = {
         },
         'custom.management.commands.facebook_status_update': {
             'handlers': ['facebook_status_update'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'custom.management.commands.twitter_status_update': {
+            'handlers': ['twitter_status_update'],
             'level': 'INFO',
             'propagate': True,
         },
