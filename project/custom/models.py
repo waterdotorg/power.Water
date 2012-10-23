@@ -32,6 +32,15 @@ class FacebookStatusUpdate(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError('Start date may not be after end date.')
 
+class FacebookStatusUpdateLog(models.Model):
+    facebook_status_update = models.ForeignKey(FacebookStatusUpdate)
+    user = models.ForeignKey(User)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('facebook_status_update', 'user')
+
 class TwitterStatusUpdate(models.Model):
     link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
     content = models.TextField(help_text="Context variables: {{ short_link }}")
@@ -48,6 +57,24 @@ class TwitterStatusUpdate(models.Model):
         from django.core.exceptions import ValidationError
         if self.start_date > self.end_date:
             raise ValidationError('Start date may not be after end date.')
+
+class TwitterStatusUpdateLog(models.Model):
+    twitter_status_update = models.ForeignKey(TwitterStatusUpdate)
+    user = models.ForeignKey(User)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('twitter_status_update', 'user')
+
+class TwitterAutoFriendshipLog(models.Model):
+    user = models.ForeignKey(User)
+    success = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s Auto Friend" % self.user
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
@@ -72,20 +99,11 @@ def get_profile_image_path(instance, filename):
     return dir
 
 class Profile(models.Model):
-    DEFAULT_TYPE = 0
-    TEST_TYPE = 1
-
-    TYPE_CHOICES = (
-        (DEFAULT_TYPE, 'Default'),
-        (TEST_TYPE, 'Test'),
-    )
-
     user = models.OneToOneField(User)
     followers = models.IntegerField(default=0)
     image = models.ImageField(upload_to=get_profile_image_path, max_length=256, blank=True)
     user_referrer = models.ForeignKey(User, related_name='user_referrer', blank=True, null=True)
     source_referrer = models.CharField(max_length=100, blank=True)
-    type = models.SmallIntegerField(choices=TYPE_CHOICES, default=DEFAULT_TYPE)
     semaphore_twitter = models.BooleanField(default=False)
     semaphore_facebook = models.BooleanField(default=False)
     social_data_completed = models.BooleanField(default=False)

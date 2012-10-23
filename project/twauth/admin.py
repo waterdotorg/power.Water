@@ -3,7 +3,7 @@ from django.contrib import admin
 from twauth.models import TwitterUser
 
 class TwitterUserAdmin(admin.ModelAdmin):
-    list_display = ['user', 'uid', 'created']
+    list_display = ['user', 'uid', 'status', 'created']
     search_fields = ('uid',)
     ordering = ('-created',)
 

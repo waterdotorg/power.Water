@@ -156,6 +156,17 @@ AUTHENTICATION_BACKENDS = (
     'twauth.auth.TwAuth',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "custom.context_processors.returning_user",
+)
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -164,6 +175,14 @@ AUTHENTICATION_BACKENDS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
@@ -174,12 +193,38 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'facebook_status_update': {
+            'level': 'INFO',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': path.join(PROJECT_ROOT, "../../logs/facebook_status_update/log.log"),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
+        },
+        'twitter_status_update': {
+            'level': 'INFO',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': path.join(PROJECT_ROOT, "../../logs/twitter_status_update/log.log"),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
         }
     },
     'loggers': {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
+            'propagate': True,
+        },
+        'custom.management.commands.facebook_status_update': {
+            'handlers': ['facebook_status_update'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'custom.management.commands.twitter_status_update': {
+            'handlers': ['twitter_status_update'],
+            'level': 'INFO',
             'propagate': True,
         },
     }
@@ -196,5 +241,8 @@ FACEBOOK_LOGIN_ERROR_REDIRECT = '/'
 # Twitter settings
 TWITTER_LOGIN_SUCCESS_REDIRECT = '/'
 TWITTER_LOGIN_ERROR_REDIRECT = '/'
+TWITTER_SCREEN_NAME = 'water'
 
 AUTH_PROFILE_MODULE = 'custom.Profile'
+
+LOGIN_URL = '/'
