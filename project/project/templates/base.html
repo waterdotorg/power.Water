@@ -15,6 +15,7 @@
     {% block styles %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
     {% endblock %}
 
@@ -32,17 +33,20 @@
      <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <a class="brand" href="{% url homepage %}">
+                    <img class="hidden-mobile" src="{{ STATIC_URL }}image/logo.png" alt="Water.org | Donate Your Voice" >
+                    <img class="visible-mobile" src="{{ STATIC_URL }}image/logo-mobile.png" alt="Water.org | Donate Your Voice" >
                 </a>
-                <a class="brand" href="#"><img src="{{ STATIC_URL }}image/logo.png" alt="Water.org | Donate Your Voice" ></a>
-                <div class="nav-collapse collapse">
-                    <form class="navbar-form pull-right">
-                        <button type="submit" class="btn">Sign in</button>
-                    </form>
-                </div><!--/.nav-collapse -->
+                <a class="btn btn-connect btn-connect-twitter pull-right">
+                    <i class="icon-twitter icon-large"></i>
+                </a>
+                <a class="btn btn-connect btn-connect-facebook pull-right">
+                    <i class="icon-facebook icon-large"></i>
+                </a>
+                <p class="connect-with pull-right">
+                    Connect:
+                </p>
+
             </div>
         </div>
     </div>

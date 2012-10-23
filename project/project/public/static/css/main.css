@@ -1,6 +1,12 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+.hidden-mobile {
+	display: block;
+}
+.visible-mobile {
+	display: none;
+}
 
 body {
 	background: #EBEBEB;
@@ -23,8 +29,71 @@ body {
 }
 
 .navbar-inverse .navbar-inner .brand {
-	width: 120px;
+	width: 140px;
 	height: auto;
+}
+
+p.connect-with {
+	margin-top: 12px;
+	margin-right: 6px;
+	color: white;
+	text-shadow: 0px 0px 2px black;
+}
+
+.btn-connect {
+	background: transparent;
+	box-shadow: inset 0px 0px 8px rgba(255,255,255,0.2);
+	color: white;
+	text-shadow: 0px 0px 2px black;
+	padding: 7px 14px;
+	padding-left: 38px;
+	top: 8px;
+	margin-right: 10px;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid #032051;
+	display: block;
+	height: 20px;
+	font-size: 120%;
+}
+
+.btn-connect:hover {
+	background: transparent;
+	box-shadow: inset 0px 0px 8px rgba(255,255,255,0.4);
+	color: white;
+	text-shadow: 0px 0px 2px black;
+}
+
+.btn-connect:active {
+	background: transparent;
+	box-shadow: inset 0px 0px 8px rgba(0,0,0,0.8);
+	border: 1px solid #032051;
+	color: white;
+	text-shadow: 0px 0px 2px black;
+}
+
+.btn-connect-facebook:after {
+	content: "with Facebook";
+}
+
+.btn-connect-twitter:after {
+	content: "with Twitter";
+}
+
+.btn-connect-facebook i{
+	font-size: 200%;
+	position: absolute;
+	bottom: 8px;
+	left: 12px;
+	text-shadow: 0px 0px 2px black, 1px 1px 0px rgba(0,0,0,0.6);
+}
+
+.btn-connect-twitter i{
+	font-size: 180%;
+	position: absolute;
+	bottom: 12px;
+	left: -8px;
+	text-shadow: 0px 0px 2px black, 1px 1px 0px rgba(0,0,0,0.6);
 }
 
 .featured-background-image {
@@ -49,12 +118,12 @@ body {
 	right: 0;
 	width: 62%;
 	padding: 0 2%;
-	text-shadow: 1px 1px 1px black;
+	text-shadow: 2px 2px 2px black;
 }
 
 h2#featured-post-title {
-	text-transform: uppercase;
 	color: white;
+	font-size: 240%;
 }
 
 h2#featured-post-title span {
@@ -80,16 +149,15 @@ h2#featured-post-title span:after {
 }
 
 h2#featured-post-title-mobile {
-	text-transform: uppercase;
 	color: white;
-	font-size: 120%;
+	font-size: 140%;
 	margin: 0;
 	line-height: 1.2;
 	padding: 2%;
 }
 
 h2#featured-post-title-mobile span {
-	font-size: 60%;
+	font-size: 90%;
 	color: #DE001B;
 	padding-left: 6px;
 	font-weight: normal;
@@ -131,15 +199,21 @@ h3.aside-heading {
 
 p.share-this {
 	position: absolute;
-	top: 16px;
+	top: 34px;
 	right: 132px;
 }
 
 .shr_classic {
 	position: absolute;
-	top: -3px;
+	top: 16px;
 	right: 20px;
 }
+
+#user-ribbon {
+	background: #363636;
+}
+
+
 
 /* ============= */
 /* Media Queries */
@@ -198,6 +272,13 @@ p.share-this {
 		margin-right: 0px;
 		margin-left: 0px;
 	}
+	.btn-connect-facebook:after {
+		content: "";
+	}
+
+	.btn-connect-twitter:after {
+		content: "";
+	}
 	.featured-background-image {
 		height: 220px;
 	}
@@ -208,14 +289,48 @@ p.share-this {
 		margin: 30px 0 0;
 		padding: 0;
 	}
+	p.share-this {
+		top: 15px;
+		right: 132px;
+	}
+	.shr_classic {
+		top: -3px;
+		right: 20px;
+	}
 }
  
 /* Landscape phones and down */
 @media (max-width: 480px) {
+	.hidden-mobile {
+		display: none;
+	}
+	.visible-mobile {
+		display: block;
+	}
+	.navbar-inverse .navbar-inner {
+		padding: 0px 10px;
+	}
+	.navbar-inverse .navbar-inner .brand {
+		width: 100px;
+	}
+	p.connect-with {
+		margin-top: 8px;
+		font-size: 80%;
+	}
+	.btn-connect {
+		top: 1px;
+		padding-left: 24px;
+	}
 	.featured-background-image {
 		height: 140px;
 	}
 	#main-inner {
 		height: 140px;
+	}
+	h2#featured-post-title-mobile {
+		font-size: 120%;
+	}
+	h2#featured-post-title-mobile span {
+		font-size: 90%;
 	}
 }
