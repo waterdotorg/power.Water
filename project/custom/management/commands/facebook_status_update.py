@@ -163,6 +163,7 @@ class Command(BaseCommand):
 
                 profiles = Profile.objects.filter(
                     semaphore_facebook=False,
+                    enable_facebook_updates=True,
                     user__is_active=True,
                     user__pk__in=facebook_users_pk_list
                 )

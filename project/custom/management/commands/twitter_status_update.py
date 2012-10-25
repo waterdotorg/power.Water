@@ -139,6 +139,7 @@ class Command(BaseCommand):
 
                 profiles = Profile.objects.filter(
                     semaphore_twitter=False,
+                    enable_twitter_updates=True,
                     user__is_active=True,
                     user__pk__in=twitter_users_pk_list,
                 )
