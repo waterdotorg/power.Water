@@ -12,18 +12,28 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import simplejson as json
 from django.utils.timezone import utc
 
-from custom.forms import EmailForm
+from custom.forms import EmailForm, SettingsForm
 from custom.models import Post, Profile
 
 def homepage(request):
     now = datetime.datetime.utcnow().replace(tzinfo=utc)
     profile = None
+    settings_form = None
     user_referrer = request.session.get('ur', None)
     user_referrer_profile = None
     source_referrer = request.session.get('sr', None)
 
     if request.user.is_authenticated():
         profile = request.user.get_profile()
+        settings_form_initial = {
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+            'enable_facebook_updates': profile.enable_facebook_updates,
+            'enable_twitter_updates': profile.enable_twitter_updates,
+            'enable_email_updates': profile.enable_email_updates,
+        }
+        settings_form = SettingsForm(initial=settings_form_initial, user=request.user)
 
     if user_referrer:
         try:
@@ -48,6 +58,7 @@ def homepage(request):
 
     dict_context = {
         'profile': profile,
+        'settings_form': settings_form,
         'user_referrer': user_referrer,
         'user_referrer_profile': user_referrer_profile,
         'source_referrer': source_referrer,
@@ -113,6 +124,19 @@ def post(request, slug=None):
 def ajax_email_form(request):
     if request.method == 'POST' and request.is_ajax():
         form = EmailForm(request.POST, request.FILES, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse(json.dumps('success'), mimetype="application/json")
+        else:
+            return HttpResponseBadRequest(json.dumps(form.errors), mimetype="application/json")
+
+    return HttpResponseBadRequest(json.dumps('Invalid request.'), mimetype="application/json")
+
+@login_required
+def ajax_settings_form(request):
+    if request.method == 'POST' and request.is_ajax():
+        form = SettingsForm(reqeust.POST, request.FILES, user=request.user)
 
         if form.is_valid():
             form.save()
