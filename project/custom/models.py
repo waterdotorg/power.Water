@@ -107,6 +107,9 @@ class Profile(models.Model):
     semaphore_twitter = models.BooleanField(default=False)
     semaphore_facebook = models.BooleanField(default=False)
     social_data_completed = models.BooleanField(default=False)
+    enable_facebook_updates = models.BooleanField(default=True)
+    enable_twitter_updates = models.BooleanField(default=True)
+    enable_email_updates = models.BooleanField(default=True)
 
     def __unicode__(self):
         return '%s' % self.user
