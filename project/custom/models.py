@@ -163,6 +163,17 @@ class Profile(models.Model):
         except:
             pass
 
+    def promoted_posts_count(self):
+        t = TwitterStatusUpdateLog.objects.filter(user=self.user).count()
+        f = FacebookStatusUpdateLog.objects.filter(user=self.user).count()
+        return int(t+f)
+
+    def friends_joined_count(self):
+        return int(Profile.objects.filter(user_referrer=self.user).count())
+
+    def friends_joined(self, limit=3):
+        friend_profiles = Profile.objects.filter(user_referrer=self.user).order_by('-pk')[:limit]
+        return friend_profiles
 
 ### Signals ###
 def user_signed_in(sender, request, user, **kwargs):

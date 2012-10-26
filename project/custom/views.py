@@ -108,6 +108,8 @@ def post(request, slug=None):
     else:
         post = get_object_or_404(Post, slug=slug, published_date__lte=now)
 
+    recent_posts = Post.objects.filter(published_date__lte=now).exclude(pk=post.pk).order_by('-published_date')[1:5]
+
     dict_context = {
         'profile': profile,
         'user_referrer': user_referrer,
@@ -116,6 +118,7 @@ def post(request, slug=None):
         'site': site,
         'total_followers': total_followers,
         'post': post,
+        'recent_posts': recent_posts,
     }
 
     return render(request, 'post/post.html', dict_context)
