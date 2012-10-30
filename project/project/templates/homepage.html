@@ -2,6 +2,10 @@
 
 {% block body_class %}homepage{% endblock %}
 
+{% block head_extra %}
+    {{ block.super }}
+{% endblock %}
+
 {% block main %}
     <div class="row-fluid">
     	<div class="featured-background-image">

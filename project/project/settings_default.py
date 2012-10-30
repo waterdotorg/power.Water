@@ -38,6 +38,7 @@ SERVER_EMAIL = ''
 FACEBOOK_APP_ID = ''
 FACEBOOK_API_KEY = ''
 FACEBOOK_API_SECRET = ''
+FACEBOOK_APP_NAMESPACE = ''
 
 # Twitter API keys
 TWITTER_CONSUMER_KEY = ''
@@ -209,6 +210,14 @@ LOGGING = {
             'maxBytes': 1024*1024*5, # 5 MB
             'backupCount': 5,
             'formatter':'verbose',
+        },
+        'facebook_og_new_friend_joined': {
+            'level': 'INFO',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': path.join(PROJECT_ROOT, "../../logs/facebook_og_new_friend_joined/log.log"),
+            'maxBytes': 1024*1024*5, # 5 MB
+            'backupCount': 5,
+            'formatter':'verbose',
         }
     },
     'loggers': {
@@ -224,6 +233,11 @@ LOGGING = {
         },
         'custom.management.commands.twitter_status_update': {
             'handlers': ['twitter_status_update'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'custom.management.commands.facebook_og_new_friend_joined': {
+            'handlers': ['facebook_og_new_friend_joined'],
             'level': 'INFO',
             'propagate': True,
         },
