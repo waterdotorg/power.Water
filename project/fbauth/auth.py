@@ -76,6 +76,8 @@ class FbAuth(object):
 
     def get_user(self, user_id):
         try:
-            return User.objects.get(pk=user_id)
+            user = User.objects.get(pk=user_id)
+            user.backend = "%s.%s" % (self.__module__, self.__class__.__name__)
+            return user
         except User.DoesNotExist:
             return None

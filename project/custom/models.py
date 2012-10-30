@@ -175,6 +175,16 @@ class Profile(models.Model):
         friend_profiles = Profile.objects.filter(user_referrer=self.user).order_by('-pk')[:limit]
         return friend_profiles
 
+class FacebookOGReferredLog(models.Model):
+    user = models.ForeignKey(User, related_name='user')
+    user_referred = models.ForeignKey(User, related_name='user_referred')
+    success = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s - %s" % (self.user, self.referred_user)
+
 ### Signals ###
 def user_signed_in(sender, request, user, **kwargs):
     try:
