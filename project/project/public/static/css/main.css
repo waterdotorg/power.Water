@@ -57,13 +57,6 @@ body {
 	height: auto;
 }
 
-p.connect-with {
-	margin-top: 12px;
-	margin-right: 6px;
-	color: white;
-	text-shadow: 0px 0px 2px black;
-}
-
 .btn-connect {
 	background: transparent;
 	box-shadow: inset 0px 0px 8px rgba(255,255,255,0.2);
@@ -232,9 +225,32 @@ p.share-this {
 	right: 20px;
 }
 
+/* ===================== */
+/* Member Ribbon Queries */
+/* ===================== */
+
 #user-ribbon {
 	background: #363636;
+	color: white;
 }
+
+#settings-form {
+
+}
+
+#settings-form label {
+	width: 86px;
+}
+
+#settings-form label.checkbox-label {
+	width: 146px;
+}
+
+#settings-form input[type="checkbox"] {
+	vertical-align: top;
+	margin-right: 6px;
+}
+
 
 
 

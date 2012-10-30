@@ -2,6 +2,28 @@
 
 {% block body_class %}homepage{% endblock %}
 
+{% block top %}
+{{ block.super }}
+	{% if user.is_authenticated and not user.email %}
+	    <div id="ajax-form" class="row alert-ajax" style="display:none;">
+	        <div class="container">
+	        	<!-- Email Form -->
+	            <form id="email-form" class="form-inline" method="POST" action="{% url ajax_email_form %}">{% csrf_token %}
+	                <div class="control-group">
+	                    <label class="control-label" for="inputIcon">Thanks for connecting! Please provide us with a valid email address:</label>
+	                    <div class="input-append">
+	                       <input class="span2" id="email" name="email" size="16" type="text" placeholder="email@domain">
+	                       <input class="btn" type="submit" id="submit-email" value="Submit">
+	                    </div>
+	                </div>
+	            </form>
+	            <!-- /Email Form -->
+	            <a class="close" href="#">&times;</a>
+	        </div><!-- /container -->
+	    </div><!-- /ajax-form -->
+	{% endif %}	
+{% endblock %}
+
 {% block main %}
     <div class="row-fluid">
     	<div class="featured-background-image">
@@ -56,12 +78,55 @@
 			</div><!--/container-->
 		</div><!--/featured-post-->
 	</div><!--/row-fluid-->
+
+	{% if profile %}
+		{% include "fragments/member_ribbon.html" %}
+	{% elif user_referrer_profile %}
+		{% include "fragments/referrer_ribbon.html" %}
+	{% endif %}
+
 {% endblock %}
 
-{% block user_ribbon %}
-	<div id="user-ribbon" class="row-fluid">
-		<div class="span2 user-img">
-			
-		</div>
-	</div>
+
+{% block footer_scripts %}
+{{ block.super }}
+	{% if user.is_authenticated and not user.email %}
+		<!-- Initiate Ajax Email Form -->
+		<script>
+		    $(window).load(function() {
+		        setTimeout(ajaxFormShow, 500);
+		    });
+		</script>
+
+		<!-- Validate and Send Email Form -->
+		<script>
+		    $(document).on("submit", "#email-form", function(e) {
+		        clear_form_field_errors($("#ajax-form"));
+		        e.preventDefault();
+		        var self = $(this),
+		            url = self.attr("action"),
+		            ajax_req = $.ajax({
+		                url: url,
+		                type: "POST",
+		                data: {
+		                    email: self.find("#email").val(),
+		                    csrfmiddlewaretoken: self.find("input[name='csrfmiddlewaretoken']").val()
+		                },
+		                success: function(data, textStatus, jqXHR) {
+		                    // django_message("Email saved successfully.", "success");
+		                },
+		                error: function(data, textStatus, jqXHR) {
+		                    var errors = $.parseJSON(data.responseText);
+		                    $.each(errors, function(index, value) {
+		                        if (index === "__all__") {
+		                            django_message(value[0], "error");
+		                        } else {
+		                            apply_form_field_error(index, value);
+		                        }
+		                    });
+		                }
+		            });
+		    });
+		</script>
+	{% endif %}
 {% endblock %}
