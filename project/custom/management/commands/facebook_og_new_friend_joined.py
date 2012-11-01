@@ -46,12 +46,13 @@ class Command(BaseCommand):
                     FacebookOGReferredLog.objects.get(user=profile.user_referrer, user_referred=profile.user)
                 except FacebookOGReferredLog.DoesNotExist:
                     try:
-                        facebook_user = FacebookUser.objects.get(user=profile.user)
+                        facebook_user = FacebookUser.objects.get(user=profile.user_referrer)
+                        Profile.objects.get(user=facebook_user.user, enable_facebook_updates=True)
                         graph = facebook.GraphAPI(self.app_access_token)
                         graph.put_object(
                             facebook_user.uid,
                             self.graph_action,
-                            friend='http://%s?ur=%d' % (self.domain, profile.user.pk)
+                            friend='http://%s?ur=%d&du=%d' % (self.domain, profile.user_referrer.pk, profile.user.pk)
                         )
                         FacebookOGReferredLog.objects.create(user=profile.user_referrer, user_referred=profile.user)
                     except Exception, e:

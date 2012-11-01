@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -21,7 +22,16 @@ def homepage(request):
     settings_form = None
     user_referrer = request.session.get('ur', None)
     user_referrer_profile = None
+    display_profile = None
+    display_user_pk = request.GET.get('du')
     source_referrer = request.session.get('sr', None)
+    absolute_uri = request.build_absolute_uri()
+
+    if display_user_pk:
+        try:
+            display_profile = Profile.objects.get(user__pk=display_user_pk)
+        except Profile.DoesNotExist:
+            pass
 
     if request.user.is_authenticated():
         profile = request.user.get_profile()
@@ -42,6 +52,13 @@ def homepage(request):
         except:
             pass
 
+    # We need a dashboard and/or nav bar
+    if not display_profile:
+        if profile:
+            display_profile = profile
+        elif user_referrer_profile:
+            display_profile = user_referrer_profile
+
     site = Site.objects.get_current()
     total_followers_qs = Profile.objects.aggregate(Sum('followers'))
     try:
@@ -57,6 +74,7 @@ def homepage(request):
     recent_posts = Post.objects.filter(published_date__lte=now).order_by('-published_date')[1:5]
 
     dict_context = {
+        'display_profile': display_profile,
         'profile': profile,
         'settings_form': settings_form,
         'user_referrer': user_referrer,
@@ -66,6 +84,9 @@ def homepage(request):
         'total_followers': total_followers,
         'post': post,
         'recent_posts': recent_posts,
+        'FACEBOOK_APP_NAMESPACE': settings.FACEBOOK_APP_NAMESPACE,
+        'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
+        'absolute_uri': absolute_uri,
     }
 
     response = render(request, 'homepage.html', dict_context)

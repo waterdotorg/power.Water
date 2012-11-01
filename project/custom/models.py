@@ -183,7 +183,7 @@ class FacebookOGReferredLog(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return "%s - %s" % (self.user, self.referred_user)
+        return "%s - %s" % (self.user, self.user_referred)
 
 ### Signals ###
 def user_signed_in(sender, request, user, **kwargs):
