@@ -30,22 +30,7 @@
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
 
-{% block ajax_form %}
-    <div id="ajax-form" class="row alert-ajax" style="display:none;">
-        <div class="container">
-            <form id="email-form" class="form-inline" method="POST" action="{% url ajax_email_form %}">
-                {% csrf_token %}
-                <div class="control-group">
-                    <label class="control-label" for="inputIcon">Thanks for connecting! Please provide us with a valid email address:</label>
-                    <div class="input-append">
-                       <input class="span2" id="email" name="email" size="16" type="text" placeholder="email@domain">
-                       <input class="btn" type="submit" id="submit-email" value="Submit">
-                    </div>
-                </div>
-            </form>
-        </div><!-- /container -->
-    </div><!-- /ajax-form -->
-{% endblock %}
+{% block top %}{% endblock %}
 
 {% block nav_bar %}
      <div class="navbar navbar-inverse">
@@ -61,10 +46,6 @@
                 <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
                     <i class="icon-facebook icon-large"></i>
                 </a>
-                <p class="connect-with pull-right">
-                    Connect:
-                </p>
-
             </div>
         </div>
     </div>
@@ -108,47 +89,9 @@
     $('.featured-background-image').anystretch("{{ STATIC_URL }}image/featured-image.jpg", {speed: 150});
 </script>
 
-<!-- Initiate Collapse Pluggin -->
+<!-- Initiate Collapse/Alert Plugins -->
 <script>
     $(".collapse").collapse();
-</script>
-
-<!-- Initiate Ajax Email Form -->
-<script>
-    $(window).load(function() {
-        setTimeout(ajaxFormShow, 2000);
-    });
-</script>
-
-<!-- Validate and Send Email Form -->
-<script>
-$(document).on("submit", "#email-form", function(e) {
-    clear_form_field_errors($("#ajax-form"));
-    e.preventDefault();
-    var self = $(this),
-        url = self.attr("action"),
-        ajax_req = $.ajax({
-            url: url,
-            type: "POST",
-            data: {
-                email: self.find("#email").val(),
-                csrfmiddlewaretoken: self.find("input[name='csrfmiddlewaretoken']").val()
-            },
-            success: function(data, textStatus, jqXHR) {
-                // django_message("Email saved successfully.", "success");
-            },
-            error: function(data, textStatus, jqXHR) {
-                var errors = $.parseJSON(data.responseText);
-                $.each(errors, function(index, value) {
-                    if (index === "__all__") {
-                        django_message(value[0], "error");
-                    } else {
-                        apply_form_field_error(index, value);
-                    }
-                });
-            }
-        });
-});
 </script>
 
 <!-- Start Shareaholic Classic Bookmarks settings -->
@@ -173,6 +116,8 @@ $(document).on("submit", "#email-form", function(e) {
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
 </script>
+
+{% block footer_scripts %}{% endblock %}
 
 </body>
 </html>

@@ -1,0 +1,76 @@
+<!-- User Ribbone -->
+<div id="user-ribbon" class="row-fluid">
+	<div class="container">
+
+		<!-- Seetings Container -->
+		<div id="settings-container">
+			
+			<!-- Seetings Form -->
+			<form id="settings-form" class="form-inline" method="POST" action="{% url ajax_settings_form %}">{% csrf_token %}
+
+				{{ settings_form.non_field_errors }}
+
+				<div class="row-fluid">
+
+					<!-- First Name Field -->
+				    <div class="span4 fieldWrapper">
+				        {{ settings_form.first_name.errors }}
+				        <label for="first_name">First Name:</label>
+				        {{ settings_form.first_name }}
+				    </div>
+				    <!-- /First Name Field -->
+
+				    <!-- Last Name Field -->
+				    <div class="span4 fieldWrapper">
+				        {{ settings_form.last_name.errors }}
+				        <label for="last_name">Last Name:</label>
+				        {{ settings_form.last_name }}
+				    </div>
+				    <!-- /Last Name Field -->
+
+				    <!-- Email Field -->
+				    <div class="span4 fieldWrapper">
+				        {{ settings_form.email.errors }}
+				        <label for="email">Email:</label>
+				        {{ settings_form.email }}
+				    </div>
+				    <!-- /Email Field -->
+
+				    <div class="span8">
+				    	<!-- Email Updates Field -->
+				    	<div class="fieldWrapper">
+					        {{ settings_form.enable_email_updates.errors }}
+					        <input type="checkbox" name="enable_email_updates" id="enable_email_updates" checked="checked" />
+					        <label class="checkbox-label" for="enable_email_updates">Enable Email Updates</label>
+				    	</div>
+				    	<!-- /Email Updates Field -->
+				    
+				    	<!-- Social Updates Field -->
+				    	<div class="fieldWrapper">
+					    	<!-- If User Authenticated Facebook -->
+					    	{% if 'FbAuth' in user.backend %}
+						        {{ settings_form.enable_facebook_updates.errors }}
+						        <input type="checkbox" name="enable_facebook_updates" id="enable_facebook_updates" checked="checked" />
+						        <label class="checkbox-label" for="enable_facebook_updates">Enable Facebook Updates</label>
+						    <!-- If User Authenticated Twitter -->
+						    {% elif 'TwAuth' in user.backend %}
+						    	{{ settings_form.enable_twitter_updates.errors }}
+						        <input type="checkbox" name="enable_twitter_updates" id="enable_twitter_updates" checked="checked" />
+						        <label class="checkbox-label" for="enable_twitter_updates">Enable Facebook Updates</label>
+						    {% endif %}
+						</div>
+				    	<!-- /Social Updates Field -->
+				    </div>
+				</div>
+				<!-- /row-fluid -->
+
+				<input class="btn pull-right" type="submit" id="submit-settings" value="Update">
+
+	        </form>
+	        <!-- /Settings Form -->
+    	</div>
+    	<!-- Settings Container -->
+
+    </div>
+</div>
+<!-- /User Ribbon -->
