@@ -2,6 +2,18 @@
 
 {% block body_class %}homepage{% endblock %}
 
+{% block head_extra %}
+    {{ block.super }}
+    {% if display_profile %}
+        <meta property="og:title" content="{{ display_profile.user.get_full_name }}"/>
+        <meta property="og:type" content="{{ FACEBOOK_APP_NAMESPACE }}:friend"/>
+        {% if display_profile.image %}<meta property="og:image" content="http://{{ site.domain }}{{ display_profile.image.url }}"/>{% endif %}
+        <meta property="og:url" content="{{ absolute_uri }}"/>
+        <meta property="og:site_name" content="{{ site.name }}"/>
+        <meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}"/>
+    {% endif %}
+{% endblock %}
+
 {% block top %}
 {{ block.super }}
 	{% if user.is_authenticated and not user.email %}
@@ -25,18 +37,6 @@
 	    </div>
 	    <!-- /Ajax Form -->
 	{% endif %}	
-{% endblock %}
-
-{% block head_extra %}
-    {{ block.super }}
-    {% if display_profile %}
-        <meta property="og:title" content="{{ display_profile.user.get_full_name }}"/>
-        <meta property="og:type" content="{{ FACEBOOK_APP_NAMESPACE }}:friend"/>
-        {% if display_profile.image %}<meta property="og:image" content="http://{{ site.domain }}{{ display_profile.image.url }}"/>{% endif %}
-        <meta property="og:url" content="{{ absolute_uri }}"/>
-        <meta property="og:site_name" content="{{ site.name }}"/>
-        <meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}"/>
-    {% endif %}
 {% endblock %}
 
 {% block main %}
