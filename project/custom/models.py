@@ -182,6 +182,21 @@ class FacebookOGReferredLog(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        unique_together = (('user', 'user_referred'))
+
+    def __unicode__(self):
+        return "%s - %s" % (self.user, self.user_referred)
+
+class FriendJoinedEmailLog(models.Model):
+    user = models.ForeignKey(User, related_name='user_fje')
+    user_referred = models.ForeignKey(User, related_name='user_referred_fje')
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = (('user', 'user_referred'))
+
     def __unicode__(self):
         return "%s - %s" % (self.user, self.user_referred)
 

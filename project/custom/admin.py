@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from custom.models import Profile, Post, TwitterStatusUpdate, FacebookStatusUpdate, FacebookStatusUpdateLog, \
-    FacebookOGReferredLog, TwitterAutoFriendshipLog, TwitterStatusUpdateLog
+    FacebookOGReferredLog, FriendJoinedEmailLog, TwitterAutoFriendshipLog, TwitterStatusUpdateLog
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'followers', 'user_referrer', 'source_referrer', 'social_data_completed']
@@ -46,6 +46,12 @@ class FacebookOGReferredLogAdmin(admin.ModelAdmin):
         'user_referred__first_name', 'user_referred__last_name']
     ordering = ['-created_date']
 
+class FriendJoinedEmailLogAdmin(admin.ModelAdmin):
+    list_display = ['user', 'user_referred', 'created_date']
+    search_fields = ['user__username', 'user__first_name', 'user__last_name', 'user_referred__username',
+        'user_referred__first_name', 'user_referred__last_name']
+    ordering = ['-created_date']
+
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Post, PostAdmin)
@@ -55,3 +61,4 @@ admin.site.register(TwitterAutoFriendshipLog, TwitterAutoFriendshipLogAdmin)
 admin.site.register(FacebookStatusUpdate, FacebookStatusUpdateAdmin)
 admin.site.register(FacebookStatusUpdateLog, FacebookStatusUpdateLogAdmin)
 admin.site.register(FacebookOGReferredLog, FacebookOGReferredLogAdmin)
+admin.site.register(FriendJoinedEmailLog, FriendJoinedEmailLogAdmin)

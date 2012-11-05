@@ -1,0 +1,5 @@
+referring member: {{ referring_profile.user.get_full_name }}
+
+=======
+
+referred friend: {{ referred_profile.user.get_full_name }}
