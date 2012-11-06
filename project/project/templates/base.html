@@ -12,19 +12,24 @@
     <meta name="viewport" content="width=device-width">
 
     <link rel="alternate" type="application/rss+xml" title="Water.org Feed'" href="/rss/feed/">
+
+    <!-- Stylesheets -->
     {% block styles %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
     {% endblock %}
+    <!-- /Stylesheets -->
 
     <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     <!--[if gte IE 9]>
       <style type="text/css"> .gradient { filter: none; } </style>
     <![endif]-->
+
     {% block head_extra %}{% endblock %}
 </head>
+
 <body class="{% block body_class %}{% endblock %}">
     <!--[if lt IE 7]>
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
@@ -33,8 +38,9 @@
 {% block top %}{% endblock %}
 
 {% block nav_bar %}
+    <!-- Nav Bar -->
      <div class="navbar navbar-inverse">
-        <div class="navbar-inner">
+        <div class="navbar-inner gradient">
             <div class="container">
                 <a class="brand" href="{% url homepage %}">
                     <img class="hidden-mobile" src="{{ STATIC_URL }}image/logo.png" alt="Water.org | Donate Your Voice" >
@@ -49,12 +55,15 @@
             </div>
         </div>
     </div>
+    <!-- /Nav Bar -->
 {% endblock %}
 
 {% block main_wrap %}
+    <!-- Main -->
     <div id="main-wrap">
         {% block main %}{% endblock %}
     </div>
+    <!-- /Main -->
 {% endblock %}
 
 {% if messages %}
@@ -76,11 +85,10 @@
     </footer>
 {% endblock %}
 
+<!-- Javascripts -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
-
 <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
-
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/main.js"></script>
 
@@ -94,22 +102,6 @@
     $(".collapse").collapse();
 </script>
 
-<!-- Start Shareaholic Classic Bookmarks settings -->
-<script type="text/javascript">
-    var SHRCB_Settings = {"shr_classic":{"size":16,"link":"","service":"5,7,309,304,88","apikey":"2fc518bd8c0bb3cf45bdade11877971c1","shortener":"bitly","shortener_key":"","designer_toolTips":true,"twitter_template":"${title} - ${short_link} via @Shareaholic"}};
-    var SHRCB_Globals = {"perfoption":"1"};
-</script>
-<!-- End Shareaholic Classic Bookmarks settings -->
-<!-- Start Shareaholic Classic Bookmarks script -->
-<script type="text/javascript">
-    (function() {
-    var sb = document.createElement("script"); sb.type = "text/javascript";sb.async = true;
-    sb.src = ("https:" == document.location.protocol ? "https://dtym7iokkjlif.cloudfront.net" : "http://cdn.shareaholic.com") + "/media/js/jquery.shareaholic-publishers-cb.min.js";
-    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(sb, s);
-    })();
-</script>
-<!-- End Shareaholic Classic Bookmarks script -->
-
 <script>
     var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
@@ -118,6 +110,7 @@
 </script>
 
 {% block footer_scripts %}{% endblock %}
+<!-- /Javascripts -->
 
 </body>
 </html>

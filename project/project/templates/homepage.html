@@ -48,7 +48,7 @@
     			<div id="main-inner" class="container-inner">
     				<!-- Featured Post Title Block -->
     				<div id="featured-post-title-block" class="hidden-phone">
-    					<h2 id="featured-post-title">Thirsty for Change? 6 Things You Can Do Right Now <span data-toggle="collapse" data-target="#featured-post">Read Story</span></h2>
+    					<h2 id="featured-post-title">Thirsty for change? 6 things you could do right now <span data-toggle="collapse" data-target="#featured-post">Read Story</span></h2>
     				</div>
     				<!-- /Featured Post Title Block -->
     			</div>
@@ -70,7 +70,7 @@
 				<!-- Info Block: Hidden on Mobile -->
 				<div class="span4 hidden-phone">
 					<aside>
-						<h3 class="aside-heading">What is This All About?</h3>
+						<h3 class="aside-heading">What is Power About?</h3>
 						<p class="aside-text">Sharing your voice is easy. Sign up and we'll post news and stories that support safe water and make a difference.</p>
 					</aside>
 					<aside>
@@ -83,10 +83,6 @@
 				<!-- Article Content -->
 				<div class="span8">
 					<article>
-						<!--http://shareaholic.com/publishers/sharing/-->
-						<span class="shr_classic shareaholic-show-on-load"></span>
-						<p class="share-this"><strong>Share:</strong></p>
-
 						<p id="featured-post-text">
 							When we stare facts in the face - 780 million people lack access to an improved water source - it can be easy to feel overwhelmed. However, everyone has a role to play, here are six things you can do right now to help.
 							<br><br>
@@ -101,6 +97,7 @@
 							<br><br>
 							5. Change a life. It only takes $25 to give someone water for life. Match the size of your family and give water.
 						</p>
+						<a class="btn btn-share"><i class="icon-share"></i>Share</a>
 					</article>
 				</div>
 				<!--/Article Content -->
@@ -116,6 +113,114 @@
 	{% elif user_referrer_profile %}
 		{% include "fragments/referrer_ribbon.html" %}
 	{% endif %}
+
+	<!-- Donate Ribbon -->
+	<div id="donate-ribbon" class="gradient row-fluid">
+		<div class="container">
+			<h1>Donate Your Voice</h1>
+			<!-- Donate Buttons -->
+			<div class="row-fluid">
+				<div class="connect-center">
+					<a class="btn btn-connect btn-connect-twitter pull-right" href="{% url twauth %}">
+			            <i class="icon-twitter icon-large"></i>
+			        </a>
+			        <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
+			            <i class="icon-facebook icon-large"></i>
+			        </a>
+		    	</div>
+	    	</div>
+	        <!-- /Donate Buttons -->
+	        <h3>
+	        	together, we're telling <span>2,240,000</span> people about safe water
+	        </h3>
+        </div>
+	</div>
+	<!-- /Donate Ribbon -->
+
+	<!-- Joining Ribbon -->
+	<div id="joining-ribbon" class="row-fluid ribbon">
+		<div class="container">
+			<h3>Joining is easy:</h3>
+			<!-- Joining Blocks -->
+			<div class="row-fluid">
+				<div class="span4 joining-block">
+					<img src="{{ STATIC_URL }}/image/howto_03.png" />
+					<p>
+						Connect to the Power App with your Facebook or Twitter account.
+					</p>
+		    	</div>
+		    	<div class="span4 joining-block">
+					<img src="{{ STATIC_URL }}/image/howto_05.png" />
+					<p>
+						Every other week Water.org will push one fact or story about water to all Power users.
+					</p>
+		    	</div>
+		    	<div class="span4 joining-block">
+					<img src="{{ STATIC_URL }}/image/howto_07.png" />
+					<p>
+						The story shows up on your account as if you said it. You and your friends learn something cool!
+					</p>
+		    	</div>
+	    	</div>
+	    	<!-- /Joining Blocks -->
+        </div>
+	</div>
+	<!-- /Joining Ribbon -->
+
+	<div class="container divider">
+		<hr>
+	</div>
+
+	<!-- Crisis Ribbon -->
+	<div id="crisis-ribbon" class="row-fluid ribbon">
+		<div class="container">
+			<div class="span7">
+				<h2>How does this help solve the water crisis?</h2>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ac lacus diam, vel porttitor tortor. Aenean a luctus ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Pellentesque molestie lorem eleifend neque ullamcorper dictum. Aliquam at nunc quam, vitae sollicitudin ligula. Vestibulum ac turpis in nisi aliquam lacinia. Integer aliquet, nisl et eleifend dapibus, libero lectus vestibulum ipsum, at convallis eros turpis vel dolor. Vestibulum facilisis pretium nibh.
+				</p>
+			</div>
+			<div class="span5">
+				<img src="{{ STATIC_URL }}/image/watergirl.png" />
+			</div>
+        </div>
+	</div>
+	<!-- /Crisis Ribbon -->
+
+	<!-- Donate Ribbon Small -->
+	<div id="donate-ribbon-small" class="gradient row-fluid">
+		<div class="container">
+			<!-- Donate Buttons -->
+			<div class="row-fluid">
+				<div class="span5">
+					<h2>Donate Your Voice</h2>
+				</div>
+				<div class="connect-center">
+					<a class="btn btn-connect btn-connect-twitter pull-right" href="{% url twauth %}">
+			            <i class="icon-twitter icon-large"></i>
+			        </a>
+			        <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
+			            <i class="icon-facebook icon-large"></i>
+			        </a>
+		    	</div>
+	    	</div>
+	        <!-- /Donate Buttons -->
+        </div>
+	</div>
+	<!-- /Donate Ribbon Small -->
+
+	<!-- Recent Stories Ribbon -->
+	<div id="recent-stories" class="row-fluid">
+		<div class="container">
+			<h3>Recent Stories</h3>
+			<div class="span3 stories-block">
+
+			</div>
+        </div>
+	</div>
+	<!-- /Recent Stories Ribbon -->
+
+
 
 {% endblock %}
 

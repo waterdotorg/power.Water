@@ -9,7 +9,7 @@
 }
 
 body {
-	background: #EBEBEB;
+	background: #f8f8f8;
 }
 
 .alert-ajax {
@@ -57,27 +57,23 @@ body {
 	height: auto;
 }
 
-p.connect-with {
-	margin-top: 12px;
-	margin-right: 6px;
-	color: white;
-	text-shadow: 0px 0px 2px black;
-}
-
 .btn-connect {
 	background: transparent;
 	box-shadow: inset 0px 0px 8px rgba(255,255,255,0.2);
 	color: white;
 	text-shadow: 0px 0px 2px black;
-	padding: 7px 14px;
-	padding-left: 38px;
-	top: 8px;
+	padding: 12px 14px;
+	line-height: 1;
+	top: 4px;
 	margin-right: 10px;
 	position: relative;
-	overflow: hidden;
 	border: 1px solid #032051;
-	display: block;
-	height: 20px;
+	font-weight: bold;
+}
+
+.btn-connect i {
+	padding: 0 0 0 6px;
+	line-height: 1;
 	font-size: 120%;
 }
 
@@ -96,15 +92,15 @@ p.connect-with {
 	text-shadow: 0px 0px 2px black;
 }
 
-.btn-connect-facebook:after {
-	content: "with Facebook";
+.btn-connect-facebook:before {
+	content: "Connect with Facebook";
 }
 
-.btn-connect-twitter:after {
-	content: "with Twitter";
+.btn-connect-twitter:before {
+	content: "Connect with Twitter";
 }
 
-.btn-connect-facebook i{
+/*.btn-connect-facebook i{
 	font-size: 200%;
 	position: absolute;
 	bottom: 8px;
@@ -118,7 +114,7 @@ p.connect-with {
 	bottom: 12px;
 	left: -8px;
 	text-shadow: 0px 0px 2px black, 1px 1px 0px rgba(0,0,0,0.6);
-}
+}*/
 
 .featured-background-image {
 	width: 100%;
@@ -202,7 +198,7 @@ p {
 
 #featured-post .container {
 	position: relative;
-	padding: 30px 0;
+	padding: 30px 0 60px;
 }
 
 p#featured-post-text {
@@ -232,9 +228,63 @@ p.share-this {
 	right: 20px;
 }
 
+/* =================== */
+/* Member Ribbon Style */
+/* =================== */
+
 #user-ribbon {
 	background: #363636;
+	color: white;
+	text-shadow: 1px 1px 0px black;
+	padding: 20px 0;
 }
+
+#user-ribbon h2 {
+}
+
+#user-ribbon p {
+	text-shadow: 1px 1px 0px black;
+}
+
+#user-ribbon i {
+	padding: 0 12px 0 0;
+	line-height: 1;
+}
+
+#user-ribbon .btn {
+	line-height: 1;
+	padding: 8px 14px;
+	margin: 10px 0;
+}
+
+#settings-container {
+}
+
+#settings-form .fieldWrapper {
+	margin: 10px 0;
+}
+
+#settings-form .fieldWrapperCheckbox {
+	margin: 12px 0 0 -20px;
+}
+
+#settings-form label {
+	text-align: right;
+}
+
+#settings-form label.checkbox-label {
+	text-align: left;
+}
+
+#settings-form input[type="checkbox"] {
+	vertical-align: top;
+	margin-right: 6px;
+}
+
+#settings-form input[type="submit"] {
+	margin-top: 20px;
+}
+
 
 
 
@@ -295,12 +345,11 @@ p.share-this {
 		margin-right: 0px;
 		margin-left: 0px;
 	}
-	.btn-connect-facebook:after {
-		content: "";
+	.btn-connect-facebook:before {
+		content: "Connect";
 	}
-
-	.btn-connect-twitter:after {
-		content: "";
+	.btn-connect-twitter:before {
+		content: "Connect";
 	}
 	.featured-background-image {
 		height: 220px;
@@ -320,6 +369,9 @@ p.share-this {
 		top: -3px;
 		right: 20px;
 	}
+	#settings-form .fieldWrapperCheckbox {
+		margin-left: 0;
+	}
 }
  
 /* Landscape phones and down */
@@ -336,13 +388,21 @@ p.share-this {
 	.navbar-inverse .navbar-inner .brand {
 		width: 100px;
 	}
-	p.connect-with {
-		margin-top: 8px;
-		font-size: 80%;
-	}
 	.btn-connect {
-		top: 1px;
-		padding-left: 24px;
+		padding: 10px 10px 4px;
+		top: 3px;
+		margin-right: 10px;
+	}
+	.btn-connect i {
+		padding: 0;
+		line-height: 1;
+		font-size: 100%;
+	}
+	.btn-connect-facebook:before {
+		content: "";
+	}
+	.btn-connect-twitter:before {
+		content: "";
 	}
 	.featured-background-image {
 		height: 140px;

@@ -1,52 +1,109 @@
-<!-- User Ribbone -->
-<div id="user-ribbon" class="row-fluid">
+{% load thumbnail %}
+
+<!-- User Ribbon -->
+<div id="user-ribbon">
 	<div class="container">
 
-		<!-- Seetings Container -->
-		<div id="settings-container">
-			
-			<!-- Seetings Form -->
-			<form id="settings-form" class="form-inline" method="POST" action="{% url ajax_settings_form %}">{% csrf_token %}
+		<div id="stats-container" class="row-fluid">
 
-				{{ settings_form.non_field_errors }}
+			<div id="user-img" class="span2">
+				<img src="{% thumbnail profile.image 200x200 %}" alt="{{ user.first_name }} {{ user.last_name }} is Donating their Voice to Water.org" />
+			</div>
 
-				<div class="row-fluid">
+			<div class="span4">
+				<h2>
+					{{ user.first_name }} {{ user.last_name }}
+				</h2>
+				<h4>
+					is donating their voice
+				</h4>
+			</div>
 
-					<!-- First Name Field -->
-				    <div class="span4 fieldWrapper">
-				        {{ settings_form.first_name.errors }}
-				        <label for="first_name">First Name:</label>
-				        {{ settings_form.first_name }}
-				    </div>
-				    <!-- /First Name Field -->
+			<div class="span2">
+				<h2>
+					{{ profile.friends_joined_count }}
+				</h2>
+				<p>
+					friends joined
+				</p>
+			</div>
 
-				    <!-- Last Name Field -->
-				    <div class="span4 fieldWrapper">
-				        {{ settings_form.last_name.errors }}
-				        <label for="last_name">Last Name:</label>
-				        {{ settings_form.last_name }}
-				    </div>
-				    <!-- /Last Name Field -->
+			<div class="span2">
+				<h2>
+					{{ profile.promoted_posts_count }}
+				</h2>
+				<p>
+					promoted posts
+				</p>
+			</div>
 
-				    <!-- Email Field -->
-				    <div class="span4 fieldWrapper">
-				        {{ settings_form.email.errors }}
-				        <label for="email">Email:</label>
-				        {{ settings_form.email }}
-				    </div>
-				    <!-- /Email Field -->
+			<div class="span2">
+				<h2>
+					{{ profile.followers }}
+				</h2>
+				<p>
+					your social reach
+				</p>
+			</div>
 
-				    <div class="span8">
+			{{ friends_joined }}
+
+		</div>
+		<!-- /Stats Container -->
+
+	    <!-- User Settings -->
+		<div id="user-settings">
+
+			<div class="settings-link">
+
+				<a class="btn-settings" data-toggle="collapse" data-target="#settings-container">Your Settings [<span>+</span>]</a>
+
+			</div>
+
+			<!-- Settings Container -->
+			<div id="settings-container" class="collapse in">
+				
+				<!-- Seetings Form -->
+				<form id="settings-form" class="form-inline" method="POST" action="{% url ajax_settings_form %}">{% csrf_token %}
+
+					{{ settings_form.non_field_errors }}
+
+					<div class="row-fluid">
+
+						<!-- First Name Field -->
+					    <div class="span4 fieldWrapper">
+					        {{ settings_form.first_name.errors }}
+					        <label for="first_name">First Name:</label><br>
+					        {{ settings_form.first_name }}
+					    </div>
+					    <!-- /First Name Field -->
+
+					    <!-- Last Name Field -->
+					    <div class="span4 fieldWrapper">
+					        {{ settings_form.last_name.errors }}
+					        <label for="last_name">Last Name:</label><br>
+					        {{ settings_form.last_name }}
+					    </div>
+					    <!-- /Last Name Field -->
+
+					    <!-- Email Field -->
+					    <div class="span4 fieldWrapper">
+					        {{ settings_form.email.errors }}
+					        <label for="email">Email:</label><br>
+					        {{ settings_form.email }}
+					    </div>
+					    <!-- /Email Field -->
+
 				    	<!-- Email Updates Field -->
-				    	<div class="fieldWrapper">
+				    	<div class="span4 fieldWrapper">
 					        {{ settings_form.enable_email_updates.errors }}
 					        <input type="checkbox" name="enable_email_updates" id="enable_email_updates" checked="checked" />
 					        <label class="checkbox-label" for="enable_email_updates">Enable Email Updates</label>
 				    	</div>
 				    	<!-- /Email Updates Field -->
-				    
+					    
 				    	<!-- Social Updates Field -->
-				    	<div class="fieldWrapper">
+				    	<div class="span4 fieldWrapper">
 					    	<!-- If User Authenticated Facebook -->
 					    	{% if 'FbAuth' in user.backend %}
 						        {{ settings_form.enable_facebook_updates.errors }}
@@ -60,17 +117,16 @@
 						    {% endif %}
 						</div>
 				    	<!-- /Social Updates Field -->
-				    </div>
-				</div>
-				<!-- /row-fluid -->
-
-				<input class="btn pull-right" type="submit" id="submit-settings" value="Update">
-
-	        </form>
-	        <!-- /Settings Form -->
-    	</div>
-    	<!-- Settings Container -->
-
-    </div>
+					</div>
+					<!-- /row-fluid -->
+					<input class="btn" type="submit" id="submit-settings" value="Update">
+		        </form>
+		        <!-- /Settings Form -->
+	    	</div>
+	    	<!-- /Settings Container -->
+		</div>
+		<!-- /User Settings -->
+	</div>
+	<!-- /container -->
 </div>
 <!-- /User Ribbon -->
