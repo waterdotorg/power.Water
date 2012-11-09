@@ -71,7 +71,10 @@ def homepage(request):
     except:
         post = None
 
-    recent_posts = Post.objects.filter(published_date__lte=now).order_by('-published_date')[1:5]
+    recent_posts = Post.objects.filter(published_date__lte=now).order_by('-published_date')
+    if post:
+        recent_posts = recent_posts.exclude(pk=post.pk)
+    recent_posts = recent_posts[:4]
 
     dict_context = {
         'display_profile': display_profile,
@@ -129,7 +132,7 @@ def post(request, slug=None):
     else:
         post = get_object_or_404(Post, slug=slug, published_date__lte=now)
 
-    recent_posts = Post.objects.filter(published_date__lte=now).exclude(pk=post.pk).order_by('-published_date')[1:5]
+    recent_posts = Post.objects.filter(published_date__lte=now).exclude(pk=post.pk).order_by('-published_date')[:4]
 
     dict_context = {
         'profile': profile,
