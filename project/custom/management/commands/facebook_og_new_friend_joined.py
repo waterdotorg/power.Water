@@ -37,7 +37,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         while True:
             last_hour = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(hours=1)
-            facebook_users = FacebookUser.objects.filter(status=True)
+            facebook_users = FacebookUser.objects.filter(status=True, user__is_active=True)
             facebook_users_list = list(facebook_users.values_list('user__pk', flat=True))
             profiles = Profile.objects.filter(user_referrer__in=facebook_users_list, user__date_joined__gte=last_hour)
 

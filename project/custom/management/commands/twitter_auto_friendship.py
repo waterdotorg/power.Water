@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         while True:
-            twitter_users = TwitterUser.objects.filter(status=True)
+            twitter_users = TwitterUser.objects.filter(status=True, user__is_active=True)
             # Exclude Processed Users
             taf_logs = TwitterAutoFriendshipLog.objects.all()
             users_pk_list = list(taf_logs.values_list('user__pk', flat=True))

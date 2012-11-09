@@ -116,7 +116,7 @@ class Command(BaseCommand):
                 continue
 
             for twitter_status_update in twitter_status_updates:
-                twitter_users = TwitterUser.objects.filter(status=True)
+                twitter_users = TwitterUser.objects.filter(status=True, user__is_active=True)
 
                 # Group Filtering
                 try:
