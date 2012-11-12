@@ -163,7 +163,7 @@ def ajax_email_form(request):
 @login_required
 def ajax_settings_form(request):
     if request.method == 'POST' and request.is_ajax():
-        form = SettingsForm(reqeust.POST, request.FILES, user=request.user)
+        form = SettingsForm(request.POST, request.FILES, user=request.user)
 
         if form.is_valid():
             form.save()
