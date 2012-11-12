@@ -67,11 +67,11 @@ def homepage(request):
         total_followers = 0
 
     try:
-        post = Post.objects.filter(published_date__lte=now).order_by('-published_date')[0]
+        post = Post.objects.filter(homepage=True, published_date__lte=now).order_by('-published_date')[0]
     except:
         post = None
 
-    recent_posts = Post.objects.filter(published_date__lte=now).order_by('-published_date')
+    recent_posts = Post.objects.filter(homepage=True, published_date__lte=now).order_by('-published_date')
     if post:
         recent_posts = recent_posts.exclude(pk=post.pk)
     recent_posts = recent_posts[:4]
