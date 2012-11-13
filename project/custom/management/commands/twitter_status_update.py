@@ -38,8 +38,8 @@ class Command(BaseCommand):
         while True:
             try:
                 queue = self.work_queue.get_nowait()
-                profile = queue['profile']
-                twitter_status_update = queue['twitter_status_update']
+                profile = Profile.objects.get(pk=queue['profile_pk'])
+                twitter_status_update = TwitterStatusUpdate.objects.get(pk=queue['twitter_status_update_pk'])
                 logger.info('Twitter status update %d activated for profile %d' % (twitter_status_update.pk, profile.pk))
             except:
                 logger.info('No twitter status updates found in queue')
@@ -147,7 +147,7 @@ class Command(BaseCommand):
                 Profile.objects.filter(pk__in=profiles_pk_list).update(semaphore_twitter=True)
                 profiles = Profile.objects.filter(pk__in=profiles_pk_list)
                 for profile in profiles:
-                    self.work_queue.put({'profile': profile, 'twitter_status_update': twitter_status_update})
+                    self.work_queue.put({'profile_pk': profile.pk, 'twitter_status_update_pk': twitter_status_update.pk})
                     logger.info("Added profile %d and twitter status update %d to queue" % (profile.pk, twitter_status_update.pk))
                     time.sleep(1)
 

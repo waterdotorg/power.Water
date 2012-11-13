@@ -54,8 +54,8 @@ class Command(BaseCommand):
         while True:
             try:
                 queue = self.work_queue.get_nowait()
-                profile = queue['profile']
-                facebook_status_update = queue['facebook_status_update']
+                profile = Profile.objects.get(pk=queue['profile_pk'])
+                facebook_status_update = FacebookStatusUpdate.objects.get(pk=queue['facebook_status_update_pk'])
                 logger.info('Facebook status update %d activated for profile %d' % (facebook_status_update.pk, profile.pk))
             except:
                 logger.info('No facebook status updates found in queue')
@@ -171,7 +171,7 @@ class Command(BaseCommand):
                 Profile.objects.filter(pk__in=profiles_pk_list).update(semaphore_facebook=True)
                 profiles = Profile.objects.filter(pk__in=profiles_pk_list)
                 for profile in profiles:
-                    self.work_queue.put({'profile': profile, 'facebook_status_update': facebook_status_update})
+                    self.work_queue.put({'profile_pk': profile.pk, 'facebook_status_update_pk': facebook_status_update.pk})
                     logger.info("Added profile %d and facebook status update %d to queue" % (profile.pk, facebook_status_update.pk))
                     time.sleep(1)
 
