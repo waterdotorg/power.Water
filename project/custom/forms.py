@@ -15,9 +15,9 @@ class SettingsForm(forms.Form):
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
     email = forms.EmailField(required=False)
-    enable_facebook_updates = forms.BooleanField()
-    enable_twitter_updates = forms.BooleanField()
-    enable_email_updates = forms.BooleanField()
+    enable_facebook_updates = forms.BooleanField(required=False)
+    enable_twitter_updates = forms.BooleanField(required=False)
+    enable_email_updates = forms.BooleanField(required=False)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -34,3 +34,5 @@ class SettingsForm(forms.Form):
         profile.enable_twitter_updates = self.cleaned_data['enable_twitter_updates']
         profile.enable_email_updates = self.cleaned_data['enable_email_updates']
         profile.save()
+
+        del self.user._profile_cache
