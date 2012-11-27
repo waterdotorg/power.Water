@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
     <title>{% block title %}Power.Water.org{% endblock %}</title>
-    
+
     <meta name="viewport" content="width=device-width">
 
     <link rel="alternate" type="application/rss+xml" title="Water.org Feed'" href="/rss/feed/">
@@ -18,9 +18,16 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
+        <link href='http://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css">
     {% endblock %}
     <!-- /Stylesheets -->
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}image/apple-touch-icon-144x144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}image/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}image/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}image/apple-touch-icon-precomposed.png">
 
     <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     <!--[if gte IE 9]>
@@ -40,18 +47,24 @@
 {% block nav_bar %}
     <!-- Nav Bar -->
      <div class="navbar navbar-inverse">
-        <div class="navbar-inner gradient">
+        <div class="navbar-inner">
             <div class="container">
                 <a class="brand" href="{% url homepage %}">
                     <img class="hidden-mobile" src="{{ STATIC_URL }}image/logo.png" alt="Water.org | Donate Your Voice" >
                     <img class="visible-mobile" src="{{ STATIC_URL }}image/logo-mobile.png" alt="Water.org | Donate Your Voice" >
                 </a>
-                <a class="btn btn-connect btn-connect-twitter pull-right" href="{% url twauth %}">
-                    <i class="icon-twitter icon-large"></i>
-                </a>
-                <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
-                    <i class="icon-facebook icon-large"></i>
-                </a>
+                {% if user.is_authenticated %}
+                    <a title="Sign Out" class="btn btn-connect btn-connect-signout pull-right" href="{% url signout %}">
+                        <i class="icon-signout icon-large"></i>
+                    </a>
+                {% else %}
+                    <a class="btn btn-connect btn-connect-twitter pull-right" href="{% url twauth %}">
+                        <i class="icon-twitter icon-large"></i>
+                    </a>
+                    <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
+                        <i class="icon-facebook icon-large"></i>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -66,7 +79,7 @@
     <!-- /Main -->
 {% endblock %}
 
-{% if messages %}
+<!-- {% if messages %}
     <div id="messages-wrap" class="row">
         <div id="messages" class="container">
             <div id="messages-inner" class="container-inner">
@@ -78,36 +91,72 @@
             </div>
         </div>
     </div>
-{% endif %}
+{% endif %} -->
     
 {% block footer %}
-    <footer>
-    </footer>
+    <div id="footer-base-wrap" class="row-fluid">
+        <div id="footer-base" class="container">
+            <div id="footer-base-inner" class="container-inner">
+                <div id="footer-base_general" class="footer-base-section span6">
+                    <p class="general-links">
+                        <a href="http://water.org/contact/">Contact Us</a> |
+                        <a href="http://water.org/about/finance/">Financial Reporting</a> |
+                        <a href="http://water.org/privacy/">Privacy Policy</a> |
+                        <a href="http://water.org/terms/">Terms of Use</a>
+                    </p>
+                    <p class="general-copyright">
+                        copyright &copy; 1990-2012 water.org
+                    </p>
+                </div>
+                <div id="footer-base_license" class="footer-base-section span6">
+                    <p>
+                        This site, unless otherwise noted, is licensed under a
+                        <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 United States License.</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 <!-- Javascripts -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
 <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/main.js"></script>
 
 <!-- Initiate Background Image -->
+{% if post.image %}
 <script type="text/javascript">
-    $('.featured-background-image').anystretch("{{ STATIC_URL }}image/featured-image.jpg", {speed: 150});
+    $('.featured-background-image').anystretch("{{ post.image.url }}", {speed: 150});
 </script>
+{% endif %}
+<!-- /Initiate Background Image -->
 
-<!-- Initiate Collapse/Alert Plugins -->
+<!-- Analytics -->
 <script>
-    $(".collapse").collapse();
-</script>
-
-<script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    var _gaq=[['_setAccount','UA-2458604-21'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));
+
+    /*  ==============
+        Event Tracking
+        ==============  */
+    $(document).ready(function(){
+        $.getJSON("http://jsonip.appspot.com?callback=?", function(data) {
+            $('#map-ribbon').click(function(){
+                _gaq.push(['_trackEvent', 'Toilet Day', 'interact', 'Sanitation Map ' + data.ip]);
+            });
+            $('#flip-ribbon').click(function(){
+                _gaq.push(['_trackEvent', 'Toilet Day', 'interact', 'Sanitation Quiz ' + data.ip]);
+            });
+        });
+    });
 </script>
+<!-- /Analytics -->
 
 {% block footer_scripts %}{% endblock %}
 <!-- /Javascripts -->

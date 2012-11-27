@@ -1,1 +1,323 @@
 {% extends "base.html" %}
+{% load humanize %}
+{% load markup %}
+{% load thumbnail %}
+
+{% block body_class %}post{% endblock %}
+
+{% block head_extra %}
+    {{ block.super }}
+    {% if display_profile %}
+        <meta property="og:title" content="{{ display_profile.user.get_full_name }}"/>
+        <meta property="og:type" content="{{ FACEBOOK_APP_NAMESPACE }}:friend"/>
+        {% if display_profile.image %}<meta property="og:image" content="http://{{ site.domain }}{{ display_profile.image.url }}"/>{% endif %}
+        <meta property="og:url" content="{{ absolute_uri }}"/>
+        <meta property="og:site_name" content="{{ site.name }}"/>
+        <meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}"/>
+    {% endif %}
+{% endblock %}
+
+{% block top %}
+{{ block.super }}
+	<!-- Ajax Form -->
+    <div id="ajax-success" class="row alert-ajax" style="display:none;">
+        <div class="container">
+        	<!-- Success Message -->
+            <p>Your settings have been saved!</p>
+            <!-- /Success Message -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /Ajax Form -->
+
+	{% if user.is_authenticated and not user.email %}
+		<!-- Ajax Form -->
+	    <div id="ajax-form" class="row alert-ajax" style="display:none;">
+	        <div class="container">
+	        	<!-- Email Form -->
+	            <form id="email-form" class="form-inline" method="POST" action="{% url ajax_email_form %}">{% csrf_token %}
+	                <div class="control-group">
+	                    <label class="control-label" for="inputIcon">Thanks for connecting! Please provide us with a valid email address:</label>
+	                    <div class="input-append">
+	                       <input class="span2" id="email" name="email" size="16" type="text" placeholder="email@domain">
+	                       <input class="btn" type="submit" id="submit-email" value="Submit">
+	                    </div>
+	                </div>
+	            </form>
+	            <!-- /Email Form -->
+	            <a class="close" href="#" onclick="ajaxFormHide()">&times;</a>
+	        </div>
+	        <!-- /container -->
+	    </div>
+	    <!-- /Ajax Form -->
+	{% endif %}	
+{% endblock %}
+
+{% block main %}
+    <div class="row-fluid">
+
+    	<!-- Featured Background Image -->
+    	<div class="featured-background-image">
+    		<div id="main" role="main" class="container">
+    			<div id="main-inner" class="container-inner">
+    				<!-- Featured Post Title Block -->
+    				<div id="featured-post-title-block" class="hidden-phone">
+    					<h2 id="featured-post-title">{{ post.title }}</h2>
+    					<p>
+    						{{ post.content|truncatewords:8 }}
+    						<!-- <span class="collapse-btn collapsed" data-toggle="collapse" data-target="#featured-post">Read Story</span> -->
+    					</p>
+    				</div>
+    				<!-- /Featured Post Title Block -->
+    			</div>
+    			<!-- /container-inner -->
+   			</div>
+   			<!-- /container -->
+    	</div>
+    	<!-- /Featured Background Image -->
+
+    	<!-- Mobile Featured Title Block -->
+    	<div id="featured-post-title-block-mobile" class="visible-phone">
+    		<div class="container">
+				<h2 id="featured-post-title-mobile">{{ post.title }} <!-- <span class="collapse-btn collapsed" data-toggle="collapse" data-target="#featured-post">Read Story</span> --></h2>
+			</div>
+		</div>
+		<!-- /Mobile Featured Title Block -->
+		
+		<!-- Featured Post -->
+		<div id="featured-post" class="collapse in row-fluid">
+			<div class="container">
+
+				<!-- Article Content -->
+				<div class="span8 pull-right">
+					<article>
+					    <div id="featured-post-text">
+					        {{ post.content|markdown }}
+					    </div>
+						<a class="btn btn-share" rel="popover" data-content='{% include "fragments/share_story.html" %}' data-original-title="Share this story...">
+							<i class="icon-share"></i>Share
+						</a>
+					</article>
+				</div>
+				<!--/Article Content -->
+
+				<!-- Info Block -->
+				<div class="span4 pull-left">
+					<aside>
+						<h3 class="aside-heading">How we can help</h3>
+						<p class="aside-text">Sharing your voice is easy. Sign up now and we'll post news and stories on your account through November 25th to spread the word.</p>
+					</aside>
+					<aside>
+						<h3 class="aside-heading">About Water.org</h3>
+						<p class="aside-text">For more than twenty years <a href="http://water.org" target="_blank">Water.org</a> has worked with local partners and communities to solve the water and sanitation crisis. Over 50,000 people have donated their voice to our campaigns that inform and educate others online.</p>
+					</aside>
+				</div>
+				<!--/span4-->
+
+			</div>
+			<!--/container-->
+		</div>
+		<!--/Featured Post-->
+	</div>
+	<!--/row-fluid-->
+
+	<!-- Donate Ribbon -->
+	<a name="emaillink"></a>
+	{% if not user.is_authenticated %}
+	<div id="donate-ribbon" class="gradient row-fluid">
+		<div class="container">
+			<h1>Donate Your Voice</h1>
+			<!-- Donate Buttons -->
+			<div class="row-fluid">
+				<div class="connect-right">
+					<p>
+	        	Allow us to post status updates for Water.org. Make your voice heard today.
+	        </p>
+	        <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
+	            <i class="icon-facebook icon-large"></i>
+	        </a>
+					<a class="btn btn-connect btn-connect-twitter pull-right" href="{% url twauth %}">
+	            <i class="icon-twitter icon-large"></i>
+	        </a>
+		    </div>
+    	</div>
+      <!-- /Donate Buttons -->
+    </div>
+	</div>
+	{% endif %}
+	<!-- /Donate Ribbon -->
+
+	{% if display_profile %}
+	    {% include "fragments/profile_ribbon.html" %}
+	{% endif %}
+
+		<!-- Crisis Ribbon -->
+		<div id="crisis-ribbon" class="row-fluid ribbon">
+			<div class="container">
+				<div class="span7">
+					<h2>How does this help solve the water crisis?</h2>
+					<p>
+						When you tell your social networks about the water crisis, you are helping others become more aware of the challenges associated with not having access to safe water and sanitation. With every new person learning about the water crisis, more people are thinking about solutions, donating money, and working together towards the day when everyone has access to safe water and a toilet. Your voice has the power to make a difference.
+					</p>
+				</div>
+				<div class="span5">
+					<img src="{{ STATIC_URL }}image/crisis-ribbon.jpg" alt="Donate Your Voice - Water.org" />
+				</div>
+	    </div>
+		</div>
+		<!-- /Crisis Ribbon -->
+
+		<div class="container divider">
+			<hr>
+		</div>
+
+		<!-- Joining Ribbon -->
+		<div id="joining-ribbon" class="row-fluid ribbon">
+			<div class="container">
+				<h3>Joining is easy:</h3>
+				<!-- Joining Blocks -->
+				<div class="row-fluid">
+					<div class="span4 joining-block">
+						<img src="{{ STATIC_URL }}image/how-to1.png" />
+						<p>
+							Connect to the Power site using your Facebook or Twitter account.
+						</p>
+			    </div>
+			    <div class="span4 joining-block">
+						<img src="{{ STATIC_URL }}image/how-to2.png" />
+						<p>
+							Every other week, this site will post a fact or story on your account.
+						</p>
+			    </div>
+			    <div class="span4 joining-block">
+						<img src="{{ STATIC_URL }}image/how-to3.png" />
+						<p>
+							The story shows up in your timeline as if you said it. Your friends join on in.
+						</p>
+			    </div>
+		    </div>
+		    	<!-- /Joining Blocks -->
+	    </div>
+		</div>
+		<!-- /Joining Ribbon -->
+
+		<!-- Total Follower Ribbon -->
+    <div id="followers-ribbon" class="row-fluid">
+        <div class="container">
+            <h2>Together we're telling <span>{{ total_followers|intcomma }}</span> people about safe water!</h2>
+        </div>
+    </div>
+    <!-- /Total Follower Ribbon -->
+
+
+	{% if recent_posts.count %}
+	  <div class="container divider">
+			<hr>
+		</div>
+
+    <!-- Recent Stories Ribbon -->
+		<div id="recent-stories" class="row-fluid ribbon">
+			<div class="container">
+				<h3>Recent Stories</h3>
+				{% for post in recent_posts %}
+	                <div class="span3 stories-block">
+	                    <a href="{{ post.get_absolute_url }}">
+	                        <img src="{% thumbnail post.image 267x150 %}" />
+	                    </a>
+	                    <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+	                </div>
+				{% endfor %}
+	        </div>
+		</div>
+		<!-- /Recent Stories Ribbon -->
+	{% endif %}
+
+	<!-- Donate Ribbon Small -->
+	{% if not user.is_authenticated %}
+		<div id="donate-ribbon-small">
+			<div class="container">
+				<div class="row-fluid">
+					<div class="span6">
+						<h1>Donate Your Voice</h1>
+					</div>
+					<div class="connect-right span6">
+						<a class="btn btn-connect btn-connect-facebook" href="{% url fbauth %}">
+				      <i class="icon-facebook icon-large"></i>
+				    </a>
+						<a class="btn btn-connect btn-connect-twitter" href="{% url twauth %}">
+				      <i class="icon-twitter icon-large"></i>
+				    </a>
+		    	</div>
+	    	</div>
+      </div>
+		</div>
+	{% endif %}
+	<!-- Donate Ribbon Small -->
+
+
+
+{% endblock %}
+
+
+{% block footer_scripts %}
+{{ block.super }}
+
+	{% if user.is_authenticated and not user.email %}
+		<!-- Initiate Ajax Email Form -->
+		<script>
+		    $(window).load(function() {
+		        setTimeout(ajaxFormShow, 500);
+		    });
+		</script>
+		<!-- /Initiate Ajax Email Form -->
+
+		<!-- Validate and Post Email Form -->
+		<script>
+		    $(document).on("submit", "#email-form", function(e) {
+		        clear_form_field_errors($("#ajax-form"));
+		        e.preventDefault();
+		        var self = $(this),
+		            url = self.attr("action"),
+		            ajax_req = $.ajax({
+		                url: url,
+		                type: "POST",
+		                data: {
+		                    email: self.find("#email").val(),
+		                    csrfmiddlewaretoken: self.find("input[name='csrfmiddlewaretoken']").val()
+		                },
+		                success: function(data, textStatus, jqXHR) {
+		                    $("#ajax-form").slideUp("medium");
+		                    showSuccess();
+		                },
+		                error: function(data, textStatus, jqXHR) {
+		                    var errors = $.parseJSON(data.responseText);
+		                    $.each(errors, function(index, value) {
+		                        if (index === "__all__") {
+		                            django_message(value[0], "error");
+		                        } else {
+		                            apply_form_field_error(index, value);
+		                        }
+		                    });
+		                }
+		            });
+		    });
+		</script>
+		<!-- /Validate and Post Email Form -->
+	{% endif %}
+
+	<!-- Template Javascript Variables -->
+	<script>
+		var staticURL = '{{ STATIC_URL }}';
+		var socialPostDomain = 'http://{{ site.domain }}';
+		var socialPostLink = 'http://{{ site.domain }}{{ post.get_absolute_url }}';
+		var socialPostTitle = '{{ post.title }}';
+		var socialPostTitleEscaped = escape(socialPostTitle);
+		var socialPostImage = 'http://{{ site.domain }}{{ post.image.url }}';
+		var socialMapImage = '{{ STATIC_URL }}image/sanitation-map-active-bl.png';
+		var socialMapTitleEscaped = escape('Billions with no place to "go"? Find out where...');
+		var socialMapLink = escape('http://{{ site.domain }}/#map-ribbon');
+	</script>
+	<!-- /Template Javascript Variables -->
+
+
+{% endblock %}

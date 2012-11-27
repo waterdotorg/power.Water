@@ -1,0 +1,100 @@
+{% extends "emails/base.html" %}
+{% load humanize %}
+{% load thumbnail %}
+
+{% block header %}
+    <table width="100%" cellpadding="20" cellspacing="0" border="0">
+        <tr>
+            <td width="100%" bgcolor="#ffffff">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="border-bottom:1px solid #DBDADB; color:#4E4E4E;" valign="top" bgcolor="#ffffff">
+                            {% if referring_profile.user.first_name %}
+                            <div style="font-size:20px; line-height: 25px;"><strong>{{ referring_profile.user.first_name}},</strong></div>{% endif %}
+                            <div style="font-size:13px; line-height: 16px;">World Toilet Day is gaining steam...</div>
+                        </td>
+                        <td style="border-bottom:1px solid #DBDADB; color:#4E4E4E;" align="right" bgcolor="#ffffff">
+                            <a href="http://{{ site.domain }}/">
+                                <img src="http://{{ site.domain }}/static/image/toilet-day-logo_03.png" width="167" height="46" alt="{{ site.name }}" style="-ms-interpolation-mode:bicubic;">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% block main %}
+    <table width="100%" cellpadding="20" cellspacing="0" border="0">
+        <tr>
+            <td width="100%" bgcolor="#ffffff">
+
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="color:#4E4E4E; padding: 5px 30px 0 20px; padding-top:5px; vertical-align: top;" bgcolor="#ffffff">
+                            <div style="font-size:20px; line-height: 25px;"><strong>{{ referred_profile.user.get_full_name }} just donated their voice.</strong></div>
+                            <div style="font-size:13px; line-height: 16px; padding-top:20px;">This person found out about {{ site.name }} because of your participation. You are spreading the word. Thanks for being so awesome!</div>
+                        </td>
+                        <td style="color:#4E4E4E; padding: 5px 20px 0 0; vertical-align: top;" bgcolor="#ffffff">
+                            {% if referred_profile.image %}
+                            <div style="background-color: #EEEEEE; border: 1px solid #AAAAAA; margin: 0; padding:5px; text-align: center; width:200px !important;">
+                                <img class="image_fix" border="0" src="http://{{ site.domain }}{% thumbnail referred_profile.image 200x200 %}" alt="{{ referred_profile.user.get_full_name }}" />
+                            </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="border-bottom:1px solid #DBDADB; color:#4E4E4E; padding-top:50px;">
+                            <div style="padding-bottom:4px;"><strong>YOUR STATS</strong></div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        {% if referring_profile.image %}
+                        <td style="color:#4E4E4E; padding-top:15px; padding-right: 40px; vertical-align: top;" bgcolor="#ffffff">
+                            <img class="image_fix" border="0" src="http://{{ site.domain }}{% thumbnail referring_profile.image 200x200 %}" alt="{{ referring_profile.user.get_full_name }}" />
+                        </td>
+                        {% endif %}
+                        <td style="color:#4E4E4E; padding-top:15px; vertical-align: top;" bgcolor="#ffffff">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="color:#4E4E4E; padding-bottom:10px;">
+                                        <div style="font-size:20px; line-height: 25px;"><strong>{{ referring_profile.user.get_full_name }}</strong></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="color:#4E4E4E;">
+                                        <div style="font-size:51px; line-height: 51px;">
+                                            <strong>{{ referring_profile.friends_joined_count|intcomma }}</strong>
+                                        </div>
+                                        <div>friend{{ referring_profile.friends_joined_count|pluralize }} joined</div>
+                                    </td>
+                                    <td style="color:#4E4E4E;">
+                                        <div style="font-size:51px; line-height: 51px;">
+                                            <strong>{{ referring_profile.promoted_posts_count|intcomma }}</strong>
+                                        </div>
+                                        <div>promoted post{{ referring_profile.promoted_posts_count|pluralize }}</div>
+                                    </td>
+                                    <td style="color:#4E4E4E;">
+                                        <div style="font-size:51px; line-height: 51px;">
+                                            <strong>{{ referring_profile.followers|intcomma }}</strong>
+                                        </div>
+                                        <div>social reach</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
