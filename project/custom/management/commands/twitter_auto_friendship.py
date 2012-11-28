@@ -15,6 +15,10 @@ class Command(BaseCommand):
     help = 'Twitter auto friendship daemon'
     args = ''
 
+    def close_db_connection(self):
+        from django import db
+        db.close_connection()
+
     def handle(self, *args, **options):
         while True:
             twitter_users = TwitterUser.objects.filter(status=True, user__is_active=True)
@@ -34,4 +38,5 @@ class Command(BaseCommand):
                         TwitterAutoFriendshipLog.objects.create(user=twitter_user.user)
                     except:
                         TwitterAutoFriendshipLog.objects.create(user=twitter_user.user, success=False)
+            self.close_db_connection()
             time.sleep(300)

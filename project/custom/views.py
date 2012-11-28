@@ -108,10 +108,15 @@ def post(request, slug=None):
     profile = None
     user_referrer = request.session.get('ur', None)
     user_referrer_profile = None
+    display_profile = None
+    display_user_pk = request.GET.get('du')
     source_referrer = request.session.get('sr', None)
 
-    if request.user.is_authenticated():
-        profile = request.user.get_profile()
+    if display_user_pk:
+        try:
+            display_profile = Profile.objects.get(user__pk=display_user_pk)
+        except Profile.DoesNotExist:
+            pass
 
     if user_referrer:
         try:
@@ -119,6 +124,13 @@ def post(request, slug=None):
             user_referrer_profile = user_referrer_object.get_profile()
         except:
             pass
+
+    # We need a dashboard and/or nav bar
+    if not display_profile:
+        if profile:
+            display_profile = profile
+        elif user_referrer_profile:
+            display_profile = user_referrer_profile
 
     site = Site.objects.get_current()
     total_followers_qs = Profile.objects.aggregate(Sum('followers'))
@@ -135,6 +147,7 @@ def post(request, slug=None):
     recent_posts = Post.objects.filter(published_date__lte=now).exclude(pk=post.pk).order_by('-published_date')[:4]
 
     dict_context = {
+        'display_profile': display_profile,
         'profile': profile,
         'user_referrer': user_referrer,
         'user_referrer_profile': user_referrer_profile,

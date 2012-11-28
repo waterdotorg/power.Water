@@ -23,6 +23,10 @@ class Command(BaseCommand):
         super(Command, self).__init__(*args, **kwargs)
         self.site = Site.objects.get_current()
 
+    def close_db_connection(self):
+        from django import db
+        db.close_connection()
+
     def handle(self, *args, **options):
         while True:
             last_hour = datetime.datetime.utcnow().replace(tzinfo=utc) - datetime.timedelta(hours=1)
@@ -52,4 +56,5 @@ class Command(BaseCommand):
                     email.attach_alternative(email_html, 'text/html')
                     email.send()
                     FriendJoinedEmailLog.objects.create(user=profile.user_referrer, user_referred=profile.user)
+            self.close_db_connection()
             time.sleep(600)
