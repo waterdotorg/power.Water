@@ -31,8 +31,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 CREDITS
 -------
 A project by [Water.org](http://water.org/)
-
-		  _    _    _    _    _    _    _    _    _  
-		 / \  / \  / \  / \  / \  / \  / \  / \  / \ 
-		( w )( a )( t )( e )( r )( . )( o )( r )( g )
-		 \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/ 
