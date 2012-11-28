@@ -1,62 +1,46 @@
+{% load humanize %}
 {% load thumbnail %}
 
 <!-- User Ribbon -->
 <div id="user-ribbon">
 	<div class="container">
-
 		<div id="stats-container" class="row-fluid">
-
 			<div id="user-img" class="span2">
-				<img src="{% thumbnail profile.image 200x200 %}" alt="{{ user.first_name }} {{ user.last_name }} is Donating their Voice to Water.org" />
+			    {% if display_profile.image %}
+				    <img src="{% thumbnail display_profile.image 140x140 crop %}" alt="{{ display_profile.user.get_full_name }}" />
+				{% else %}
+				    <!-- Default Image -->
+				    <img src="{{ STATIC_URL }}image/default.png" width="140" height="140" title="Bummer! No profile pic?" alt="Power.Water.org!" />
+				{% endif %}
 			</div>
-
 			<div class="span4">
-				<h2>
-					{{ user.first_name }} {{ user.last_name }}
-				</h2>
-				<h4>
-					is donating their voice
-				</h4>
+				<h2>{{ display_profile.user.get_full_name }}</h2>
+				<h4>is donating their voice</h4>
 			</div>
-
-			<div class="span2">
-				<h2>
-					{{ profile.friends_joined_count }}
-				</h2>
-				<p>
-					friends joined
-				</p>
+			<div class="span6">
+				<table class="table">
+					<tr>
+						<th><h3>{{ display_profile.friends_joined_count|intcomma }}</h3></th>
+						<th><h3>{{ display_profile.promoted_posts_count|intcomma }}</h3></th>
+						<th><h3>{{ display_profile.followers|intcomma }}</h3></th>
+					</tr>
+					<tr>
+						<td><h4>friend{{ display_profile.friends_joined_count|pluralize }} joined</h4></td>
+						<td><h4>promoted post{{ display_profile.promoted_posts_count|pluralize }}</h4></td>
+						<td><h4>social reach</h4></td>
+					</tr>
+				</table>
 			</div>
-
-			<div class="span2">
-				<h2>
-					{{ profile.promoted_posts_count }}
-				</h2>
-				<p>
-					promoted posts
-				</p>
-			</div>
-
-			<div class="span2">
-				<h2>
-					{{ profile.followers }}
-				</h2>
-				<p>
-					your social reach
-				</p>
-			</div>
-
-			{{ friends_joined }}
-
 		</div>
 		<!-- /Stats Container -->
 
+        {% if user.is_authenticated and user.id == display_profile.user.id %}
 	    <!-- User Settings -->
 		<div id="user-settings">
 
 			<div class="settings-link">
 
-				<a class="btn-settings" data-toggle="collapse" data-target="#settings-container">Your Settings [<span>+</span>]</a>
+				<a class="btn-settings collapse-btn collapsed" data-toggle="collapse" data-target="#settings-container">Your Settings</a>
 
 			</div>
 
@@ -97,8 +81,8 @@
 				    	<!-- Email Updates Field -->
 				    	<div class="span4 fieldWrapper">
 					        {{ settings_form.enable_email_updates.errors }}
-					        <input type="checkbox" name="enable_email_updates" id="enable_email_updates" checked="checked" />
-					        <label class="checkbox-label" for="enable_email_updates">Enable Email Updates</label>
+					        {{ settings_form.enable_email_updates }}
+					        <label class="checkbox-label">Enable Email Updates</label>
 				    	</div>
 				    	<!-- /Email Updates Field -->
 					    
@@ -107,25 +91,32 @@
 					    	<!-- If User Authenticated Facebook -->
 					    	{% if 'FbAuth' in user.backend %}
 						        {{ settings_form.enable_facebook_updates.errors }}
-						        <input type="checkbox" name="enable_facebook_updates" id="enable_facebook_updates" checked="checked" />
-						        <label class="checkbox-label" for="enable_facebook_updates">Enable Facebook Updates</label>
+						        {{ settings_form.enable_facebook_updates }}
+						        <label class="checkbox-label">Enable Facebook Updates</label>
+						        <div style="display:none;">
+							        {{ settings_form.enable_twitter_updates }}
+						    	</div>
 						    <!-- If User Authenticated Twitter -->
 						    {% elif 'TwAuth' in user.backend %}
 						    	{{ settings_form.enable_twitter_updates.errors }}
-						        <input type="checkbox" name="enable_twitter_updates" id="enable_twitter_updates" checked="checked" />
-						        <label class="checkbox-label" for="enable_twitter_updates">Enable Facebook Updates</label>
+						        {{ settings_form.enable_twitter_updates }}
+						        <label class="checkbox-label">Enable Twitter Updates</label>
+						        <div style="display:none;">
+							        {{ settings_form.enable_facebook_updates }}
+							    </div>
 						    {% endif %}
 						</div>
 				    	<!-- /Social Updates Field -->
 					</div>
 					<!-- /row-fluid -->
-					<input class="btn" type="submit" id="submit-settings" value="Update">
+					<input class="btn" type="submit" id="submit-settings" value="Update" data-toggle="collapse" data-target="#settings-container">
 		        </form>
 		        <!-- /Settings Form -->
 	    	</div>
 	    	<!-- /Settings Container -->
 		</div>
 		<!-- /User Settings -->
+		{% endif %}
 	</div>
 	<!-- /container -->
 </div>

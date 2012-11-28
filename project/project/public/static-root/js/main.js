@@ -133,14 +133,14 @@ $(document).ready(function(){
 
     $('#world').mapster({
         render_highlight: {
-                fillOpacity: 0.6,
+            fillOpacity: 0.2,
             stroke: false,
-            altImage: staticURL + 'image/sanitation-map-hover.png'
+            altImage: staticURL + 'image/sanitation-map-white.png'
         },
         render_select: {
-                fillOpacity: 1.0,
+            fillOpacity: 1.0,
             stroke: false,
-            altImage: staticURL + 'image/sanitation-map-active-bl.png'
+            altImage: staticURL + 'image/sanitation-map-red.png'
         },
         fadeInterval: 50,
         mapKey: 'region',

@@ -484,6 +484,7 @@ h3.aside-heading {
 	color: white;
 	text-shadow: 2px 2px 1px black;
 	border-top: 3px solid #232323;
+	box-shadow: inset 0px 0px 8px black;
 }
 
 #user-ribbon .container {
@@ -492,7 +493,15 @@ h3.aside-heading {
 
 #user-img {
 	border-radius: 50%;
-	border: 2px solid #E9F1DF;
+	background: rgba(255,255,255,0.1);
+	padding: 8px;
+	width: 148px;
+	height: 148px;
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+}
+
+#user-img img {
+	border-radius: 50%;
 }
 
 #stats-container {
