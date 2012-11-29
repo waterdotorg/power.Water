@@ -33,6 +33,11 @@ class Command(BaseCommand):
         from django import db
         db.close_connection()
 
+    def status_update_error(self, e, twitter_user):
+        if 'Invalid or expired token' in e.reason:
+            twitter_user.status = False
+            twitter_user.save()
+
     def handle(self, *args, **options):
         while True:
             now = datetime.datetime.utcnow().replace(tzinfo=utc)
@@ -115,7 +120,11 @@ class Command(BaseCommand):
                         auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
                         auth.set_access_token(twitter_user.oauth_token, twitter_user.oauth_token_secret)
                         api = tweepy.API(auth_handler=auth, api_root='/1.1')
-                        api.update_status(status=twitter_content)
+                        try:
+                            api.update_status(status=twitter_content)
+                        except tweepy.TweepError, e:
+                            self.status_update_error(e, twitter_user)
+                            raise Exception('Error pushing twitter status update for user id %d. Error: %s' % (profile.user.pk, str(e)))
                         logger.info('Successfully sent twitter status update %d to profile %d' % (twitter_status_update.pk, profile.pk))
                         TwitterStatusUpdateLog.objects.create(user=profile.user, twitter_status_update=twitter_status_update)
                     except Exception, e:
