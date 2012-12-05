@@ -736,6 +736,11 @@ h3.aside-heading {
 	background: white;
 }
 
+#joining-ribbon {
+    padding-top: 50px;
+	background: url(../image/gradient.png) top left repeat-x;
+}
+
 #joining-ribbon h3 {
 	margin-top: 0;
 	padding-top: 0;
@@ -765,8 +770,7 @@ h3.aside-heading {
 ==================================================================
 */
 #crisis-ribbon {
-	padding-top: 50px;
-	background: url(../image/gradient.png) top left repeat-x;
+
 }
 
 #crisis-ribbon h2 {

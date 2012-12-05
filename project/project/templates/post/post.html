@@ -105,7 +105,7 @@
 				<div class="span4 pull-left">
 					<aside>
 						<h3 class="aside-heading">How we can help</h3>
-						<p class="aside-text">Sharing your voice is easy. Sign up now and we'll post news and stories on your account through November 25th to spread the word.</p>
+						<p class="aside-text">Sign up now and about every two weeks we'll post news and stories on your account to help spread the word about the crisis. It's easy, and your voice really has the power to make a difference.</p>
 					</aside>
 					<aside>
 						<h3 class="aside-heading">About Water.org</h3>
@@ -130,9 +130,7 @@
 			<!-- Donate Buttons -->
 			<div class="row-fluid">
 				<div class="connect-right">
-					<p>
-	        	Allow us to post status updates for Water.org. Make your voice heard today.
-	        </p>
+					<p>Allow us to post facts and stories on your account to spread the word about the crisis. It's easy and you can make a difference.</p>
 	        <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
 	            <i class="icon-facebook icon-large"></i>
 	        </a>
@@ -151,6 +149,41 @@
 	    {% include "fragments/profile_ribbon.html" %}
 	{% endif %}
 
+	    <!-- Joining Ribbon -->
+		<div id="joining-ribbon" class="row-fluid ribbon">
+			<div class="container">
+				<h3>Joining is easy:</h3>
+				<!-- Joining Blocks -->
+				<div class="row-fluid">
+					<div class="span4 joining-block">
+						<img src="{{ STATIC_URL }}image/how-to1.png" />
+						<p>
+							Connect to the Power site using your Facebook or Twitter account.
+						</p>
+			    </div>
+			    <div class="span4 joining-block">
+						<img src="{{ STATIC_URL }}image/how-to2.png" />
+						<p>
+							Every other week or so, we will post a fact or story on your account.
+						</p>
+			    </div>
+			    <div class="span4 joining-block">
+						<img src="{{ STATIC_URL }}image/how-to3.png" />
+						<p>
+							The story shows up in your timeline as if you said it. Your friends join on in.
+						</p>
+			    </div>
+		    </div>
+		    	<!-- /Joining Blocks -->
+	    </div>
+		</div>
+		<!-- /Joining Ribbon -->
+
+
+		<div class="container divider">
+			<hr>
+		</div>
+
 		<!-- Crisis Ribbon -->
 		<div id="crisis-ribbon" class="row-fluid ribbon">
 			<div class="container">
@@ -167,44 +200,10 @@
 		</div>
 		<!-- /Crisis Ribbon -->
 
-		<div class="container divider">
-			<hr>
-		</div>
-
-		<!-- Joining Ribbon -->
-		<div id="joining-ribbon" class="row-fluid ribbon">
-			<div class="container">
-				<h3>Joining is easy:</h3>
-				<!-- Joining Blocks -->
-				<div class="row-fluid">
-					<div class="span4 joining-block">
-						<img src="{{ STATIC_URL }}image/how-to1.png" />
-						<p>
-							Connect to the Power site using your Facebook or Twitter account.
-						</p>
-			    </div>
-			    <div class="span4 joining-block">
-						<img src="{{ STATIC_URL }}image/how-to2.png" />
-						<p>
-							Every other week, this site will post a fact or story on your account.
-						</p>
-			    </div>
-			    <div class="span4 joining-block">
-						<img src="{{ STATIC_URL }}image/how-to3.png" />
-						<p>
-							The story shows up in your timeline as if you said it. Your friends join on in.
-						</p>
-			    </div>
-		    </div>
-		    	<!-- /Joining Blocks -->
-	    </div>
-		</div>
-		<!-- /Joining Ribbon -->
-
 		<!-- Total Follower Ribbon -->
     <div id="followers-ribbon" class="row-fluid">
         <div class="container">
-            <h2>Together we're telling <span>{{ total_followers|intcomma }}</span> people about safe water!</h2>
+            <h2>Together our voice is reaching <span>{{ total_followers|intcomma }}</span> people</h2>
         </div>
     </div>
     <!-- /Total Follower Ribbon -->
