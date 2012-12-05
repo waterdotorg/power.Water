@@ -50,8 +50,8 @@
         <div class="navbar-inner">
             <div class="container">
                 <a class="brand" href="{% url homepage %}">
-                    <img class="hidden-mobile" src="{{ STATIC_URL }}image/logo.png" alt="Water.org | Donate Your Voice" >
-                    <img class="visible-mobile" src="{{ STATIC_URL }}image/logo-mobile.png" alt="Water.org | Donate Your Voice" >
+                    <img class="hidden-mobile" src="{{ STATIC_URL }}image/logo_standard_res.png" alt="Water.org | Donate Your Voice" >
+                    <img class="visible-mobile" src="{{ STATIC_URL }}image/logo_mobile.png" alt="Water.org | Donate Your Voice" >
                 </a>
                 {% if user.is_authenticated %}
                     <a title="Sign Out" class="btn btn-connect btn-connect-signout pull-right" href="{% url signout %}">
