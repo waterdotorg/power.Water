@@ -161,10 +161,11 @@ a.close {
 	margin-bottom: 0px;
 	overflow: hidden;
 	/*position: absolute;*/
-	box-shadow: 2px 4px 2px rgba(0,0,0,0.4);
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
 }
 
 .gradient, .navbar-inverse .navbar-inner {
+	border: none;
 	background: #3aa9dd; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxMiUiIHN0b3AtY29sb3I9IiMzYWE5ZGQiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI4NyUiIHN0b3AtY29sb3I9IiMwMDMwNjciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -175,8 +176,7 @@ a.close {
 	background: -ms-linear-gradient(left,  #3aa9dd 12%,#003067 87%); /* IE10+ */
 	background: linear-gradient(to right,  #3aa9dd 12%,#003067 87%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3aa9dd', endColorstr='#003067',GradientType=1 ); /* IE6-8 */
-	border-bottom: 1px solid #02173A;
-	border-top: 1px solid #02173A;
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
 }
 
 .navbar-inverse .navbar-inner {
@@ -231,13 +231,13 @@ h2#featured-post-title {
 }
 
 #featured-post-title-block {
-	position: absolute;
-	background: rgba(0,0,0,0.7);
-	bottom: 60px;
-	right: 0;
-	width: 62%;
-	padding: 2% 4%;
-	text-shadow: 2px 2px 2px black;
+  position: absolute;
+  background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.7);
+  bottom: 0px;
+  right: 0px;
+  width: 58%;
+  padding: 2% 2%;
+  text-shadow: 2px 2px 2px black;
 }
 
 #featured-post-title-block p {
@@ -356,14 +356,14 @@ h3.aside-heading {
 */
 .btn-connect {
 	background: url(../image/btn-connect-bg.png) top right;
-	color: #545454;
-	text-shadow: 0 0 2px white;
+	color: white;
+	text-shadow: 1px 1px 0px rgba(0,0,0,0.44);
 	padding: 10px 14px 10px 18px;
 	line-height: 1;
 	top: 5px;
 	position: relative;
 	border: 1px solid #1F4860;
-	font-weight: 600;
+	font-weight: 400;
 	font-size: 120%;
 	box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
 	-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
@@ -630,7 +630,7 @@ h3.aside-heading {
 
 #donate-ribbon p {
 	font-weight: 300;
-	margin-top: 32px;
+	margin-top: 22px;
 	text-align: left;
 	color: white;
 	text-shadow: 1px 1px 0px #02173A;

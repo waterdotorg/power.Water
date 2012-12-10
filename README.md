@@ -1,6 +1,8 @@
 ABOUT
 -----
+The power.Water codebase allows organizations to recruit, collect, manage, and then post content on users' accounts on both Facebook and Twitter. Users "donate their voice" by authorizing the power.Water site with their Facebook Connect or Twitter OAuth credentials. 
 
+Administrators determine when a post will occur on user accounts. Content can be scheduled, includes unique identifying information for each user and post for tracking, can include photos on Facebook, and can include links to any resolvable URI on the web. Visit [power.Water.org Production Site](http://power.water.org)
 
 QUICK INSTALL
 -------------
@@ -66,4 +68,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 CREDITS
 -------
-A project by [Water.org](http://water.org/)
+A project by [Water.org](http://water.org/). For more than two decades, Water.org has been at the forefront of developing and delivering solutions to the water crisis. Founded by Gary White and Matt Damon, Water.org pioneers innovative, community-driven and market-based solutions to ensure all people have access to safe water and sanitation; giving women hope, children health and communities a future. To date, Water.org has positively transformed the lives of more than 1,000,000 individuals living across communities in Africa, South Asia, Latin America and the Caribbean; ensuring a better life for generations ahead.

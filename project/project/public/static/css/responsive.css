@@ -135,7 +135,7 @@
 		padding: 0 0 10px;
 		text-align: center;
 		color: white;
-		text-shadow: 3px 3px 0px #422D1E;
+		text-shadow: 1px 2px 0px #422D1E;
 	}
 	#donate-ribbon-small .connect-right {
 		height: auto;
@@ -197,10 +197,10 @@
 		background-color: #e5e5e5;
 		background-attachment: fixed;
 		background-repeat: no-repeat;
-		-webkit-background-size: 200%;
-    -moz-background-size: 200%;
-    -o-background-size: 200%;
-    background-size: 200%;
+		-webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
 		background-position: top center;
 	}
 	#main-inner {
@@ -217,10 +217,6 @@
 	.shr_classic {
 		top: -3px;
 		right: 20px;
-	}
-	#user-ribbon img {
-		width: 24%;
-		margin-left: 38%;
 	}
 	#settings-form .fieldWrapperCheckbox {
 		margin-left: 0;
@@ -500,10 +496,10 @@
 		background-color: #e5e5e5;
 		background-attachment: fixed;
 		background-repeat: no-repeat;
-		-webkit-background-size: 200%;
-    -moz-background-size: 200%;
-    -o-background-size: 200%;
-    background-size: 200%;
+		-webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
 		background-position: top center;
 	}
 	#main-inner {
