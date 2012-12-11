@@ -57,7 +57,7 @@
     <div class="row-fluid">
 
     	<!-- Featured Background Image -->
-    	<div class="featured-background-image">
+    	<div class="featured-background-image hidden-phone">
     		<div id="main" role="main" class="container">
     			<div id="main-inner" class="container-inner">
     				<!-- Featured Post Title Block -->
@@ -76,13 +76,18 @@
     	</div>
     	<!-- /Featured Background Image -->
 
-    	<!-- Mobile Featured Title Block -->
+    	<!-- Featured Background Image Mobile -->
+    	<div class="featured-background-mobile visible-phone" style="background-image: url({{ post.image.url }});">
+    	</div>
+    	<!-- /Featured Background Image Mobile -->
+
+    	<!-- Mobile Featured Title Block Mobile -->
     	<div id="featured-post-title-block-mobile" class="visible-phone">
     		<div class="container">
-				<h2 id="featured-post-title-mobile">{{ post.title }} <!-- <span class="collapse-btn collapsed" data-toggle="collapse" data-target="#featured-post">Read Story</span> --></h2>
+				<h2 id="featured-post-title-mobile">{{ post.title }} <span class="collapse-btn collapsed" data-toggle="collapse" data-target="#featured-post">Read Story</span></h2>
 			</div>
 		</div>
-		<!-- /Mobile Featured Title Block -->
+		<!-- /Mobile Featured Title Block Mobile -->
 		
 		<!-- Featured Post -->
 		<div id="featured-post" class="collapse in row-fluid">
@@ -312,9 +317,15 @@
 		var socialPostTitle = '{{ post.title }}';
 		var socialPostTitleEscaped = escape(socialPostTitle);
 		var socialPostImage = 'http://{{ site.domain }}{{ post.image.url }}';
-		var socialMapImage = '{{ STATIC_URL }}image/sanitation-map-active-bl.png';
+		var socialMapImage = 'http://power.water.org/static/image/sanitation-map-red.png';
 		var socialMapTitleEscaped = escape('Billions with no place to "go"? Find out where...');
 		var socialMapLink = escape('http://{{ site.domain }}/#map-ribbon');
+		var socialQuizImage = 'http://power.water.org/static/image/multi-choice_17.png';
+		var socialQuizTitleEscaped = escape('Which invention has saved the most live? Find out here...');
+		var socialQuizLink = escape('http://{{ site.domain }}/#quiz-ribbon');
+		var socialCardsImage = 'http://power.water.org/static/image/flipcard_1.png';
+		var socialCardsTitleEscaped = escape('How does poop get everywhere? Find out here...');
+		var socialCardsLink = escape('http://{{ site.domain }}/#flip-ribbon');
 	</script>
 	<!-- /Template Javascript Variables -->
 
