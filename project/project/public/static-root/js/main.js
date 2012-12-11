@@ -185,6 +185,39 @@ $(document).ready(function(){
 
 /*  
 ==================================================================
+        QUIZ RIBBON FUNCTIONS
+==================================================================
+*/
+$(document).ready(function(){
+    var optionToilet = $('#optionToilet');
+    var optionPenicillin = $('#optionPenicillin');
+    var optionSeatbelts = $('#optionSeatbelts');
+
+    optionToilet.click(function(){
+        optionToilet.closest('span').removeClass('quiz-alert-correct');
+        optionPenicillin.closest('span').removeClass('quiz-alert-incorrect1');
+        optionSeatbelts.closest('span').removeClass('quiz-alert-incorrect2');
+        $(this).closest('span').addClass('quiz-alert-correct');
+    });
+
+    optionPenicillin.click(function(){
+        optionToilet.closest('span').removeClass('quiz-alert-correct');
+        optionPenicillin.closest('span').removeClass('quiz-alert-incorrect1');
+        optionSeatbelts.closest('span').removeClass('quiz-alert-incorrect2');
+        $(this).closest('span').addClass('quiz-alert-incorrect1');
+    });
+
+    optionSeatbelts.click(function(){
+        optionToilet.closest('span').removeClass('quiz-alert-correct');
+        optionPenicillin.closest('span').removeClass('quiz-alert-incorrect1');
+        optionSeatbelts.closest('span').removeClass('quiz-alert-incorrect2');
+        $(this).closest('span').addClass('quiz-alert-incorrect2');
+    });
+});
+
+
+/*  
+==================================================================
         FLIP RIBBON FUNCTIONS
 ==================================================================
 */
@@ -234,23 +267,6 @@ function trackMapLinkedIn() {
 }
 
 
-function trackStoryFacebook() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','Facebook', socialPostTitle ]);
-}
-function trackStoryTwitter() {
-    _gaq.push(['_trackEvent','Story', 'Share','Twitter', socialPostTitle ]);
-}
-function trackStoryPinterest() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','Pinterest', socialPostTitle ]);
-}
-function trackStoryGooglePlus() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','GooglePlus', socialPostTitle ]);
-}
-function trackStoryLinkedIn() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','LinkedIn', socialPostTitle ]);
-}
-
-
 function shareMapFacebook() {
     window.open('http://www.facebook.com/share.php?u=' + socialMapLink + '&title=' + socialMapTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 }
@@ -265,6 +281,23 @@ function shareMapGooglePlus() {
 }
 function shareMapLinkedIn() {
     window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialMapLink + '&title=' + socialMapTitleEscaped + '&source=' + socialMapLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+
+
+function trackStoryFacebook() {
+    _gaq.push(['_trackEvent', 'Story', 'Share','Facebook', socialPostTitle ]);
+}
+function trackStoryTwitter() {
+    _gaq.push(['_trackEvent','Story', 'Share','Twitter', socialPostTitle ]);
+}
+function trackStoryPinterest() {
+    _gaq.push(['_trackEvent', 'Story', 'Share','Pinterest', socialPostTitle ]);
+}
+function trackStoryGooglePlus() {
+    _gaq.push(['_trackEvent', 'Story', 'Share','GooglePlus', socialPostTitle ]);
+}
+function trackStoryLinkedIn() {
+    _gaq.push(['_trackEvent', 'Story', 'Share','LinkedIn', socialPostTitle ]);
 }
 
 
@@ -283,4 +316,74 @@ function shareStoryGooglePlus() {
 }
 function shareStoryLinkedIn() {
     window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialPostLink + '&title=' + socialPostTitleEscaped + '&source=' + socialPostLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+
+
+function trackQuizFacebook() {
+    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'Facebook']);
+}
+function trackQuizTwitter() {
+    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'Twitter']);
+}
+function trackQuizPinterest() {
+    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'Pinterest']);
+}
+function trackQuizGooglePlus() {
+    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'GooglePlus']);
+}
+function trackQuizLinkedIn() {
+    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'LinkedIn']);
+}
+
+
+function shareQuizFacebook() {
+    window.open('http://www.facebook.com/share.php?u=' + socialQuizLink + '&title=' + socialQuizTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    console.log('shared');
+}
+function shareQuizTwitter() {
+    window.open('http://twitter.com/home?status=' + socialQuizTitleEscaped + '+' + socialQuizLink,'Share on Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+function shareQuizPinterest() {
+    window.open('http://pinterest.com/pin/create/button/?url=' + socialQuizLink + '&media=' + socialQuizImage + '&description=' + socialQuizTitleEscaped,'Share on Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+function shareQuizGooglePlus() {
+    window.open('https://plus.google.com/share?url=' + socialQuizLink,'Share on Google Plus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+function shareQuizLinkedIn() {
+    window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialQuizLink + '&title=' + socialQuizTitleEscaped + '&source=' + socialQuizLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+
+
+function trackCardsFacebook() {
+    _gaq.push(['_trackEvent', 'Cards', 'Share', 'Facebook']);
+}
+function trackCardsTwitter() {
+    _gaq.push(['_trackEvent', 'Cards', 'Share', 'Twitter']);
+}
+function trackCardsPinterest() {
+    _gaq.push(['_trackEvent', 'Cards', 'Share', 'Pinterest']);
+}
+function trackCardsGooglePlus() {
+    _gaq.push(['_trackEvent', 'Cards', 'Share', 'GooglePlus']);
+}
+function trackCardsLinkedIn() {
+    _gaq.push(['_trackEvent', 'Cards', 'Share', 'LinkedIn']);
+}
+
+
+function shareCardsFacebook() {
+    window.open('http://www.facebook.com/share.php?u=' + socialCardsLink + '&title=' + socialCardsTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    console.log('shared');
+}
+function shareCardsTwitter() {
+    window.open('http://twitter.com/home?status=' + socialCardsTitleEscaped + '+' + socialCardsLink,'Share on Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+function shareCardsPinterest() {
+    window.open('http://pinterest.com/pin/create/button/?url=' + socialCardsLink + '&media=' + socialCardsImage + '&description=' + socialCardsTitleEscaped,'Share on Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+function shareCardsGooglePlus() {
+    window.open('https://plus.google.com/share?url=' + socialCardsLink,'Share on Google Plus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+}
+function shareCardsLinkedIn() {
+    window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialCardsLink + '&title=' + socialCardsTitleEscaped + '&source=' + socialCardsLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 }
