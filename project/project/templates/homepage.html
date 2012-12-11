@@ -263,7 +263,7 @@
 	</div>
 
 	<!-- quiz Ribbon -->
-	<div id="quiz-ribbon" class="row-fluid ribbon visible-desktop visible-tablet">
+	<div id="quiz-ribbon" class="row-fluid ribbon">
 		<div class="container">
 			<h3>Which invention has saved more lives?</h3>
 			<!-- quiz Blocks -->
@@ -273,7 +273,7 @@
 					<span class="quiz-alert">
 						<i class="quiz-icon icon-thumbs-up"></i>
 						<label class="radio">
-	  					<input type="radio" name="options" id="optionToilet" value="option1" checked> toilets
+	  					<input type="radio" name="options" id="optionToilet" value="option1" checked="unchecked"> toilets
 						</label>
 					</spaN>
 					<p>
@@ -285,7 +285,7 @@
 					<span class="quiz-alert">
 						<i class="quiz-icon icon-remove"></i>
 						<label class="radio">
-	  					<input type="radio" name="options" id="optionPenicillin" value="option2" checked> penicillin
+	  					<input type="radio" name="options" id="optionPenicillin" value="option2" checked="unchecked"> penicillin
 	  				</label>
   				</span>
 					<p>
@@ -297,7 +297,7 @@
 					<span class="quiz-alert">
 						<i class="quiz-icon icon-remove"></i>
 						<label class="radio">
-	  					<input type="radio" name="options" id="optionSeatbelts" value="option2" checked> seatbelts
+	  					<input type="radio" name="options" id="optionSeatbelts" value="option2" checked="checked"> seatbelts
 	  				</label>
   				</span>
 					<p>
@@ -306,6 +306,9 @@
 		    </div>
 	    </div>
 	    	<!-- /quiz Blocks -->
+    	<a class="btn btn-share" rel="popover" data-content='{% include "fragments/share_quiz.html" %}' data-original-title="Share this...">
+				<i class="icon-share"></i>Share
+			</a>
     </div>
 	</div>
 	<!-- /quiz Ribbon -->
@@ -365,6 +368,9 @@
 
 			</div>
 			<!-- /Cardcontainer -->
+			<a class="btn btn-share" rel="popover" data-content='{% include "fragments/share_cards.html" %}' data-original-title="Share this...">
+				<i class="icon-share"></i>Share
+			</a>
 		</div>
 		<!-- /Container -->
 	</div>
@@ -473,6 +479,12 @@
 		var socialMapImage = 'http://power.water.org/static/image/sanitation-map-red.png';
 		var socialMapTitleEscaped = escape('Billions with no place to "go"? Find out where...');
 		var socialMapLink = escape('http://{{ site.domain }}/#map-ribbon');
+		var socialQuizImage = 'http://power.water.org/static/image/multi-choice_17.png';
+		var socialQuizTitleEscaped = escape('Which invention has saved the most live? Find out here...');
+		var socialQuizLink = escape('http://{{ site.domain }}/#quiz-ribbon');
+		var socialCardsImage = 'http://power.water.org/static/image/flipcard_1.png';
+		var socialCardsTitleEscaped = escape('How does poop get everywhere? Find out here...');
+		var socialCardsLink = escape('http://{{ site.domain }}/#flip-ribbon');
 	</script>
 	<!-- /Template Javascript Variables -->
 

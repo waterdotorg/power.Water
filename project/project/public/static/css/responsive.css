@@ -36,6 +36,9 @@
 		width: 72%;
 		padding: 0 14%;
 	}
+	.quiz-icon {
+		left: 40px;
+	}
 }
  
 /* Portrait tablet to landscape and desktop */
@@ -158,13 +161,17 @@
 	#recent-stories .span3 {
     width: 22%;
 	}
-		.card {
+	.card {
 		width: 140px;
 		height: 140px;
 	}
 	.card-container {
 		width: 98%;
 		padding: 0 1%;
+	}
+	.quiz-block .radio {
+		font-size: 140%;
+		padding-left: 80px;
 	}
 }
  
@@ -390,6 +397,19 @@
 	#recent-stories .span3 {
     width: 100%;
 	}
+	#quiz-ribbon .span4 {
+		width: 33%;
+		float: left;
+		margin: 40px 0 0;
+	}
+	.quiz-icon {
+		left: 24px;
+		font-size: 180%;
+		line-height: 1.6;
+	}
+	#quiz-ribbon .btn-share {
+		margin-left: 0;
+	}
 }
 
 @media (max-width: 620px) {
@@ -421,6 +441,25 @@
 	#donate-ribbon-small .connect-right .btn-connect-twitter {
 		left: 70%;
 		margin-left: -73px;
+	}
+	#quiz-ribbon .span4 {
+		width: 100%;
+		float: none;
+		margin: 40px 0 0;
+	}
+	.quiz-block img {
+		width: 14%;
+		height: auto;
+		margin-left: 42%;
+	}
+	.quiz-icon {
+		left: 24px;
+		font-size: 180%;
+		line-height: 1.6;
+	}
+	.quiz-block .radio {
+		font-size: 140%;
+		padding-left: 80px;
 	}
 }
 
@@ -568,10 +607,10 @@
 		margin-left: -54px;
 	}
 	.connect-right {
-		height: 180px;
+		height: 220px;
 	}
 	.connect-right .btn-connect {
-		top: 224px;
+		top: 244px;
 	}
 	#recent-stories .span3 {
     width: 100%;
@@ -584,7 +623,7 @@
 		margin: 0;
 		border: 1px solid #422D1E;
 		position: absolute;
-		top: 104px;
+		top: 74px;
 	}
 	#donate-ribbon-small .connect-right .btn-connect-facebook {
 		left: 30%;
@@ -600,18 +639,21 @@
 	#joining-ribbon {
 		padding-bottom: 0;
 	}
+	#joining-ribbon .container {
+		padding-bottom: 40px;
+	}
 	#joining-ribbon h3 {
 		margin-top: 0;
 		padding-top: 0;
 		font-size: 220%;
 	}
 	.joining-block {
-		margin-top: 30px;
-		height: 180px;
+		margin-top: 20px;
+		height: 220px;
 	}
 	.joining-block:last-child {
-		margin-top: 30px;
-		height: 180px;
+		margin-top: 20px;
+		height: 220px;
 		margin-bottom: 0;
 	}
 	.joining-block img {
@@ -633,9 +675,15 @@
 
 @media (max-width: 404px) {
 	.connect-right {
-		height: 190px;
+		height: 220px;
 	}
 	.connect-right .btn-connect {
-		top: 244px;
+		top: 274px;
+	}
+}
+
+@media (max-width: 354px) {
+	#donate-ribbon-small .connect-right .btn-connect {
+		top: 104px;
 	}
 }
