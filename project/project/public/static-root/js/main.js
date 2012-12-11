@@ -121,7 +121,6 @@ $(document).ready(function() {
 //     $("#damon-video").fitVids();
 // });
 
-
 /*  
 ==================================================================
         SANITATION MAP FUNCTIONS
