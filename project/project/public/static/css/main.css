@@ -852,6 +852,118 @@ p.source-note {
 
 /*  
 ==================================================================
+        QUIZ RIBBON STYLES
+==================================================================
+*/
+#quiz-ribbon {
+  /*padding-top: 50px;*/
+}
+
+#quiz-ribbon h3 {
+	margin-top: 0;
+	padding-top: 0;
+	font-size: 220%;
+}
+
+.quiz-block {
+	margin-top: 20px;
+}
+
+.quiz-block img {
+	width: 28%;
+	height: auto;
+	margin-left: 36%;
+}
+
+.quiz-block p {
+	margin-top: 20px;
+	/*margin-left: 16%;*/
+	color: #747474;
+	font-size: 90%;
+	opacity: 0;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	-ms-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+
+.quiz-alert {
+	width: 99%;
+	margin: 10px 0;
+	padding: 10px 0;
+	display: block;
+	position: relative;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	-ms-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+
+.quiz-alert-correct {
+	border-radius: 20px;
+	border: 1px solid #545454;
+	background-color: rgba(2,128,0,0.2);
+	box-shadow: inset 0px 0px 12px rgba(0,0,0,0.5);
+}
+
+.quiz-alert-incorrect1, .quiz-alert-incorrect2 {
+	background: rgba(255, 0, 0, 0.2);
+	border-radius: 20px;
+	border: 1px solid #545454;
+	box-shadow: inset 0px 0px 12px rgba(0,0,0,0.5);
+}
+
+.quiz-icon {
+	position: absolute;
+	left: 20px;
+	font-size: 280%;
+	line-height: 1;
+}
+
+.quiz-icon-show {
+	opacity: 1;
+}
+
+.quiz-alert .icon-thumbs-up {
+	top: 10px;
+	color: green;
+	opacity: 0;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	-ms-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+
+.quiz-alert .icon-remove {
+	top: 12px;
+	color: red;
+	opacity: 0;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	-ms-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+
+.quiz-block .radio {
+	/*padding-left: 34%;*/
+	width: 145px;
+	font-size: 240%;
+	color: #848484;
+	margin: 10px auto;
+}
+
+.quiz-block input[type="radio"] {
+	margin-right: 10px;
+	margin-top: 6px;
+}
+
+
+/*  
+==================================================================
         FLIP RIBBON STYLES
 ==================================================================
 */

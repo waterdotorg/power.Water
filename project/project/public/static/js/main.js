@@ -185,6 +185,21 @@ $(document).ready(function(){
 
 /*  
 ==================================================================
+        QUIZ RIBBON FUNCTIONS
+==================================================================
+*/
+$(document).ready(function(){
+
+    $('#optionToilet').click(function(){
+        $(this).closest('span').addClass('quiz-alert-correct');
+        $(this).closest('.quiz-icon').addClass('quiz-icon-show');
+    });
+
+});
+
+
+/*  
+==================================================================
         FLIP RIBBON FUNCTIONS
 ==================================================================
 */
