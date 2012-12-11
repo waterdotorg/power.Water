@@ -128,7 +128,7 @@ $(document).ready(function() {
 */
 $(document).ready(function(){
 
-    var sanitation_number = 58;
+    var sanitation_number = 343;
 
     $('#world').mapster({
         render_highlight: {
@@ -154,11 +154,11 @@ $(document).ready(function(){
     var regions_total = $('#map-regions'),
             sanitation_total = $('#map-number'),
                     stats = {
-                        af: ['Africa', 'af', 58],
-                        la: ['Latin America + Caribbean', 'la', 12],
-                        ae: ['Anglo-America + Europe', 'ae', 2],
-                        wa: ['South/West Asia + Commonwealth', 'sa', 113],
-                        ea: ['East/Southeast Asia + Oceania', 'ea', 81] 
+                        af: ['Africa', 'af', 343],
+                        la: ['Latin America + Caribbean', 'la', 38],
+                        ae: ['Anglo-America + Europe', 'ae', 4],
+                        wa: ['South/West Asia + Commonwealth', 'sa', 260],
+                        ea: ['East/Southeast Asia + Oceania', 'ea', 239] 
                     }
             if ( data.selected == true ) {
                 regions_total.append('<li class="' + stats[data.key][1] + '">' + stats[data.key][0] + '</li>' );
@@ -172,7 +172,7 @@ $(document).ready(function(){
             sanitation_total.animate({
                 opacity: 0,
               }, 500, function() {
-                sanitation_total.text((sanitation_number/100)).animate({
+                sanitation_total.text(sanitation_number).animate({
                     opacity: 1,
                 }, 500);
               });
