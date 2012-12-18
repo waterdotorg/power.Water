@@ -217,35 +217,6 @@ $(document).ready(function(){
 
 /*  
 ==================================================================
-        FLIP RIBBON FUNCTIONS
-==================================================================
-*/
-$(function () {
-    if ($('html').hasClass('csstransforms3d')) {
-        $('.card').removeClass('scroll').addClass('flip');
-        $('.card.flip').hover(
-            function () {
-                $(this).find('.card-wrapper').addClass('flipIt');
-            },
-            function () {
-                $(this).find('.card-wrapper').removeClass('flipIt');           
-            }
-        );
-    } else {
-        $('.card').hover(
-            function () {
-                $(this).find('.card-detail').stop().animate({bottom:0}, 500, 'easeOutCubic');
-            },
-            function () {
-                $(this).find('.card-detail').stop().animate({bottom: ($(this).height() * -1) }, 500, 'easeOutCubic');          
-            }
-        );
-    }
-});
-
-
-/*  
-==================================================================
         TRACKING/SHARING FUNCTIONS
 ==================================================================
 */
@@ -350,39 +321,4 @@ function shareQuizGooglePlus() {
 }
 function shareQuizLinkedIn() {
     window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialQuizLink + '&title=' + socialQuizTitleEscaped + '&source=' + socialQuizLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-
-
-function trackCardsFacebook() {
-    _gaq.push(['_trackEvent', 'Cards', 'Share', 'Facebook']);
-}
-function trackCardsTwitter() {
-    _gaq.push(['_trackEvent', 'Cards', 'Share', 'Twitter']);
-}
-function trackCardsPinterest() {
-    _gaq.push(['_trackEvent', 'Cards', 'Share', 'Pinterest']);
-}
-function trackCardsGooglePlus() {
-    _gaq.push(['_trackEvent', 'Cards', 'Share', 'GooglePlus']);
-}
-function trackCardsLinkedIn() {
-    _gaq.push(['_trackEvent', 'Cards', 'Share', 'LinkedIn']);
-}
-
-
-function shareCardsFacebook() {
-    window.open('http://www.facebook.com/share.php?u=' + socialCardsLink + '&title=' + socialCardsTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-    console.log('shared');
-}
-function shareCardsTwitter() {
-    window.open('http://twitter.com/home?status=' + socialCardsTitleEscaped + '+' + socialCardsLink,'Share on Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareCardsPinterest() {
-    window.open('http://pinterest.com/pin/create/button/?url=' + socialCardsLink + '&media=' + socialCardsImage + '&description=' + socialCardsTitleEscaped,'Share on Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareCardsGooglePlus() {
-    window.open('https://plus.google.com/share?url=' + socialCardsLink,'Share on Google Plus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareCardsLinkedIn() {
-    window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialCardsLink + '&title=' + socialCardsTitleEscaped + '&source=' + socialCardsLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 }

@@ -313,69 +313,6 @@
 	</div>
 	<!-- /quiz Ribbon -->
 
-	<div class="container divider visible-desktop visible-tablet">
-		<hr>
-	</div>
-
-	<!-- Flip Ribbon -->
-	<div id="flip-ribbon" class="row-fluid ribbon visible-desktop visible-tablet">
-		<!-- Container -->
-		<div class="container">
-			<h3>How does poop get everywhere?</h3>
-			<!-- Card container -->
-			<div class="card-container">
-
-				<div class="card scroll">
-				    <div class="card-wrapper">
-				        <img src="{{ STATIC_URL }}image/flipcard_1.png" />
-				        <div class="card-detail">
-				            <img src="{{ STATIC_URL }}image/flipcard_1_b.png" />            
-				        </div>
-				    </div>
-				</div>
-				<div class="card scroll">
-				    <div class="card-wrapper">
-				        <img src="{{ STATIC_URL }}image/flipcard_2.png" />
-				        <div class="card-detail">
-				            <img src="{{ STATIC_URL }}image/flipcard_2_b.png" />       
-				        </div>
-				    </div>
-				</div>
-				<div class="card scroll">
-				    <div class="card-wrapper">
-				        <img src="{{ STATIC_URL }}image/flipcard_3.png" />
-				        <div class="card-detail">
-				            <img src="{{ STATIC_URL }}image/flipcard_3_b.png" />            
-				        </div>
-				    </div>
-				</div>
-				<div class="card scroll">
-				    <div class="card-wrapper">
-				        <img src="{{ STATIC_URL }}image/flipcard_4.png" />
-				        <div class="card-detail">
-				            <img src="{{ STATIC_URL }}image/flipcard_4_b.png" />            
-				        </div>
-				    </div>
-				</div>
-				<div class="card scroll">
-				    <div class="card-wrapper">
-				        <img src="{{ STATIC_URL }}image/flipcard_5.png" />
-				        <div class="card-detail">
-				            <img src="{{ STATIC_URL }}image/flipcard_5_b.png" />            
-				        </div>
-				    </div>
-				</div>
-
-			</div>
-			<!-- /Cardcontainer -->
-			<a class="btn btn-share" rel="popover" data-content='{% include "fragments/share_cards.html" %}' data-original-title="Share this...">
-				<i class="icon-share"></i>Share
-			</a>
-		</div>
-		<!-- /Container -->
-	</div>
-	<!-- /Flip Ribbon -->
-
 	{% if recent_posts.count %}
   <div class="container divider">
 		<hr>
@@ -482,9 +419,6 @@
 		var socialQuizImage = 'http://power.water.org/static/image/multi-choice_17.png';
 		var socialQuizTitleEscaped = escape('Which invention has saved the most live? Find out here...');
 		var socialQuizLink = escape('http://{{ site.domain }}/#quiz-ribbon');
-		var socialCardsImage = 'http://power.water.org/static/image/flipcard_1.png';
-		var socialCardsTitleEscaped = escape('How does poop get everywhere? Find out here...');
-		var socialCardsLink = escape('http://{{ site.domain }}/#flip-ribbon');
 	</script>
 	<!-- /Template Javascript Variables -->
 

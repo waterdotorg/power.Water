@@ -148,10 +148,10 @@
     $(document).ready(function(){
         $.getJSON("http://jsonip.appspot.com?callback=?", function(data) {
             $('#map-ribbon').click(function(){
-                _gaq.push(['_trackEvent', 'Toilet Day', 'interact', 'Sanitation Map ' + data.ip]);
+                _gaq.push(['_trackEvent', 'Power', 'interact', 'Water Map ' + data.ip]);
             });
-            $('#flip-ribbon').click(function(){
-                _gaq.push(['_trackEvent', 'Toilet Day', 'interact', 'Sanitation Quiz ' + data.ip]);
+            $('#quiz-ribbon').click(function(){
+                _gaq.push(['_trackEvent', 'Power', 'interact', 'Water Quiz ' + data.ip]);
             });
         });
     });
