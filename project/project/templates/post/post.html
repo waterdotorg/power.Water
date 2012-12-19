@@ -206,7 +206,7 @@
 		<!-- /Crisis Ribbon -->
 
 		<!-- Total Follower Ribbon -->
-    <div id="followers-ribbon" class="row-fluid">
+    <div id="followers-ribbon" class="row-fluid gradient">
         <div class="container">
             <h2>Together our voice is reaching <span>{{ total_followers|intcomma }}</span> people</h2>
         </div>
@@ -236,9 +236,9 @@
 		<!-- /Recent Stories Ribbon -->
 	{% endif %}
 
-	<!-- Donate Ribbon Small -->
+		<!-- Donate Ribbon Small -->
 	{% if not user.is_authenticated %}
-		<div id="donate-ribbon-small">
+		<div id="donate-ribbon-small" class="gradient">
 			<div class="container">
 				<div class="row-fluid">
 					<div class="span6">
