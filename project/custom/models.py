@@ -117,8 +117,11 @@ class Profile(models.Model):
         return '%s' % self.user
 
     def social_data_process(self):
+        if not self.user.is_active:
+            return None
+
         try:
-            facebook_user = FacebookUser.objects.get(user=self.user)
+            facebook_user = FacebookUser.objects.get(user=self.user, status=True)
 
             # FB Profile Image
             fb_image_url = 'http://graph.facebook.com/' + str(facebook_user.uid) + '/picture?type=large'
@@ -139,7 +142,7 @@ class Profile(models.Model):
             pass
 
         try:
-            twitter_user = TwitterUser.objects.get(user=self.user)
+            twitter_user = TwitterUser.objects.get(user=self.user, status=True)
             auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
             auth.set_access_token(twitter_user.oauth_token, twitter_user.oauth_token_secret)
             api = tweepy.API(auth_handler=auth, api_root='/1.1')
