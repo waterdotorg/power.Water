@@ -1,5 +1,6 @@
-import facebook
+import os
 import requests
+import shutil
 import tweepy
 import urllib
 
@@ -116,6 +117,13 @@ class Profile(models.Model):
     def __unicode__(self):
         return '%s' % self.user
 
+    def remove_profile_images(self):
+        if self.image:
+            user_profile_pic_path = settings.MEDIA_ROOT + '/profile-pics/' + str(self.user.pk)
+            if os.path.isdir(user_profile_pic_path):
+                    shutil.rmtree(user_profile_pic_path)
+            self.image.delete()
+
     def social_data_process(self):
         if not self.user.is_active:
             return None
@@ -128,6 +136,8 @@ class Profile(models.Model):
             fb_image = urllib.urlretrieve(fb_image_url)
             if fb_image[0]:
                 fb_image_contents = File(open(fb_image[0]))
+                if self.image:
+                    self.remove_profile_images()
                 self.image.save('profile-image.png', fb_image_contents, save=True)
 
             # FB Followers Count
@@ -157,6 +167,8 @@ class Profile(models.Model):
             tw_image = urllib.urlretrieve(profile_image_url)
             if tw_image[0]:
                 tw_image_contents = File(open(tw_image[0]))
+                if self.image:
+                    self.remove_profile_images()
                 self.image.save('profile-image.png', tw_image_contents, save=True)
 
             # TW Followers Count
