@@ -28,6 +28,10 @@ Setup Postgres Database
 
 Setup Django environment - [Quick install guide](https://docs.djangoproject.com/en/1.4/intro/install/)
     - See comments in settings_default.py file regarding private settings
+    
+Install fixtures
+
+    $ python project/manage.py loaddata groups
 
 Install Nginx and symlink config file
 
