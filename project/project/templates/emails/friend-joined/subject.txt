@@ -1,1 +1,1 @@
-{{ referred_profile.user.get_full_name }} joined {{ site.name }}
+{{ referred_profile.user.get_full_name|safe }} joined {{ site.name }}
