@@ -22,6 +22,10 @@ TODO
 *.pot
 local_settings.py
 
+# Vim #
+#######
+*.swp
+
 # Python #
 ##########
 *.py[co]
