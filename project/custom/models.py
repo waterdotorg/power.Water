@@ -13,15 +13,27 @@ from django.db import models
 from fbauth.models import FacebookUser
 from twauth.models import TwitterUser
 
+
 class FacebookStatusUpdate(models.Model):
-    link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
+    link = models.URLField(
+        blank=True,
+        help_text="Homepage url used if blank. Use absolute url's with"
+                  " trailing slash - http://example.com/foobar/")
     picture = models.ImageField(upload_to="facebook-status-update")
     name = models.CharField(max_length=100, help_text="The name of the link")
-    caption = models.CharField(max_length=100, help_text="The caption of the link which appears beneath the link name", blank=True)
+    caption = models.CharField(
+        max_length=100,
+        help_text="The caption of the link which appears "
+                  "beneath the link name",
+        blank=True)
     description = models.TextField(blank=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    groups = models.ManyToManyField(Group, verbose_name='groups', help_text='Leave blank for everybody.', blank=True)
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name='groups',
+        help_text='Leave blank for everybody.',
+        blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -33,6 +45,7 @@ class FacebookStatusUpdate(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError('Start date may not be after end date.')
 
+
 class FacebookStatusUpdateLog(models.Model):
     facebook_status_update = models.ForeignKey(FacebookStatusUpdate)
     user = models.ForeignKey(User)
@@ -42,12 +55,20 @@ class FacebookStatusUpdateLog(models.Model):
     class Meta:
         unique_together = ('facebook_status_update', 'user')
 
+
 class TwitterStatusUpdate(models.Model):
-    link = models.URLField(blank=True, help_text="Homepage url used if blank. Use absolute url's with trailing slash - http://example.com/foobar/")
+    link = models.URLField(
+        blank=True,
+        help_text="Homepage url used if blank. Use absolute url's with "
+                  "trailing slash - http://example.com/foobar/")
     content = models.TextField(help_text="Context variables: {{ short_link }}")
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    groups = models.ManyToManyField(Group, verbose_name='groups', help_text='Leave blank for everybody.', blank=True)
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name='groups',
+        help_text='Leave blank for everybody.',
+        blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -59,6 +80,7 @@ class TwitterStatusUpdate(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError('Start date may not be after end date.')
 
+
 class TwitterStatusUpdateLog(models.Model):
     twitter_status_update = models.ForeignKey(TwitterStatusUpdate)
     user = models.ForeignKey(User)
@@ -67,6 +89,7 @@ class TwitterStatusUpdateLog(models.Model):
 
     class Meta:
         unique_together = ('twitter_status_update', 'user')
+
 
 class TwitterAutoFriendshipLog(models.Model):
     user = models.ForeignKey(User)
@@ -77,13 +100,16 @@ class TwitterAutoFriendshipLog(models.Model):
     def __unicode__(self):
         return "%s Auto Friend" % self.user
 
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to='post', max_length=256)
+    teaser = models.CharField(max_length=256)
     content = models.TextField()
     published_date = models.DateTimeField()
-    homepage = models.BooleanField(default=True, help_text='Display on homepage.')
+    homepage = models.BooleanField(default=True,
+                                   help_text='Display on homepage.')
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -92,18 +118,22 @@ class Post(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('post', (), {'slug': self.slug,})
+        return ('post', (), {'slug': self.slug})
+
 
 def get_profile_image_path(instance, filename):
     extension = filename.split('.')[-1]
     dir = "profile-pics/%s/profile-photo.%s" % (instance.user.id, extension)
     return dir
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User)
     followers = models.IntegerField(default=0)
-    image = models.ImageField(upload_to=get_profile_image_path, max_length=256, blank=True)
-    user_referrer = models.ForeignKey(User, related_name='user_referrer', blank=True, null=True)
+    image = models.ImageField(upload_to=get_profile_image_path,
+                              max_length=256, blank=True)
+    user_referrer = models.ForeignKey(User, related_name='user_referrer',
+                                      blank=True, null=True)
     source_referrer = models.CharField(max_length=100, blank=True)
     semaphore_twitter = models.BooleanField(default=False)
     semaphore_facebook = models.BooleanField(default=False)
@@ -129,7 +159,8 @@ class Profile(models.Model):
             return None
 
         try:
-            facebook_user = FacebookUser.objects.get(user=self.user, status=True)
+            facebook_user = FacebookUser.objects.get(
+                user=self.user, status=True)
 
             # FB Profile Image
             fb_image_url = 'http://graph.facebook.com/' + str(facebook_user.uid) + '/picture?type=large'
@@ -192,6 +223,7 @@ class Profile(models.Model):
         friend_profiles = Profile.objects.filter(user_referrer=self.user).order_by('-pk')[:limit]
         return friend_profiles
 
+
 class FacebookOGReferredLog(models.Model):
     user = models.ForeignKey(User, related_name='user')
     user_referred = models.ForeignKey(User, related_name='user_referred')
@@ -205,6 +237,7 @@ class FacebookOGReferredLog(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.user, self.user_referred)
 
+
 class FriendJoinedEmailLog(models.Model):
     user = models.ForeignKey(User, related_name='user_fje')
     user_referred = models.ForeignKey(User, related_name='user_referred_fje')
@@ -216,6 +249,7 @@ class FriendJoinedEmailLog(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.user, self.user_referred)
+
 
 ### Signals ###
 def user_signed_in(sender, request, user, **kwargs):
