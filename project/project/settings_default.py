@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'fbauth',
     'twauth',
     'custom',
+    'instagallery',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -249,14 +250,17 @@ THUMBNAIL_SUBDIR = 'thumbs'
 
 # Facebook settings
 FACEBOOK_PERMISSIONS_SCOPE = ['publish_stream', 'email']
-FACEBOOK_LOGIN_SUCCESS_REDIRECT = '/'
-FACEBOOK_LOGIN_ERROR_REDIRECT = '/'
+FACEBOOK_LOGIN_SUCCESS_REDIRECT = '/dashboard/'
+FACEBOOK_LOGIN_ERROR_REDIRECT = '/signin/'
 
 # Twitter settings
-TWITTER_LOGIN_SUCCESS_REDIRECT = '/'
-TWITTER_LOGIN_ERROR_REDIRECT = '/'
+TWITTER_LOGIN_SUCCESS_REDIRECT = '/dashboard/'
+TWITTER_LOGIN_ERROR_REDIRECT = '/signin/'
 TWITTER_SCREEN_NAME = 'water'
 
 AUTH_PROFILE_MODULE = 'custom.Profile'
 
-LOGIN_URL = '/'
+LOGIN_URL = '/signin/'
+
+# Instagram Settings
+INSTAGRAM_CLIENT_ID = '9d807f57a0c648db849357d3285bae86'

@@ -2,122 +2,14 @@
 {% load thumbnail %}
 
 <!-- User Ribbon -->
-<div id="user-ribbon">
-	<div class="container">
-		<div id="stats-container" class="row-fluid">
-			<div id="user-img" class="span2">
-			    {% if display_profile.image %}
-				    <img src="{% thumbnail display_profile.image 140x140 crop %}" alt="{{ display_profile.user.get_full_name }}" />
-				{% else %}
-				    <!-- Default Image -->
-				    <img src="{{ STATIC_URL }}image/default.png" width="140" height="140" title="Bummer! No profile pic?" alt="Power.Water.org!" />
-				{% endif %}
-			</div>
-			<div class="span4">
-				<h2>{{ display_profile.user.get_full_name }}</h2>
-				<h4>is donating their voice</h4>
-			</div>
-			<div class="span6">
-				<table class="table">
-					<tr>
-						<th><h3>{{ display_profile.friends_joined_count|intcomma }}</h3></th>
-						<th><h3>{{ display_profile.promoted_posts_count|intcomma }}</h3></th>
-						<th><h3>{{ display_profile.followers|intcomma }}</h3></th>
-					</tr>
-					<tr>
-						<td><h4>friend{{ display_profile.friends_joined_count|pluralize }} joined</h4></td>
-						<td><h4>promoted post{{ display_profile.promoted_posts_count|pluralize }}</h4></td>
-						<td><h4>social reach</h4></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<!-- /Stats Container -->
-
-        {% if user.is_authenticated and user.id == display_profile.user.id %}
-	    <!-- User Settings -->
-		<div id="user-settings">
-
-			<div class="settings-link">
-
-				<a class="btn-settings collapse-btn collapsed" data-toggle="collapse" data-target="#settings-container">Your Settings</a>
-
-			</div>
-
-			<!-- Settings Container -->
-			<div id="settings-container" class="collapse">
-				
-				<!-- Seetings Form -->
-				<form id="settings-form" class="form-inline" method="POST" action="{% url ajax_settings_form %}">{% csrf_token %}
-
-					{{ settings_form.non_field_errors }}
-
-					<div class="row-fluid">
-
-						<!-- First Name Field -->
-					    <div class="span4 fieldWrapper">
-					        {{ settings_form.first_name.errors }}
-					        <label for="first_name">First Name:</label><br>
-					        {{ settings_form.first_name }}
-					    </div>
-					    <!-- /First Name Field -->
-
-					    <!-- Last Name Field -->
-					    <div class="span4 fieldWrapper">
-					        {{ settings_form.last_name.errors }}
-					        <label for="last_name">Last Name:</label><br>
-					        {{ settings_form.last_name }}
-					    </div>
-					    <!-- /Last Name Field -->
-
-					    <!-- Email Field -->
-					    <div class="span4 fieldWrapper">
-					        {{ settings_form.email.errors }}
-					        <label for="email">Email:</label><br>
-					        {{ settings_form.email }}
-					    </div>
-					    <!-- /Email Field -->
-
-				    	<!-- Email Updates Field -->
-				    	<div class="span4 fieldWrapper">
-					        {{ settings_form.enable_email_updates.errors }}
-					        {{ settings_form.enable_email_updates }}
-					        <label class="checkbox-label">Enable Email Updates</label>
-				    	</div>
-				    	<!-- /Email Updates Field -->
-					    
-				    	<!-- Social Updates Field -->
-				    	<div class="span4 fieldWrapper">
-					    	<!-- If User Authenticated Facebook -->
-					    	{% if 'FbAuth' in user.backend %}
-						        {{ settings_form.enable_facebook_updates.errors }}
-						        {{ settings_form.enable_facebook_updates }}
-						        <label class="checkbox-label">Enable Facebook Updates</label>
-						        <div style="display:none;">
-							        {{ settings_form.enable_twitter_updates }}
-						    	</div>
-						    <!-- If User Authenticated Twitter -->
-						    {% elif 'TwAuth' in user.backend %}
-						    	{{ settings_form.enable_twitter_updates.errors }}
-						        {{ settings_form.enable_twitter_updates }}
-						        <label class="checkbox-label">Enable Twitter Updates</label>
-						        <div style="display:none;">
-							        {{ settings_form.enable_facebook_updates }}
-							    </div>
-						    {% endif %}
-						</div>
-				    	<!-- /Social Updates Field -->
-					</div>
-					<!-- /row-fluid -->
-					<input class="btn" type="submit" id="submit-settings" value="Update" data-toggle="collapse" data-target="#settings-container">
-		        </form>
-		        <!-- /Settings Form -->
-	    	</div>
-	    	<!-- /Settings Container -->
-		</div>
-		<!-- /User Settings -->
+<div id="user-container" class="hidden-phone">
+	<div id="user-img" class="pull-left">
+	  {% if display_profile.image %}
+		    <img class="media-object" src="{% thumbnail display_profile.image 60x60 crop %}" alt="{{ display_profile.user.get_full_name }}" />
+		{% else %}
+		    <img class="media-object" src="{{ STATIC_URL }}image/avatar.png" width="140" height="140" />
 		{% endif %}
 	</div>
-	<!-- /container -->
+	<h4 class="profile-heading">{{ display_profile.user.get_full_name }} and <span>{{ total_followers|intcomma }}</span> others are listening</h4>
 </div>
-<!-- /User Ribbon -->
+	<!-- /User Container -->

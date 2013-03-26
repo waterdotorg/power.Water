@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load markup %}
+{% load thumbnail %}
+
+{% block body_class %}dashboard{% endblock %}
+
+{% block top %}
+    {{ block.super }}
+    {% include "fragments/settings_form_success.html" %}
+    {% include "fragments/settings_form.html" %}
+
+    {% if user.is_authenticated and not user.email %}
+      <!-- Email Form -->
+      <div id="ajax-form" class="alert-ajax" style="display:none;">
+        <div class="container relative">
+            <form id="email-form" class="form-inline" method="POST" action="{% url ajax_email_form %}">{% csrf_token %}
+                <div class="control-group">
+                    <label class="control-label" for="inputIcon">Thanks for connecting! Please provide us with a valid email address:</label>
+                    <div class="input-append">
+                       <input id="email" name="email" size="16" type="text" placeholder="email@domain">
+                       <input class="btn" type="submit" id="submit-email" value="Submit">
+                    </div>
+                </div>
+            </form>
+            <a class="close" href="#">&times;</a>
+        </div>
+      </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+  <!-- Thanks Block -->
+  <div id="thanks-block">
+    <div class="container">
+      <div class="row-fluid">
+
+        <div class="span5">
+          <h1 class="thanks-heading">Thanks!</h1>
+        </div>
+
+        <div id="dashboard-user-img" class="span2">
+          {% if profile.image %}
+            <img src="{% thumbnail profile.image 140x140 crop %}" alt="{{ profile.user.get_full_name }}" />
+            <!-- <img src="{{ STATIC_URL }}image/avatar.png" width="140" height="140" /> -->
+          {% else %}
+            <img src="{{ STATIC_URL }}image/avatar.png" width="140" height="140" />
+          {% endif %}
+        </div>
+
+        <div class="span5">
+          <h4 class="thanks-text">
+            <span>{{ user.first_name }},</span> Your signup was successful! Thanks for your support.
+          </h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Block -->
+  <div id="next-block">
+    <div class="container">
+      <div class="row-fluid">
+
+        <div class="span4">
+          <img class="next-image" src="{{ STATIC_URL }}image/water-day.jpg" />
+        </div>
+
+        <div class="span7 offset1">
+          <h2 class="next-heading">What's Next?</h2>
+          <p class="next-text">
+            Just like playing catch, ending the water crisis is not something one person can do on their own. By
+            working together, we will see the day when everyone in the world can take a safe drink of water.
+          </p>
+          <div class="join-button join-twitter">
+              <a id="trackTweetToEnterEvent" class="next-tweet" href="#">
+                  Tweet&nbsp;to&nbsp;invite&nbsp;friends&nbsp;<span class="entypo-twitter" data-text="twitter"></span>
+              </a>
+          </div>
+
+          <![if !IE]>
+            {% include "fragments/next_buttons.html" %}
+          <![endif]>
+
+          <!--[if gte IE 9]>
+            {% include "fragments/next_buttons.html" %}
+          <![endif]-->
+          
+          <!--[if lt IE 9]>
+            {% include "fragments/ie_next_buttons.html" %}
+          <![endif]-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="blue-stripe">
+    <div class="container">
+        <p><span class="entypo-instagrem"></span>&nbsp;&nbsp;Show your support on Instagram by using the hashtag <span class="instagram-hash">#waterday</span>
+    </div>
+  </div>
+<!--   <div class="row-fluid instagram-background">
+      <div class="span12">
+          <ul class="instagram clearfix">
+              {% for image in instagram_images %}
+              <li id="{{ image.instagram_id }}" class="instagram-placeholder">
+                  <a target="_blank" href="{{ image.link }}">
+                    <img class="instagram-image" src="{{ image.thumbnail_url }}" />
+                  </a>
+              </li>
+              {% endfor %}
+          </ul>
+      </div>
+  </div> -->
+{% endblock %}
+
+{% block footer_scripts %}
+  {% if user.is_authenticated and not user.email %}
+    <!-- Initiate Ajax Email Form -->
+    <script>
+        $(window).load(function() {
+            setTimeout(ajaxFormShow, 500);
+        });
+    </script>
+
+    <!-- Validate and Post Email Form -->
+    <script>
+        $(document).on("submit", "#email-form", function(e) {
+            clear_form_field_errors($("#ajax-form"));
+            e.preventDefault();
+            var self = $(this),
+                url = self.attr("action"),
+                ajax_req = $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {
+                        email: self.find("#email").val(),
+                        csrfmiddlewaretoken: self.find("input[name='csrfmiddlewaretoken']").val()
+                    },
+                    success: function(data, textStatus, jqXHR) {
+                        $("#ajax-form").slideUp("medium");
+                        showSuccess();
+                    },
+                    error: function(data, textStatus, jqXHR) {
+                        var errors = $.parseJSON(data.responseText);
+                        $.each(errors, function(index, value) {
+                            if (index === "__all__") {
+                                django_message(value[0], "error");
+                            } else {
+                                apply_form_field_error(index, value);
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
+  {% endif %}
+{% endblock %}

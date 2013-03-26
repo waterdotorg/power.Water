@@ -7,5 +7,6 @@ django-debug-toolbar==0.9.4
 easy-thumbnails==1.1
 -e git+https://github.com/pythonforfacebook/facebook-sdk.git@2fd825ba0b1121bc76b84c829b6cb43c7094cdc4#egg=facebook_sdk-dev
 gunicorn==0.14.6
+python-instagram==0.8.0
 requests==0.14.1
 -e git+https://github.com/tweepy/tweepy.git@0fd129e866a28cb610b4c4f157b2b23b0560d2a1#egg=tweepy-dev
