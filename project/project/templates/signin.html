@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block body_class %}signin{% endblock %}
+
+{% block main %}
+  <!-- Sign In -->
+  <div id="signin">
+    <div class="container">  
+      <h1 class="signin-heading">Donate Your Voice</h1>
+    </div>
+
+    <div class="row-fluid">
+      <div class="span8 offset2 overlay">
+          <p class="signin-text">
+            From now until March 23rd, Water.org will <strong>automatically</strong> post content about the water crisis 
+            to your Facebook and/or Twitter account. Once when you sign up and daily starting March 17th.
+          </p>
+          <p class="signin-text">
+            If you sign up with Twitter, you will auto-follow <a href="http://twitter.com/water" class="external">@water</a>. You can return to this site any time to revoke
+            posting or manage it from the application settings within Facebook or Twitter.
+          </p>
+          <div class="join-button">
+              <a id="signInFacebook" href="{% url fbauth %}">
+                  Log in with Facebook <span class="entypo-facebook" data-text="facebook"></span>
+              </a>
+          </div>
+          <div class="join-button join-twitter">
+              <a id="signInTwitter" href="{% url twauth %}">
+                  Log in with Twitter <span class="entypo-twitter" data-text="twitter"></span>
+              </a>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Social Posts -->
+  <div id="social-posts">
+    <div class="container">
+      <div class="row-fluid">
+        <div>
+          <h2 class="social-posts-heading">What gets posted each day:</h2>
+          <p class="social-posts-text">
+            <span>Before March 17:</span>
+            I'm celebrating World Water Day this year. Join me and donate your voice.
+          </p>
+          <p class="social-posts-text">
+            <span>Sunday, March 17:</span>
+            When people aren't walking to collect water every day, they have time for work and family.
+          </p>
+          <p class="social-posts-text">
+            <span>Monday, March 18:</span>
+            The water women carry in the developing world can weigh up to 44 lbs. Let's take the weight off.
+          </p>
+          <p class="social-posts-text">
+            <span>Tuesday, March 19:</span>
+            Access to water unlocks opportunities, allowing people to get out of poverty.
+          </p>
+          <p class="social-posts-text">
+            <span>Wednesday, March 20:</span>
+            443M more school days could be attended by children each year if they weren't sick with water related illnesses.
+          </p>
+          <p class="social-posts-text">
+            <span>Thursday, March 21:</span>
+            Access to safe water and sanitation means half of the world's hospital beds could be empty.
+          </p>
+          <p class="social-posts-text">
+            <span>Friday, March 22:</span>
+            "Individually, we are one drop. Together, we are an ocean." ~ Satoro // Happy World Water Day!
+          </p>
+          <p class="social-posts-text">
+            <span>Saturday, March 23:</span>
+            This week, millions stood up in the name of water for all. Water is life.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+<div class="hidden-desktop mobile-nav">
+	<div class="container">
+		<a href="#" class="close-mobile-nav">
+			<span class="entypo-cancel-circled mobile-nav-icon"></span>Close
+		</a>
+		<ul class="responsive-nav">
+			<span>
+				<li>
+					<a href="/">
+						<span class="icon-home mobile-nav-icon"></span>Home
+					</a>
+				</li>
+			  {% if user.is_authenticated %}
+			  	<li>
+						<a href="{% url dashboard %}">
+							<span class="icon-dashboard mobile-nav-icon"></span>Dashboard
+						</a>
+					</li>
+					<li>
+						<a href="{% url signout %}">
+							<span class="icon-signout mobile-nav-icon"></span>Sign Out
+						</a>
+					</li>
+				{% else %}
+			  	<li>
+			  		<a href="{% url signin %}">
+			  			<span class="icon-signin mobile-nav-icon"></span>Sign In
+			  		</a>
+			  	</li>
+			  {% endif %}
+			</span>
+		</ul>
+	</div>
+</div>

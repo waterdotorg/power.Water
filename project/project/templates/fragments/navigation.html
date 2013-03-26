@@ -1,0 +1,44 @@
+<ul class="nav visible-desktop">
+	<span>
+		<li>
+			<a href="/">
+				<span class="icon-home nav-icon"></span>
+				<span class="label" style="display: none;">Home</span>
+			</a>
+		</li>
+
+	{% if user.is_authenticated %}
+	    <li>
+            <a href="{% url dashboard %}">
+                <span class="icon-dashboard nav-icon"></span>
+                <span class="label" style="display: none;">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="settings-icon">
+                <span class="icon-cog nav-icon"></span>
+                <span class="label" style="display: none;">Settings</span>
+            </a>
+        </li>
+        <li>
+            <a href="{% url signout %}">
+                <span class="icon-signout nav-icon"></span>
+                <span class="label" style="display: none;">Sign Out</span>
+            </a>
+        </li>
+	{% else %}
+	  	<li>
+	  		<a href="{% url signin %}">
+	  			<span class="icon-signin nav-icon"></span>
+	  			<span class="label" style="display: none;">Sign In</span>
+	  		</a>
+	  	</li>
+	{% endif %}
+	</span>
+</ul>
+
+<!-- Mobile Nav Buttons -->
+{% if user.is_authenticated %}
+<a href="#" class="hidden-desktop settings-icon mobile-settings-btn"><span class="icon-cog nav-icon"></span></a>
+{% endif %}
+<a href="#" class="hidden-desktop mobile-nav-btn"><span class="icon-reorder"></span></a>
