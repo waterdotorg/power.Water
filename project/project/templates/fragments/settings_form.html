@@ -1,0 +1,66 @@
+<!-- Settings Container -->
+<div id="user-settings" style="display:none;">
+  <div class="container relative">
+    <form id="settings-form" class="form-inline" method="POST" action="{% url ajax_settings_form %}">
+      {% csrf_token %}
+      {{ settings_form.non_field_errors }}
+      <div class="row-fluid">
+
+          <!-- Text Fields -->
+          <div class="span5 offset1">
+            <div class="field">
+              {{ settings_form.first_name.errors }}
+              <label for="first_name">First Name:</label><br>
+              {{ settings_form.first_name }}
+            </div>
+
+            <div class="field">
+              {{ settings_form.last_name.errors }}
+              <label for="last_name">Last Name:</label><br>
+              {{ settings_form.last_name }}
+            </div>
+
+            <div class="field">
+              {{ settings_form.email.errors }}
+              <label for="email">Email:</label><br>
+              {{ settings_form.email }}
+            </div>
+          </div>
+
+          <!-- Updates Fields -->
+          <div class="span5 offset1">
+            <div class="field checkboxField">
+
+              <!-- If User Authenticated Facebook -->
+              {% if 'FbAuth' in user.backend %}
+                {{ settings_form.enable_facebook_updates.errors }}
+                {{ settings_form.enable_facebook_updates }}
+                <label class="checkbox-label">Enable Facebook Updates</label>
+                <div style="display:none;">
+                  {{ settings_form.enable_twitter_updates }}
+                </div>
+
+              <!-- If User Authenticated Twitter -->
+              {% elif 'TwAuth' in user.backend %}
+                {{ settings_form.enable_twitter_updates.errors }}
+                {{ settings_form.enable_twitter_updates }}
+                <label class="checkbox-label">Enable Twitter Updates</label>
+                <div style="display:none;">
+                  {{ settings_form.enable_facebook_updates }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="field checkboxField">
+              {{ settings_form.enable_email_updates.errors }}
+              {{ settings_form.enable_email_updates }}
+              <label class="checkbox-label">Enable Email Updates</label>
+            </div>
+            
+            <input type="submit" id="submit-settings" value="Update">
+            <a class="close">close</a>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>

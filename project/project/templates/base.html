@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome-ie7.css">
         <link href='http://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css">
@@ -29,12 +30,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}image/apple-touch-icon-72x72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}image/apple-touch-icon-precomposed.png">
 
-    <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-    <!--[if gte IE 9]>
-      <style type="text/css"> .gradient { filter: none; } </style>
-    <![endif]-->
+    <script src="{{ STATIC_URL }}js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="{{ STATIC_URL }}js/vendor/selectivizr-min.js"></script>
 
-    {% block head_extra %}{% endblock %}
+  {% block head_extra %}{% endblock %}
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
@@ -42,33 +41,42 @@
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
 
-{% block top %}{% endblock %}
+{% block top %}
+{{ block.super }}
+  {% include "fragments/settings_form_success.html" %}
+  {% if user.is_authenticated %}
+      {% include "fragments/settings_form.html" %}
+  {% endif %}
 
-{% block nav_bar %}
-    <!-- Nav Bar -->
-     <div class="navbar navbar-inverse">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="{% url homepage %}">
-                    <img class="hidden-mobile" src="{{ STATIC_URL }}image/logo_standard_res.png" alt="Water.org | Donate Your Voice" >
-                    <img class="visible-mobile" src="{{ STATIC_URL }}image/logo_mobile.png" alt="Water.org | Donate Your Voice" >
-                </a>
-                {% if user.is_authenticated %}
-                    <a title="Sign Out" class="btn btn-connect btn-connect-signout pull-right" href="{% url signout %}">
-                        <i class="icon-signout icon-large"></i>
-                    </a>
-                {% else %}
-                    <a class="btn btn-connect btn-connect-twitter pull-right" href="{% url twauth %}">
-                        <i class="icon-twitter icon-large"></i>
-                    </a>
-                    <a class="btn btn-connect btn-connect-facebook pull-right" href="{% url fbauth %}">
-                        <i class="icon-facebook icon-large"></i>
-                    </a>
-                {% endif %}
-            </div>
+  {% include "fragments/responsive_navigation.html" %}
+
+  <div id="header" class="row-fuid">
+    <div class="container">
+      <div class="row-fluid">
+        <div class="span12 relative">
+          <a class="logo pull-left hidden-phone external" href="http://water.org"><img src="{{ STATIC_URL }}/image/logo.png" alt="water.org - Water Day"></a>
+          <a class="logo pull-left visible-phone external" href="http://water.org"><img src="{{ STATIC_URL }}/image/logo@2x.png" alt="water.org - Water Day"></a>
+          
+          {% if display_profile %}
+            {% include "fragments/profile_ribbon.html" %}
+          {% endif %}
+
+          <![if !IE]>
+            {% include "fragments/navigation.html" %}
+          <![endif]>
+
+          <!--[if gte IE 9]>
+            {% include "fragments/navigation.html" %}
+          <![endif]-->
+          
+          <!--[if lt IE 9]>
+            {% include "fragments/ie_navigation.html" %}
+          <![endif]-->
+
         </div>
+      </div>
     </div>
-    <!-- /Nav Bar -->
+  </div>
 {% endblock %}
 
 {% block main_wrap %}
@@ -78,85 +86,64 @@
     </div>
     <!-- /Main -->
 {% endblock %}
-
-<!-- {% if messages %}
-    <div id="messages-wrap" class="row">
-        <div id="messages" class="container">
-            <div id="messages-inner" class="container-inner">
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-{% endif %} -->
     
 {% block footer %}
-    <div id="footer-base-wrap" class="row-fluid">
-        <div id="footer-base" class="container">
-            <div id="footer-base-inner" class="container-inner">
-                <div id="footer-base_general" class="footer-base-section span6">
-                    <p class="general-links">
-                        <a href="http://water.org/contact/">Contact Us</a> |
-                        <a href="http://water.org/about/finance/">Financial Reporting</a> |
-                        <a href="http://water.org/privacy/">Privacy Policy</a> |
-                        <a href="http://water.org/terms/">Terms of Use</a>
-                    </p>
-                    <p class="general-copyright">
-                        copyright &copy; 1990-{% now "Y" %} Water.org
-                    </p>
-                </div>
-                <div id="footer-base_license" class="footer-base-section span6">
-                    <p>
-                        This site, unless otherwise noted, is licensed under a
-                        <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 United States License.</a>
-                    </p>
-                </div>
-            </div>
+  <div id="footer-base-wrap">
+    <div class="container">
+      <div class="row-fluid">
+        <div id="footer-base_general" class="span6">
+          <p class="general-links">
+            <a href="http://water.org/contact/">Contact Us</a> |
+            <a href="http://water.org/about/finance/">Financial Reporting</a> |
+            <a href="http://water.org/privacy/">Privacy Policy</a> |
+            <a href="http://water.org/terms/">Terms of Use</a>
+            <br>
+            copyright &copy; 1990-{% now "Y" %} Water.org
+          </p>
         </div>
+        <div id="footer-base_license" class="span6">
+          <p>
+            This site, unless otherwise noted, is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 United States License.</a>
+          </p>
+        </div>
+      </div>
     </div>
+  </div>
 {% endblock %}
 
 <!-- Javascripts -->
-<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
-<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="{{ STATIC_URL }}js/vendor/bootstrap.min.js"></script>
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/main.js"></script>
 
-<!-- Initiate Background Image -->
-{% if post.image %}
-<script type="text/javascript">
-    $('.featured-background-image').anystretch("{{ post.image.url }}", {speed: 150});
-</script>
-{% endif %}
-<!-- /Initiate Background Image -->
-
-<!-- Analytics -->
+<!-- Assign Sharing and Tracking Variables -->
 <script>
-    var _gaq=[['_setAccount','UA-2458604-16'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
+  var shareLink = 'http://power.water.org/',
+      shareTitle = 'Donate Your Voice',
+      shareTitleEscaped = escape(shareTitle),
+      shareImage = 'url({{ STATIC_URL }}image/logo@2x.png)',
+      tweetTitle = 'Join me in celebrating World Water Day! Together we can make a difference.';
 
-    /*  ==============
-        Event Tracking
-        ==============  */
-    $(document).ready(function(){
-        $.getJSON("http://jsonip.appspot.com?callback=?", function(data) {
-            $('#map-ribbon').click(function(){
-                _gaq.push(['_trackEvent', 'Power', 'interact', 'Water Map ' + data.ip]);
-            });
-            $('#quiz-ribbon').click(function(){
-                _gaq.push(['_trackEvent', 'Power', 'interact', 'Water Quiz ' + data.ip]);
-            });
-        });
-    });
+  var userPK = '{{ user.pk }}';
 </script>
-<!-- /Analytics -->
+
+<!-- Analytics Tracking Code -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-2458604-16']);
+  _gaq.push(['_setDomainName', 'power.water.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 
 {% block footer_scripts %}{% endblock %}
 <!-- /Javascripts -->

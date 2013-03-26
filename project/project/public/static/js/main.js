@@ -3,7 +3,7 @@
         AJAX FORM FUNCTIONS
 ==================================================================
 */
-function apply_form_field_error(fieldname, error) {
+function apply_form_field_error (fieldname, error) {
     var input = $("#" + fieldname),
         container = $("#" + fieldname + "-form"),
         error_msg = $("<span />").addClass("alert-error ajax-error").text(error[0]);
@@ -12,7 +12,7 @@ function apply_form_field_error(fieldname, error) {
     error_msg.insertAfter(container);
 }
 
-function clear_form_field_errors(form) {
+function clear_form_field_errors (form) {
     $(".ajax-error", $(form)).remove();
     $(".error", $(form)).removeClass("error");
 }
@@ -22,7 +22,7 @@ function ajaxFormShow() {
 }
 
 function ajaxFormHide() {
-    $("#ajax-form").fadeOut("medium");
+    $("#ajax-form").slideUp("medium");
 }
 
 function successFormHide() {
@@ -31,10 +31,18 @@ function successFormHide() {
 
 function showSuccess() {
     ajaxFormHide();
-    $("#ajax-success").delay(800).slideDown("medium").delay(1800).fadeOut("medium");
+    $("#ajax-success").delay(800).fadeIn("medium").delay(1800).fadeOut("medium");
 }
 
-function getCookie(name) {
+function hideMobileNav() {
+    $(".mobile-nav-btn").fadeOut("medium");
+}
+
+function showMobileNav() {
+    $(".mobile-nav-btn").fadeIn("medium");
+}
+
+function getCookie (name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
         var cookies = document.cookie.split(';');
@@ -82,11 +90,20 @@ $(document).on("submit", "#settings-form", function(e) {
         url: url,
         type: "POST",
         data: form_data,
-        success: function(data, textStatus, jqXHR) {
-            // window.location.reload();
+        success: function (data, textStatus, jqXHR) {
+            $("#user-settings").delay(100).slideUp();
+            var $settings = $("#user-settings");
+            var $button = $(".mobile-nav-btn");
+            if ($settings.hasClass("settings-open")) {
+                $settings.removeClass("settings-open");
+                $button.removeClass("button-hidden");
+            } else {
+                $settings.addClass("settings-open");
+                $button.addClass("button-hidden");
+            }
             showSuccess();
         },
-        error: function(data, textStatus, jqXHR) {
+        error: function (data, textStatus, jqXHR) {
             var errors = $.parseJSON(data.responseText);
             $.each(errors, function(index, value) {
                 if (index === "__all__") {
@@ -104,115 +121,167 @@ $(document).on("submit", "#settings-form", function(e) {
 ==================================================================
         BOOTSTRAP FUNCTIONS
 ==================================================================
-*/
-$(document).ready(function() {
-    $('.btn-share').popover({
-        html: true
+*/  
+
+$(document).ready(function () {
+
+    // Changes Posts on Click
+    $('.post:gt(0)').hide();
+    $('.previous').click(function (e) {
+        e.preventDefault();
+        $('.post:first-child').fadeOut();
+        $('.post:last-child').prependTo('#posts').fadeIn();
     });
-});
+    $('.next').click(function (e) {
+        e.preventDefault();
+        $('.post:first-child').fadeOut().next('.post').fadeIn().end().appendTo('#posts');
+    });
 
+    // set panels equal to window size
+    setPanelSize();
+    setBackgroundImage();
 
-/*  
-==================================================================
-        INITIATE FITVIDS
-==================================================================
-*/
-// $(document).ready(function(){
-//     $("#damon-video").fitVids();
-// });
+    $(window).resize(function () {
+        setPanelSize();
+        setBackgroundImage();
+    });
 
-/*  
-==================================================================
-        SANITATION MAP FUNCTIONS
-==================================================================
-*/
-$(document).ready(function(){
-
-    var sanitation_number = 343;
-
-    $('#world').mapster({
-        render_highlight: {
-            fillOpacity: 0.2,
-            stroke: false,
-            altImage: staticURL + 'image/sanitation-map-white.png'
-        },
-        render_select: {
-            fillOpacity: 1.0,
-            stroke: false,
-            altImage: staticURL + 'image/sanitation-map-red.png'
-        },
-        fadeInterval: 50,
-        mapKey: 'region',
-  listSelectedClass: 'selected',
-        areas: [
-        {
-            key: 'af',
-            selected: true,
-                isSelectable: true
-        }],
-        onClick: function (data) {
-    var regions_total = $('#map-regions'),
-            sanitation_total = $('#map-number'),
-                    stats = {
-                        af: ['Africa', 'af', 343],
-                        la: ['Latin America + Caribbean', 'la', 38],
-                        ae: ['Anglo-America + Europe', 'ae', 4],
-                        wa: ['South/West Asia + Commonwealth', 'sa', 260],
-                        ea: ['East/Southeast Asia + Oceania', 'ea', 239] 
-                    }
-            if ( data.selected == true ) {
-                regions_total.append('<li class="' + stats[data.key][1] + '">' + stats[data.key][0] + '</li>' );
-                sanitation_number += stats[data.key][2];
-                    // console.log(sanitation_number);
-            } else {
-                regions_total.children('li.' + stats[data.key][1]).remove();
-                sanitation_number -= stats[data.key][2];
-                    // console.log(sanitation_number);
+     // function to set panels to window size and constrain video
+    function setPanelSize () {
+        var windowHeight = $(window).height(),
+            windowWidth = $(window).width(),
+            $areaFull = $('.area-full'),
+            $heroText = $('.hero-text'),
+            $postNav = $('.post-navigation a');
+        
+        if (windowWidth > 767) {
+            $areaFull.css({'height':(windowHeight-110)+'px'});
+            $heroText.css({'top':(windowHeight*0.45)+'px'});
+            if (windowHeight > 590) {
+                $postNav.css({'height': (windowHeight-110)+'px'});
             }
-            sanitation_total.animate({
-                opacity: 0,
-              }, 500, function() {
-                sanitation_total.text(sanitation_number).animate({
-                    opacity: 1,
-                }, 500);
-              });
-            return sanitation_number;
+            if (windowHeight < 320) {
+                $heroText.css({'top':'200px'});
+            }
+        } else if (windowWidth > 480) {
+            $heroText.css({'top':(windowHeight*0.45)+'px'});
+            if (windowHeight > 590) {
+                $areaFull.css({'height':'580px'});
+                $postNav.css({'height':'580px'});
+            }
+            if (windowHeight < 320) {
+                $heroText.css({'top':'200px'});
+            }
+        } else {
+            $heroText.css({'top':'200px'});
+            $areaFull.css({'height':'480px'});
+            if (windowHeight > 590) {
+                $areaFull.css({'height':'580px'});
+                $postNav.css({'height':'580px'});
+            }
+            if (windowHeight < 320) {
+                $heroText.css({'top':'200px'});
+            }
+        }
     }
+
+    function setBackgroundImage () {
+        $('.area-full').each(function () {
+            var windowWidth = $(window).width(),
+            id = $(this).parent(".post").attr('id').substring(5);
+
+            if (windowWidth > 480) {
+                $(this).css('background-image', desktopImg[id]);
+            } else {
+                $(this).css('background-image', mobileImg[id]);
+            }
+        });
+    }
+
+
+    // Toggles settings form
+    $(".settings-icon").click(function (e) {
+        e.preventDefault();
+        var $settings = $("#user-settings");
+        var $button = $(".mobile-nav-btn");
+        $settings.slideToggle("medium");
+        if ($settings.hasClass("settings-open")) {
+            $settings.removeClass("settings-open");
+            $button.removeClass("button-hidden");
+        } else {
+            $settings.addClass("settings-open");
+            $button.addClass("button-hidden");
+        }
     });
+
+    // Toggles settings form
+    $("#user-settings .close").click(function (e) {
+        e.preventDefault();
+        $("#user-settings").slideUp("medium");
+        var $settings = $("#user-settings");
+        var $button = $(".mobile-nav-btn");
+        if ($settings.hasClass("settings-open")) {
+            $settings.removeClass("settings-open");
+            $button.removeClass("button-hidden");
+        } else {
+            $settings.addClass("settings-open");
+            $button.addClass("button-hidden");
+        }
+    });
+
+    // Close Email Form
+    $('#ajax-form .close').click(function (e) {
+        e.preventDefault();
+        $("#ajax-form").fadeOut("medium");
+    })
+
+    // Open links in a New Window
+    $('.external').click(function () {
+      $(this).attr('target', '_blank');
+    });
+
+    // Share Button
+    $('.share-video').click(function () {
+        $('.social-btns').fadeToggle('medium');
+    });
+
+    // Nav Orientation
+    var path = window.location.href;
+    $('.nav a').each(function () {
+        if (this.href === path) {
+            $(this).find('.nav-icon').addClass('nav-active');
+        }
+    });
+
+    // Nav Labels
+    $('.nav li').hover(function () {
+        $(this).find('span.label').fadeToggle('fast');
+    });
+
+    // Toggles settings form
+    $(".story-toggle").click(function () {
+        $("#featured-post").slideToggle("medium");
+        $(this).toggleClass("open");
+        if ($(this).hasClass("open")) {
+            $(this).text('CLOSE STORY').append('<span> - </span>');
+        } else {
+            $(this).text('MORE ABOUT THIS PHOTO').append('<span> + </span>');
+        }
+        $('html, body').delay(300).animate({scrollTop: $("#featured-post").offset().top-60}, 500);
+    });
+
+    // Toggles Mobile Nav
+    $('.close-mobile-nav').click(function (e){
+        e.preventDefault();
+        $('.mobile-nav').removeClass("mobile-nav-visible");
+    });
+    $('.mobile-nav-btn').click(function (e){
+        e.preventDefault();
+        $('.mobile-nav').addClass("mobile-nav-visible");
+    });
+
 });
 
-
-/*  
-==================================================================
-        QUIZ RIBBON FUNCTIONS
-==================================================================
-*/
-$(document).ready(function(){
-    var optionToilet = $('#optionToilet');
-    var optionPenicillin = $('#optionPenicillin');
-    var optionSeatbelts = $('#optionSeatbelts');
-
-    optionToilet.click(function(){
-        optionToilet.closest('span').removeClass('quiz-alert-correct');
-        optionPenicillin.closest('span').removeClass('quiz-alert-incorrect1');
-        optionSeatbelts.closest('span').removeClass('quiz-alert-incorrect2');
-        $(this).closest('span').addClass('quiz-alert-correct');
-    });
-
-    optionPenicillin.click(function(){
-        optionToilet.closest('span').removeClass('quiz-alert-correct');
-        optionPenicillin.closest('span').removeClass('quiz-alert-incorrect1');
-        optionSeatbelts.closest('span').removeClass('quiz-alert-incorrect2');
-        $(this).closest('span').addClass('quiz-alert-incorrect1');
-    });
-
-    optionSeatbelts.click(function(){
-        optionToilet.closest('span').removeClass('quiz-alert-correct');
-        optionPenicillin.closest('span').removeClass('quiz-alert-incorrect1');
-        optionSeatbelts.closest('span').removeClass('quiz-alert-incorrect2');
-        $(this).closest('span').addClass('quiz-alert-incorrect2');
-    });
-});
 
 
 /*  
@@ -220,105 +289,90 @@ $(document).ready(function(){
         TRACKING/SHARING FUNCTIONS
 ==================================================================
 */
-function trackMapFacebook() {
-    _gaq.push(['_trackEvent', 'Sanitation Map', 'Share', 'Facebook']);
-}
-function trackMapTwitter() {
-    _gaq.push(['_trackEvent', 'Sanitation Map', 'Share', 'Twitter']);
-}
-function trackMapPinterest() {
-    _gaq.push(['_trackEvent', 'Sanitation Map', 'Share', 'Pinterest']);
-}
-function trackMapGooglePlus() {
-    _gaq.push(['_trackEvent', 'Sanitation Map', 'Share', 'GooglePlus']);
-}
-function trackMapLinkedIn() {
-    _gaq.push(['_trackEvent', 'Sanitation Map', 'Share', 'LinkedIn']);
-}
+// Variables defined in base.html
 
+$(document).ready(function() {
+    // Sign In Tracking
+    $('#signInFacebook').click(function () {
+        _gaq.push(['_trackEvent', '2_signin_page', 'button_facebook']);
+    });
 
-function shareMapFacebook() {
-    window.open('http://www.facebook.com/share.php?u=' + socialMapLink + '&title=' + socialMapTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareMapTwitter() {
-    window.open('http://twitter.com/home?status=' + socialMapTitleEscaped + '+' + socialMapLink,'Share on Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareMapPinterest() {
-    window.open('http://pinterest.com/pin/create/button/?url=' + socialMapLink + '&media=' + socialMapImage + '&description=' + socialMapTitleEscaped,'Share on Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareMapGooglePlus() {
-    window.open('https://plus.google.com/share?url=' + socialMapLink,'Share on Google Plus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareMapLinkedIn() {
-    window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialMapLink + '&title=' + socialMapTitleEscaped + '&source=' + socialMapLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
+    $('#signInTwitter').click(function () {
+        _gaq.push(['_trackEvent', '2_signin_page', 'button_twitter']);
+    });
+    
+    // Other Tracking Functions
+    $('#trackSupportEvent').click(function () {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_right_signin', userPK ]);
+    });
 
+    $('#trackSupportEventLarge').click(function () {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_bottom_signin', userPK ]);
+    });
 
-function trackStoryFacebook() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','Facebook', socialPostTitle ]);
-}
-function trackStoryTwitter() {
-    _gaq.push(['_trackEvent','Story', 'Share','Twitter', socialPostTitle ]);
-}
-function trackStoryPinterest() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','Pinterest', socialPostTitle ]);
-}
-function trackStoryGooglePlus() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','GooglePlus', socialPostTitle ]);
-}
-function trackStoryLinkedIn() {
-    _gaq.push(['_trackEvent', 'Story', 'Share','LinkedIn', socialPostTitle ]);
-}
+    $('#trackDonateEvent').click(function () {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_right_donate', userPK ]);
+    });
 
+    $('#trackSubscribeEvent').click(function () {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_right_subscribe', userPK ]);
+    });
 
-function shareStoryFacebook() {
-    window.open('http://www.facebook.com/share.php?u=' + socialPostLink + '&title=' + socialPostTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-    console.log('shared');
-}
-function shareStoryTwitter() {
-    window.open('http://twitter.com/home?status=' + socialPostTitleEscaped + '+' + socialPostLink,'Share on Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareStoryPinterest() {
-    window.open('http://pinterest.com/pin/create/button/?url=' + socialPostLink + '&media=' + socialPostImage + '&description=' + socialPostTitleEscaped,'Share on Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareStoryGooglePlus() {
-    window.open('https://plus.google.com/share?url=' + socialPostLink,'Share on Google Plus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareStoryLinkedIn() {
-    window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialPostLink + '&title=' + socialPostTitleEscaped + '&source=' + socialPostLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
+    $('#trackInstagramEvent').click(function () {
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_instagram_more_click', userPK ]);
+    });
 
+    // Sharing Buttons with Tracking Functions
+    $('#shareFacebook').click(function (e) {
+        window.open('http://www.facebook.com/share.php?u=' + shareLink + '&title=' + shareTitle,'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '1_home_page', 'button_facebook_share', userPK ]);
+        e.preventDefault();
+    });
 
-function trackQuizFacebook() {
-    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'Facebook']);
-}
-function trackQuizTwitter() {
-    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'Twitter']);
-}
-function trackQuizPinterest() {
-    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'Pinterest']);
-}
-function trackQuizGooglePlus() {
-    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'GooglePlus']);
-}
-function trackQuizLinkedIn() {
-    _gaq.push(['_trackEvent', 'Quiz', 'Share', 'LinkedIn']);
-}
+    $('#shareTwitter').click(function (e) {
+        window.open('http://twitter.com/home?status=' + shareTitle + '+' + shareLink,'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '1_home_page', 'button_twitter_share', userPK ]);
+        e.preventDefault();
+    });
 
+    $('#sharePinterest').click(function (e) {
+        window.open('http://pinterest.com/pin/create/button/?url=' + shareLink + '&media=' + shareImage + '&description=' + shareTitle,'Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '1_home_page', 'button_pinterest_share', userPK ]);
+        e.preventDefault();
+    });
 
-function shareQuizFacebook() {
-    window.open('http://www.facebook.com/share.php?u=' + socialQuizLink + '&title=' + socialQuizTitleEscaped,'Share on Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-    console.log('shared');
-}
-function shareQuizTwitter() {
-    window.open('http://twitter.com/home?status=' + socialQuizTitleEscaped + '+' + socialQuizLink,'Share on Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareQuizPinterest() {
-    window.open('http://pinterest.com/pin/create/button/?url=' + socialQuizLink + '&media=' + socialQuizImage + '&description=' + socialQuizTitleEscaped,'Share on Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareQuizGooglePlus() {
-    window.open('https://plus.google.com/share?url=' + socialQuizLink,'Share on Google Plus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
-function shareQuizLinkedIn() {
-    window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + socialQuizLink + '&title=' + socialQuizTitleEscaped + '&source=' + socialQuizLink,'Share on LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-}
+    $('#shareGooglePlus').click(function (e) {
+        window.open('https://plus.google.com/share?url=' + shareLink,'GooglePlus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '1_home_page', 'button_google_plus_share', userPK ]);
+        e.preventDefault();
+    });
+
+    $('#shareLinkedIn').click(function (e) {
+        window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + shareLink + '&title=' + shareTitle + '&source=' + shareLink,'LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '1_home_page', 'button_linked_in_share', userPK ]);
+        e.preventDefault();
+    });
+
+    // Dashboard Tracking Functions
+    $('#trackFacebookInviteEvent').click(function (e) {
+        window.open('http://www.facebook.com/share.php?u=' + shareLink + '&title=' + shareTitle,'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_facebook_invite', userPK ]);
+        e.preventDefault();
+    });
+
+    $('.trackPhotoScrollEvent').click(function (e) {
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_share_photo', userPK ]);
+        $('html, body').delay(300).animate({scrollTop: $(".blue-stripe").offset().top-200}, 500);
+        e.preventDefault();
+    });
+
+    $('#trackLearnEvent').click(function () {
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_share_photo', userPK ]);
+    });
+
+    $('#trackTweetToEnterEvent').click(function (e) {
+        window.open('http://twitter.com/home?status=' + tweetTitle + '+' + shareLink,'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_tweet_to_enter', userPK ]);
+        e.preventDefault();
+    });
+});
