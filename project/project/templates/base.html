@@ -61,17 +61,7 @@
             {% include "fragments/profile_ribbon.html" %}
           {% endif %}
 
-          <![if !IE]>
-            {% include "fragments/navigation.html" %}
-          <![endif]>
-
-          <!--[if gte IE 9]>
-            {% include "fragments/navigation.html" %}
-          <![endif]-->
-          
-          <!--[if lt IE 9]>
-            {% include "fragments/ie_navigation.html" %}
-          <![endif]-->
+          {% include "fragments/navigation.html" %}
 
         </div>
       </div>
