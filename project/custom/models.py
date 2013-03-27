@@ -122,7 +122,7 @@ class Post(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('post', (), {'slug': self.slug})
+        return ('homepage', (), {'post_slug': self.slug})
 
 
 def get_profile_image_path(instance, filename):

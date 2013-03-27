@@ -5,7 +5,7 @@ urlpatterns = patterns('custom.views',
     url(r'^ajax/settings-form/$', 'ajax_settings_form', name='ajax_settings_form'),
     url(r'^signout/$', 'signout', name='signout'),
     url(r'^signin/$', 'signin', name='signin'),
-    url(r'^post/(?P<slug>[-\w]+)/$', 'homepage', name='homepage'),
+    url(r'^post/(?P<post_slug>[-\w]+)/$', 'homepage', name='homepage'),
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
     url(r'^$', 'homepage', name='homepage'),
 )
