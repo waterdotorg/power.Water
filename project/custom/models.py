@@ -105,6 +105,10 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100, unique=True)
     image = models.ImageField(upload_to='post', max_length=256)
+    image_mobile = models.ImageField(
+        upload_to='post',
+        max_length=256,
+        help_text="Background image used on mobile devices")
     teaser = models.CharField(max_length=256)
     content = models.TextField()
     published_date = models.DateTimeField()
