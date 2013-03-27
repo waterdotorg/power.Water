@@ -28,6 +28,7 @@ def homepage(request, post_slug=None):
     display_user_pk = request.GET.get('du')
     source_referrer = request.session.get('sr', None)
     absolute_uri = request.build_absolute_uri()
+    instagram_images = Image.objects.order_by('-instagram_id')[:200]
 
     if display_user_pk:
         try:
@@ -96,6 +97,7 @@ def homepage(request, post_slug=None):
         'FACEBOOK_APP_NAMESPACE': settings.FACEBOOK_APP_NAMESPACE,
         'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
         'absolute_uri': absolute_uri,
+        'instagram_images': instagram_images,
     }
 
     response = render(request, 'homepage.html', dict_context)
