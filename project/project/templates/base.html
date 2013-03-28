@@ -110,11 +110,11 @@
 
 <!-- Assign Sharing and Tracking Variables -->
 <script>
-  var shareLink = 'http://power.water.org/',
+  var shareLink = 'http://power.water.org/{% if user.pk %}?ur={{ user.pk }}{% endif %}',
       shareTitle = 'Donate Your Voice',
       shareTitleEscaped = escape(shareTitle),
       shareImage = 'url({{ STATIC_URL }}image/logo@2x.png)',
-      tweetTitle = 'Join me in celebrating World Water Day! Together we can make a difference.';
+      tweetTitle = 'Join me in helping to solve the water crisis. Together we can make a difference.';
 
   var userPK = '{{ user.pk }}';
 </script>
