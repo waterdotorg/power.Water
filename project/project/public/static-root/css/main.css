@@ -566,7 +566,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
 }
 
 .hero-text h1 {
-    width: 70%;
+    width: 100%;
     color: #feffff;
     font-size: 72px;
     font-family: 'Lato', sans-serif;
