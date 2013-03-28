@@ -159,7 +159,7 @@ body{
 }
 .nav li a .label {
     position: absolute;
-    top: -2px;
+    top: 6px;
     left: -110px;
     display: block;
     width: 100px;
@@ -184,7 +184,7 @@ body{
     z-index: 10;
     display: block;
     padding: 0;
-    padding-top: 7px;
+    padding-top: 14px;
     color: #949494;
     text-align: center;
     text-shadow: none;
@@ -201,11 +201,11 @@ body{
     z-index: 10;
     display: block;
     padding: 0;
-    padding-top: 2px;
+    padding-top: 14px;
     color: #949494;
     text-align: center;
     text-shadow: none;
-    font-size: 36px;
+    font-size: 28px;
     line-height: 1;
     cursor: pointer;
     z-index: 8;
@@ -253,6 +253,9 @@ body{
     font-weight: 500;
     font-size: 140%;
     cursor: pointer;
+}
+.mobile-nav span {
+    padding-top: 5px;
 }
 .mobile-nav li a {
     padding: 30px 0 0 30px;
@@ -599,7 +602,8 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     color: #00bff3;
     vertical-align: top;
     font-size: 120%;
-    line-height: 1;
+    line-height: 1.4;
+    margin-left: 10px;
 }
 
 .post-navigation a {
@@ -733,6 +737,11 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     font-family: 'Lato', sans-serif;
 }
 
+.instagram-icon {
+    line-height: 1.4;
+    margin-right: 16px;
+}
+
 .instagram-hash {
     color: #feffff;
 }
@@ -864,7 +873,7 @@ span.alert-error:before {
 ================================================================== */
 
 #signin {
-    padding-bottom: 36px;
+    padding-bottom: 108px;
     width: 100%;
     background-image: url(../image/join-bg.jpg);
     background-position: center top;
@@ -921,12 +930,12 @@ span.alert-error:before {
 
 .join-button a span {
     position: absolute;
-    top: -4px;
+    top: 24px;
     right: 100px;
     font-size: 48px;
 }
 
-.join-twitter a span { right: 90px; }
+.join-twitter a span { right: 110px; }
 
 .join-button a:hover {
     background-color: #3865B6;
@@ -1031,7 +1040,7 @@ span.alert-error:before {
     width: 50%;
     padding: 20px 80px;
 }
-.join-twitter .next-tweet span { right: 40px; }
+.join-twitter .next-tweet span { top: 22px; right: 60px; }
 
 .next-button {
     float: left;
@@ -1051,6 +1060,8 @@ span.alert-error:before {
 
 .next-button a span {
     display: block;
+    padding-top: 20px;
+    height: 50px;
     width: 100%;
     font-size: 60px;
 }

@@ -38,9 +38,9 @@
 						  	<p>
 						  		Each year, on March 22, we join together to highlight the global water crisis and celebrate the progress made to date.
 						  	</p>
-						  	<a id="join" class="small-btn blue-btn" href="{% url signin %}">JOIN</a>
-						  	<a class="small-btn trackPhotoScrollEvent" href="#">GALLERY</a>
-						  	<a class="small-btn" target="_blank" href="http://give.water.org/f/waterday-2013/">DONATE</a>
+						  	<a id="trackJoinEvent" class="small-btn blue-btn" href="{% url signin %}">JOIN</a>
+						  	<a id="trackPhotoScrollEvent" class="small-btn" href="#">GALLERY</a>
+						  	<a id="trackDonateEvent" class="small-btn" target="_blank" href="http://give.water.org/f/power/">DONATE</a>
 						  	<div id="join-hover" class="visible-desktop">
                   <p>
                   	It only takes a second to sign up and we'll help you share stories about the water crisis on Facebook or Twitter.
@@ -61,12 +61,12 @@
 			    <div class="container">
 			    	<div class="row-fluid">
 				      <div class="story-toggle span12">
-				      	more about this photo <span>+</span>
+				      	{{ post.teaser }} <span class="story-icon icon-arrow-down"></span>
 				      </div>
 				    </div>
 
 				    <!-- Featured Post -->
-				    <div id="featured-post" class="row-fluid" style="display:none;">
+				    <div id="featured-post" class="row-fluid">
 			      	<div class="span7">
 			      		<h2>{{ post.title }}</h2>
 			      		<p>
@@ -124,12 +124,12 @@
   <div id="instagallery" class="blue-stripe">
     <div class="container">
         <p>
-        	<span class="entypo-instagrem"></span>&nbsp;&nbsp;Show your support on Instagram by using the hashtag <span class="instagram-hash">#waterday</span>
+        	<span class="icon-camera-retro instagram-icon"></span>&nbsp;&nbsp;Show your support on Instagram by using the hashtag <span class="instagram-hash">#water</span>
         </p>
     </div>
   </div>
   <!-- Instagram Images -->
-<!--   <div class="row-fluid instagram-background">
+  <div class="row-fluid instagram-background">
       <div class="span12">
           <ul class="instagram clearfix">
               {% for image in instagram_images %}
@@ -141,7 +141,7 @@
               {% endfor %}
           </ul>
       </div>
-  </div> -->
+  </div>
 {% endblock %}
 
 {% block footer_scripts %}

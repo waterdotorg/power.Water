@@ -18,11 +18,11 @@
   .signin-heading { font-size: 86px; }
   .join-button a { padding: 20px 180px; }
   .join-button a span { right: 180px; }
-  .join-twitter a span { right: 170px; }
+  .join-twitter a span { right: 190px; }
 	.thanks-heading { padding-top: 48px; }
   .thanks-text { padding-top: 46px; }
   .join-button .next-tweet { width: 50%; padding: 20px 80px; }
-  .join-twitter .next-tweet span { right: 60px; }
+  .join-twitter .next-tweet span { right: 80px; }
 }
  
 /* Portrait tablet to landscape and desktop */
@@ -41,7 +41,7 @@
   .signin-heading { font-size: 56px; }
   .join-button a { padding: 20px 40px; }
   .join-button a span { right: 60px; }
-  .join-twitter a span { right: 60px; }
+  .join-twitter a span { right: 70px; }
   .social-posts-heading { font-size: 56px; }
   .thanks-heading { font-size: 60px; padding-top: 36px; }
   .thanks-text { font-size: 16px; padding-top: 18px; }
@@ -49,7 +49,7 @@
   .next-heading {font-size: 56px; }
   .next-button a { font-size: 14px; }
   .join-button .next-tweet { width: 70%; padding: 20px 40px; }
-  .join-twitter .next-tweet span { right: 20px; }
+  .join-twitter .next-tweet span { right: 50px; }
 }
  
 /* Landscape phone to portrait tablet */
@@ -69,9 +69,9 @@
   .post-navigation .previous { left: 0; background-position: -30px center; }
   #signin .overlay { border-radius: 0; }
   .join-button a { padding: 24px 10% 18px; font-size: 16px; }
-  .join-button a span { top: 4px; font-size: 38px; }
+  .join-button a span { top: 25px; font-size: 38px; }
   .join-button a span { right: 12%; }
-  .join-twitter a span { right: 10%; }
+  .join-twitter a span { right: 14%; }
   .social-posts-heading { font-size: 48px; }
   .mobile-nav .container { max-width: 100%; }
   .thanks-heading { font-size: 68px; padding: 0 0 18px; text-align: center; }
@@ -80,7 +80,7 @@
   .next-image { width: 50%; margin-left: 23%; padding: 2%; margin-bottom: 20px; margin-top: 0; }
   .next-heading {font-size: 42px; }
   .join-button .next-tweet { width: 60%; padding: 20px 4%; }
-  .join-twitter .next-tweet span { right: 6%; }
+  .join-twitter .next-tweet span { right: 10%; }
   .instagram li { width: 25%; }
 }
  
@@ -106,13 +106,13 @@
   .signin-text { font-size: 16px; line-height: 1.4; }
   .social-posts-text { font-size: 16px; line-height: 1.4; }
   .join-button a { padding: 20px 8% 18px; margin: 18px 0; font-size: 14px; }
-  .join-button a span { top: 8px; font-size: 28px; }
+  .join-button a span { top: 25px; font-size: 28px; }
   .join-button a span { right: 8%; }
-  .join-twitter a span { right: 6%; }
+  .join-twitter a span { right: 10%; }
   .thanks-text { font-size: 16px; font-weight: 400; width: 90%; margin-left: 5%; }
   .next-text { font-size: 16px; font-weight: 400; }
   .join-button .next-tweet { width: 88%; padding: 20px 6%; }
-  .join-twitter .next-tweet span { right: 6%; }
+  .join-twitter .next-tweet span { right: 16%; top: 25px; }
   .next-button a span { font-size: 48px; }
   .next-button a { font-size: 14px; font-weight: normal; }
   .blue-stripe p { font-size: 20px; line-height: 1.2; }

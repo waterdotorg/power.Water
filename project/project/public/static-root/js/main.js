@@ -259,14 +259,14 @@ $(document).ready(function () {
 
     // Toggles settings form
     $(".story-toggle").click(function () {
-        $("#featured-post").slideToggle("medium");
-        $(this).toggleClass("open");
-        if ($(this).hasClass("open")) {
-            $(this).text('CLOSE STORY').append('<span> - </span>');
-        } else {
-            $(this).text('MORE ABOUT THIS PHOTO').append('<span> + </span>');
-        }
-        $('html, body').delay(300).animate({scrollTop: $("#featured-post").offset().top-60}, 500);
+        // $("#featured-post").slideToggle("medium");
+        // $(this).toggleClass("open");
+        // if ($(this).hasClass("open")) {
+        //     $(this).text('CLOSE STORY').append('<span> - </span>');
+        // } else {
+        //     $(this).text('MORE ABOUT THIS PHOTO').append('<span> + </span>');
+        // }
+        $('html, body').animate({scrollTop: $("#featured-post").offset().top-60}, 500);
     });
 
     // Toggles Mobile Nav
@@ -318,7 +318,7 @@ $(document).ready(function() {
     });
 
     $('#trackInstagramEvent').click(function () {
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_instagram_more_click', userPK ]);
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_instagram_click', userPK ]);
     });
 
     // Sharing Buttons with Tracking Functions
@@ -363,6 +363,20 @@ $(document).ready(function() {
         _gaq.push(['_trackEvent', '3_dashboard_page', 'button_share_photo', userPK ]);
         $('html, body').delay(300).animate({scrollTop: $(".blue-stripe").offset().top-200}, 500);
         e.preventDefault();
+    });
+
+    $('#trackPhotoScrollEvent').click(function (e) {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_share_photo', userPK ]);
+        $('html, body').delay(300).animate({scrollTop: $(".blue-stripe").offset().top-200}, 500);
+        e.preventDefault();
+    });
+
+    $('#trackDonateEvent').click(function () {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_donate', userPK ]);
+    });
+
+    $('#trackJoinEvent').click(function () {
+        _gaq.push(['_trackEvent', '1_landing_page', 'button_join', userPK ]);
     });
 
     $('#trackLearnEvent').click(function () {
