@@ -255,7 +255,7 @@ body{
     cursor: pointer;
 }
 .mobile-nav span {
-    padding-top: 5px;
+    padding-top: 3px;
 }
 .mobile-nav li a {
     padding: 30px 0 0 30px;
@@ -930,9 +930,10 @@ span.alert-error:before {
 
 .join-button a span {
     position: absolute;
-    top: 24px;
+    top: 4px;
     right: 100px;
     font-size: 48px;
+    line-height: 1.4;
 }
 
 .join-twitter a span { right: 110px; }
@@ -1040,7 +1041,7 @@ span.alert-error:before {
     width: 50%;
     padding: 20px 80px;
 }
-.join-twitter .next-tweet span { top: 22px; right: 60px; }
+.join-twitter .next-tweet span { top: 4px; right: 60px; }
 
 .next-button {
     float: left;

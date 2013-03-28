@@ -69,7 +69,7 @@
   .post-navigation .previous { left: 0; background-position: -30px center; }
   #signin .overlay { border-radius: 0; }
   .join-button a { padding: 24px 10% 18px; font-size: 16px; }
-  .join-button a span { top: 25px; font-size: 38px; }
+  .join-button a span { top: 8px; font-size: 38px; }
   .join-button a span { right: 12%; }
   .join-twitter a span { right: 14%; }
   .social-posts-heading { font-size: 48px; }
@@ -106,13 +106,13 @@
   .signin-text { font-size: 16px; line-height: 1.4; }
   .social-posts-text { font-size: 16px; line-height: 1.4; }
   .join-button a { padding: 20px 8% 18px; margin: 18px 0; font-size: 14px; }
-  .join-button a span { top: 25px; font-size: 28px; }
-  .join-button a span { right: 8%; }
+  .join-button a span { font-size: 28px; }
+  .join-button a span { top: 12px; right: 8%; }
   .join-twitter a span { right: 10%; }
   .thanks-text { font-size: 16px; font-weight: 400; width: 90%; margin-left: 5%; }
   .next-text { font-size: 16px; font-weight: 400; }
   .join-button .next-tweet { width: 88%; padding: 20px 6%; }
-  .join-twitter .next-tweet span { right: 16%; top: 25px; }
+  .join-twitter .next-tweet span { right: 16%; top: 12px; }
   .next-button a span { font-size: 48px; }
   .next-button a { font-size: 14px; font-weight: normal; }
   .blue-stripe p { font-size: 20px; line-height: 1.2; }
