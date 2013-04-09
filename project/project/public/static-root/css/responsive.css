@@ -7,22 +7,17 @@
 		background-size: 1280px 720px;
 		background-position: top center;
 	}
-  #signin {
+  /*#signin {
     background-size: 1280px 720px;
     background-position: top center;
-  }
+  }*/
 }
  
 /* Large desktop */
 @media (min-width: 1200px) {
   .signin-heading { font-size: 86px; }
-  .join-button a { padding: 20px 180px; }
-  .join-button a span { right: 180px; }
-  .join-twitter a span { right: 190px; }
 	.thanks-heading { padding-top: 48px; }
   .thanks-text { padding-top: 46px; }
-  .join-button .next-tweet { width: 50%; padding: 20px 80px; }
-  .join-twitter .next-tweet span { right: 80px; }
 }
  
 /* Portrait tablet to landscape and desktop */
@@ -31,7 +26,7 @@
   #settings-form { padding: 10px 0; }
   #settings-form .close { top: 176px; right: 90px; }
   #ajax-form .close { top: 20px; }
-  .hero-text h1 { width: 100%; }
+  .hero-text h1 { width: 100%; font-size: 60px; }
   .small-btn { margin:0 1% 0 0; width: 31%; }
   .hero .container { max-width: 86%; }
   .hero-text p { width: 100%; font-size: 20px; }
@@ -39,17 +34,12 @@
   .blue-stripe p { font-size: 27px; line-height: 1.2; }
   .instagram li { width: 20%; }
   .signin-heading { font-size: 56px; }
-  .join-button a { padding: 20px 40px; }
-  .join-button a span { right: 60px; }
-  .join-twitter a span { right: 70px; }
   .social-posts-heading { font-size: 56px; }
   .thanks-heading { font-size: 60px; padding-top: 36px; }
   .thanks-text { font-size: 16px; padding-top: 18px; }
   #dashboard-user-img { margin-top: 14px; }
   .next-heading {font-size: 56px; }
   .next-button a { font-size: 14px; }
-  .join-button .next-tweet { width: 70%; padding: 20px 40px; }
-  .join-twitter .next-tweet span { right: 50px; }
 }
  
 /* Landscape phone to portrait tablet */
@@ -62,16 +52,12 @@
   #settings-form input[type="submit"] { margin-left: 2%; }
   #settings-form .close { top: 210px; right: 0; }
   .hero-text { position: absolute; top: 50%; left: 0; margin-top: -150px; z-index: 12; }
-  .hero-text h1 { width: 70%; font-size: 60px; }
+  .hero-text h1 { width: 70%; font-size: 54px; }
   .hero-text p { width: 90%; font-size: 20px; }
   .post-navigation a { width: 38px; height: 480px; background-color: rgba(0,0,0,0.6); background-image: url(../image/arrows_mobile.png); }
   .post-navigation .next { right: 0; }
   .post-navigation .previous { left: 0; background-position: -30px center; }
   #signin .overlay { border-radius: 0; }
-  .join-button a { padding: 24px 10% 18px; font-size: 16px; }
-  .join-button a span { top: 8px; font-size: 38px; }
-  .join-button a span { right: 12%; }
-  .join-twitter a span { right: 14%; }
   .social-posts-heading { font-size: 48px; }
   .mobile-nav .container { max-width: 100%; }
   .thanks-heading { font-size: 68px; padding: 0 0 18px; text-align: center; }
@@ -79,8 +65,6 @@
   .thanks-text { font-size: 18px; width: 70%; padding-top: 4px; margin-left: 15%; text-align: center; }
   .next-image { width: 50%; margin-left: 23%; padding: 2%; margin-bottom: 20px; margin-top: 0; }
   .next-heading {font-size: 42px; }
-  .join-button .next-tweet { width: 60%; padding: 20px 4%; }
-  .join-twitter .next-tweet span { right: 10%; }
   .instagram li { width: 25%; }
 }
  
@@ -105,14 +89,8 @@
   .signin-heading { font-size: 58px; margin: 36px 0 18px; }
   .signin-text { font-size: 16px; line-height: 1.4; }
   .social-posts-text { font-size: 16px; line-height: 1.4; }
-  .join-button a { padding: 20px 8% 18px; margin: 18px 0; font-size: 14px; }
-  .join-button a span { font-size: 28px; }
-  .join-button a span { top: 12px; right: 8%; }
-  .join-twitter a span { right: 10%; }
   .thanks-text { font-size: 16px; font-weight: 400; width: 90%; margin-left: 5%; }
   .next-text { font-size: 16px; font-weight: 400; }
-  .join-button .next-tweet { width: 88%; padding: 20px 6%; }
-  .join-twitter .next-tweet span { right: 16%; top: 12px; }
   .next-button a span { font-size: 48px; }
   .next-button a { font-size: 14px; font-weight: normal; }
   .blue-stripe p { font-size: 20px; line-height: 1.2; }

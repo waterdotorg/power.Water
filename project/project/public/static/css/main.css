@@ -143,10 +143,11 @@ body{
     display: inline-block;
     margin-left: 14px;
 }
-.nav li a {
+.nav li a, .nav li a:visited {
     height: 30px;
     color: #949494;
     cursor: pointer;
+    text-decoration: none;
 }
 .nav li a:hover {
     background: none;
@@ -245,7 +246,7 @@ body{
     list-style: none;
 }
 
-.mobile-nav a {
+.mobile-nav a, .mobile-nav a:visited {
     display: block;
     color: white;
     text-align: left;
@@ -253,6 +254,7 @@ body{
     font-weight: 500;
     font-size: 140%;
     cursor: pointer;
+    text-decoration: none;
 }
 .mobile-nav span {
     padding-top: 3px;
@@ -286,7 +288,7 @@ body{
 /* ==================================================================
     BUTTON STYLES
 ================================================================== */
-.small-btn {
+.small-btn, .small-btn:visited {
     display: inline-block;
     margin:0 1.5% 0 0;
     padding: 14px 0;
@@ -369,7 +371,7 @@ body{
     SETTINGS FORM STYLES
 ================================================================== */
 #user-settings {
-    background: #121212 url(../image/stripe.png);
+    background: #232323 url(../image/stripe.png);
 }
 
 #settings-form {
@@ -410,7 +412,7 @@ body{
     border-radius: 4px;
     background: black;
     color: white;
-    font-family: 'Lato', sans-serif;
+    font-family: Helvetica, sans-serif;
     -webkit-transition: opacity 0.05s linear;
     -moz-transition: opacity 0.05s linear;
     -ms-transition: opacity 0.05s linear;
@@ -571,6 +573,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     font-size: 72px;
     font-family: 'Lato', sans-serif;
     line-height: 0.85em;
+    text-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
 
 .hero-text p {
@@ -579,6 +582,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     font-weight: 400;
     font-size: 24px;
     line-height: 1.2em;
+    text-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
 
 .hero-text #join-hover { width: 70%; }
@@ -649,7 +653,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     font-weight: 900;
     font-size: 60px;
     font-family: 'Lato', sans-serif;
-    line-height: 0.8em;
+    line-height: 1.1em;
 }
 
 #featured-post p {
@@ -682,6 +686,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     background: black;
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
+
 #mobile-user-img img {
     width: 100%;
     border-radius: 50%;
@@ -885,6 +890,10 @@ span.alert-error:before {
     background-size: cover;
 }
 
+#signin strong {
+    text-transform: uppercase;
+}
+
 .signin-heading {
     margin: 80px 0 30px;
     padding-bottom: 18px; 
@@ -899,6 +908,7 @@ span.alert-error:before {
     padding: 40px;
     border-radius: 10px;
     background: rgba(0,0,0,0.7);
+    *background: black;
 }
     
 .signin-text {
@@ -911,16 +921,16 @@ span.alert-error:before {
     position: relative;
     display: block;
     margin: 36px 0 18px;
-    padding: 20px 100px;
+    padding: 20px 0;
     border-radius: 4px;
     background-color: #30568A;
     -webkit-box-shadow: inset 0px -10px 20px rgba(0,0,0,0.1);
     box-shadow: inset 0px -10px 20px rgba(0,0,0,0.1);
     color: white;
-    text-align: left;
+    text-align: center;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .join-twitter a {
@@ -928,15 +938,20 @@ span.alert-error:before {
     background-color: #00BFF3;
 }
 
-.join-button a span {
+/*.join-button a span {
     position: absolute;
     top: 4px;
     right: 100px;
     font-size: 48px;
     line-height: 1.4;
+}*/
+
+.join-button a span {
+    font-size: 40px;
+    margin-left: 10px;
 }
 
-.join-twitter a span { right: 110px; }
+/*.join-twitter a span { right: 110px; }*/
 
 .join-button a:hover {
     background-color: #3865B6;
@@ -1050,7 +1065,7 @@ span.alert-error:before {
     width: 50%;
 }
 
-.next-button a {
+.next-button a, .next-button a:active, .next-button a:visited {
     display: block;
     color: white;
     text-align: center;
@@ -1058,6 +1073,7 @@ span.alert-error:before {
     font-weight: bold;
     font-size: 16px;
     line-height: 1.4;
+    text-decoration: none;
 }
 
 .next-button a span {
