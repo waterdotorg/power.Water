@@ -813,7 +813,7 @@ form {
 
 #ajax-form {
     padding-top: 15px;
-    padding-bottom: 4px;
+    padding-bottom: 0;
     text-align: center;
 }
 

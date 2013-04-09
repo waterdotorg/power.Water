@@ -322,39 +322,39 @@ $(document).ready(function() {
     });
 
     // Sharing Buttons with Tracking Functions
-    $('#shareFacebook').click(function (e) {
-        window.open('http://www.facebook.com/share.php?u=' + shareLink + '&title=' + shareTitle,'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '1_home_page', 'button_facebook_share', userPK ]);
-        e.preventDefault();
-    });
+    // $('#shareFacebook').click(function (e) {
+    //     window.open('http://www.facebook.com/share.php?u=' + shareLink + '&title=' + shareTitle,'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    //     _gaq.push(['_trackEvent', '1_home_page', 'button_facebook_share', userPK ]);
+    //     e.preventDefault();
+    // });
 
-    $('#shareTwitter').click(function (e) {
-        window.open('http://twitter.com/home?status=' + shareTitle + '+' + shareLink,'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '1_home_page', 'button_twitter_share', userPK ]);
-        e.preventDefault();
-    });
+    // $('#shareTwitter').click(function (e) {
+    //     window.open('http://twitter.com/home?status=' + shareTitle + '+' + shareLink,'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    //     _gaq.push(['_trackEvent', '1_home_page', 'button_twitter_share', userPK ]);
+    //     e.preventDefault();
+    // });
 
-    $('#sharePinterest').click(function (e) {
-        window.open('http://pinterest.com/pin/create/button/?url=' + shareLink + '&media=' + shareImage + '&description=' + shareTitle,'Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '1_home_page', 'button_pinterest_share', userPK ]);
-        e.preventDefault();
-    });
+    // $('#sharePinterest').click(function (e) {
+    //     window.open('http://pinterest.com/pin/create/button/?url=' + shareLink + '&media=' + shareImage + '&description=' + shareTitle,'Pinterest','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    //     _gaq.push(['_trackEvent', '1_home_page', 'button_pinterest_share', userPK ]);
+    //     e.preventDefault();
+    // });
 
-    $('#shareGooglePlus').click(function (e) {
-        window.open('https://plus.google.com/share?url=' + shareLink,'GooglePlus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '1_home_page', 'button_google_plus_share', userPK ]);
-        e.preventDefault();
-    });
+    // $('#shareGooglePlus').click(function (e) {
+    //     window.open('https://plus.google.com/share?url=' + shareLink,'GooglePlus','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    //     _gaq.push(['_trackEvent', '1_home_page', 'button_google_plus_share', userPK ]);
+    //     e.preventDefault();
+    // });
 
-    $('#shareLinkedIn').click(function (e) {
-        window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + shareLink + '&title=' + shareTitle + '&source=' + shareLink,'LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '1_home_page', 'button_linked_in_share', userPK ]);
-        e.preventDefault();
-    });
+    // $('#shareLinkedIn').click(function (e) {
+    //     window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + shareLink + '&title=' + shareTitle + '&source=' + shareLink,'LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+    //     _gaq.push(['_trackEvent', '1_home_page', 'button_linked_in_share', userPK ]);
+    //     e.preventDefault();
+    // });
 
     // Dashboard Tracking Functions
     $('#trackFacebookInviteEvent').click(function (e) {
-        window.open('http://www.facebook.com/share.php?u=' + shareLink + '&title=' + shareTitle,'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        window.open('https://www.facebook.com/dialog/feed?app_id=195104123845921&' + shareLink + '&picture=http://power.water.org/static/image/dashboard_well.jpg&name=Will%20You%20Join%20Us?&caption=Water.org%20and%20the%20water%20crisis&description=Donating%20your%20voice%20to%20the%20cause%20is%20easy%20and%20can%20make%20a%20difference.&redirect_uri=http://power.water.org/dashboard/','Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
         _gaq.push(['_trackEvent', '3_dashboard_page', 'button_facebook_invite', userPK ]);
         e.preventDefault();
     });
@@ -383,9 +383,9 @@ $(document).ready(function() {
         _gaq.push(['_trackEvent', '3_dashboard_page', 'button_share_photo', userPK ]);
     });
 
-    $('#trackTweetToEnterEvent').click(function (e) {
+    $('#trackTwitterInvite').click(function (e) {
         window.open('http://twitter.com/home?status=' + tweetTitle + '+' + shareLink,'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_tweet_to_enter', userPK ]);
+        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_twitter_invite', userPK ]);
         e.preventDefault();
     });
 });
