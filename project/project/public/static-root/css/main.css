@@ -813,7 +813,7 @@ form {
 
 #ajax-form {
     padding-top: 15px;
-    padding-bottom: 4px;
+    padding-bottom: 0;
     text-align: center;
 }
 
@@ -1017,7 +1017,7 @@ span.alert-error:before {
 }
 
 #next-block {
-    padding: 60px 0;
+    padding: 60px 0 120px;
     background: black;
 }
 
@@ -1035,6 +1035,7 @@ span.alert-error:before {
     font-weight: 900;
     font-size: 18px;
     line-height: 1.4em;
+    /*border-bottom: 8px dashed #00BFF3;*/
 }
 
 .join-button .next-tweet {
@@ -1046,7 +1047,7 @@ span.alert-error:before {
 .next-button {
     float: left;
     margin-top: 36px;
-    width: 33.33333334%;
+    width: 50%;
 }
 
 .next-button a {
