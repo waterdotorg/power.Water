@@ -24,7 +24,7 @@
 @media (max-width: 979px) {
   #user-container { width: 38%; }
   #settings-form { padding: 10px 0; }
-  #settings-form .close { top: 176px; right: 90px; }
+  #settings-form .close { top: 176px; right: 0px; }
   #ajax-form .close { top: 20px; }
   .hero-text h1 { width: 100%; font-size: 60px; }
   .small-btn { margin:0 1% 0 0; width: 31%; }
@@ -45,12 +45,13 @@
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   .container { max-width: 90%; }
-  #settings-form .field { width: 46%; float: left; margin: 14px 2% 0; }
-  #settings-form .checkboxField { width: 45%; margin: 14px 2.5% 0; }
-  #settings-form .checkboxField:first-child { margin: 14px 2.5% 0; }
-  div.checkboxField:not(#foo) > input[type='checkbox'] + label { width: 160px; }
-  #settings-form input[type="submit"] { margin-left: 2%; }
-  #settings-form .close { top: 210px; right: 0; }
+  #settings-form .field { width: 100%; float: none; margin: 14px 0 0; }
+  #settings-form .checkboxField { width: 100%; margin: 10px 0 0; }
+  #settings-form .checkboxField:first-child { margin: 18px 0 0; }
+  div.checkboxField:not(#foo) > input[type='checkbox'] { opacity: 1; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); float: left; width: 20px; height: 20px; margin-right: 6px; }
+  div.checkboxField:not(#foo) > input[type='checkbox'] + label { margin-left: 0; padding-left: 0; width: auto; height: auto; background: none; }
+  #settings-form input[type="submit"] { margin-left: 0; font-size: 18px; padding: 10px 20px; }
+  #settings-form .close { bottom: 30px; right: 0; top: auto; }
   .hero-text { position: absolute; top: 50%; left: 0; margin-top: -150px; z-index: 12; }
   .hero-text h1 { width: 70%; font-size: 54px; }
   .hero-text p { width: 90%; font-size: 20px; }
@@ -71,14 +72,8 @@
 /* Landscape phones and down */
 @media (max-width: 480px) {
   .hero .container { max-width: 80%; }
-  #settings-form .field { width: 100%; float: none; margin: 14px 0 0; }
-  #settings-form .checkboxField { width: 100%; margin: 10px 0 0; }
-  #settings-form .checkboxField:first-child { margin: 18px 0 0; }
-  div.checkboxField:not(#foo) > input[type='checkbox'] { opacity: 1; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); float: left; width: 20px; height: 20px; margin-right: 6px; }
-  div.checkboxField:not(#foo) > input[type='checkbox'] + label { margin-left: 0; padding-left: 0; width: auto; height: auto; background: none; }
-  #settings-form input[type="submit"] { margin-left: 0; font-size: 18px; padding: 10px 20px; }
-  #settings-form .close { top: 336px; right: 0; }
   .mobile-nav { width: 160px; }
+  .wrap-nav-open { right: 160px; left: -160px; }
   .close-mobile-nav { padding: 16px 0 16px 30px; }
   .mobile-nav a { font-size: 100%; }
   .hero-text h1 { width: 70%; font-size: 42px; }

@@ -195,6 +195,27 @@ body{
     z-index: 8;
 }
 
+.mobile-settings-btn-hidden, .mobile-settings-btn-hidden:hover {
+    display: none !important;
+}
+
+.wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.wrap-nav-open {
+    right: 220px;
+    left: -220px;
+}
+
 .mobile-nav-btn {
     position: absolute;
     top: 0;
@@ -222,7 +243,7 @@ body{
     right: -220px;
     bottom: 0;
     width: 220px;
-    background: #121212 url(../image/stripe.png);
+    background: #232323 url(../image/stripe.png);
     z-index: 14;
     -webkit-transition: all 0.2s ease-in;
     -moz-transition: all 0.2s ease-in;
@@ -260,11 +281,13 @@ body{
     padding-top: 3px;
 }
 .mobile-nav li a {
-    padding: 30px 0 0 30px;
+    padding: 24px 0 20px 30px;
 }
+
 .mobile-nav li:first-child {
     border-top: 1px solid #222222;
 }
+
 .mobile-nav a:active, .mobile-nav a:hover, .mobile-nav a:active, .mobile-nav-btn:active, .mobile-nav-btn:focus,
 .mobile-nav-btn:hover, .mobile-settings-btn:hover, .mobile-settings-btn:active, .mobile-settings-btn:focus {
     color: white;
@@ -278,10 +301,7 @@ body{
 }
 
 .button-hidden, .button-hidden:hover {
-    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    filter: alpha(opacity=0);
-    opacity: 0;
-    cursor: default;
+    display: none !important;
 }
 
 
@@ -313,7 +333,7 @@ body{
     width: 60%;
 }
 
-.blue-btn {
+.blue-btn, .blue-btn:visited {
     border-top: 1px solid rgba(255,255,255,0.6);
     background-color: #00bff3;
 }

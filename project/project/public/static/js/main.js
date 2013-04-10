@@ -269,14 +269,29 @@ $(document).ready(function () {
         $('html, body').animate({scrollTop: $("#featured-post").offset().top-60}, 500);
     });
 
-    // Toggles Mobile Nav
+
+    $('.mobile-nav-btn').click(function (e){
+        e.preventDefault();
+        if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
+            $('.mobile-nav').removeClass('mobile-nav-visible');
+            $('.wrap').removeClass('wrap-nav-open');
+            $(this).removeClass('.mobile-nav-btn-nav-visible');
+            $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
+            
+        } else {
+            $('.mobile-nav').addClass('mobile-nav-visible');
+            $('.wrap').addClass('wrap-nav-open');
+            $(this).addClass('.mobile-nav-btn-nav-visible');
+            $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
+        }
+    });
+
     $('.close-mobile-nav').click(function (e){
         e.preventDefault();
         $('.mobile-nav').removeClass("mobile-nav-visible");
-    });
-    $('.mobile-nav-btn').click(function (e){
-        e.preventDefault();
-        $('.mobile-nav').addClass("mobile-nav-visible");
+        $('.wrap').removeClass('wrap-nav-open');
+        $('.mobile-nav-btn').removeClass('.mobile-nav-btn-nav-visible');
+        $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
     });
 
 });
