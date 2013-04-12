@@ -211,11 +211,6 @@ body{
     transition: all 0.2s ease-in;
 }
 
-.wrap-nav-open {
-    right: 220px;
-    left: -220px;
-}
-
 .mobile-nav-btn {
     position: absolute;
     top: 0;

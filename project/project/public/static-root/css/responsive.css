@@ -76,8 +76,9 @@
   .wrap-nav-open { right: 160px; left: -160px; }
   .close-mobile-nav { padding: 16px 0 16px 30px; }
   .mobile-nav a { font-size: 100%; }
+  .mobile-nav span { padding-top: 0px; }
   .hero-text h1 { width: 70%; font-size: 42px; }
-  .hero-text p { width: 90%; font-size: 18px; }
+  .hero-text p { width: 90%; font-size: 18px; margin-bottom: 20px; }
   .hero-text .small-btn { width: 46%; }
   .hero-text .blue-btn { width: 94%; margin-bottom: 18px; }
   #signin .overlay { padding: 30px 20px 13px; }

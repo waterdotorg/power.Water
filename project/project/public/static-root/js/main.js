@@ -274,13 +274,11 @@ $(document).ready(function () {
         e.preventDefault();
         if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
             $('.mobile-nav').removeClass('mobile-nav-visible');
-            $('.wrap').removeClass('wrap-nav-open');
             $(this).removeClass('.mobile-nav-btn-nav-visible');
             $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
             
         } else {
             $('.mobile-nav').addClass('mobile-nav-visible');
-            $('.wrap').addClass('wrap-nav-open');
             $(this).addClass('.mobile-nav-btn-nav-visible');
             $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
         }
@@ -289,7 +287,6 @@ $(document).ready(function () {
     $('.close-mobile-nav').click(function (e){
         e.preventDefault();
         $('.mobile-nav').removeClass("mobile-nav-visible");
-        $('.wrap').removeClass('wrap-nav-open');
         $('.mobile-nav-btn').removeClass('.mobile-nav-btn-nav-visible');
         $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
     });

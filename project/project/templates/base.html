@@ -44,12 +44,13 @@
 {% block top %}
 {{ block.super }}
 
-{% include "fragments/responsive_navigation.html" %}
-<div class="wrap">
+
   {% include "fragments/settings_form_success.html" %}
   {% if user.is_authenticated %}
       {% include "fragments/settings_form.html" %}
   {% endif %}
+
+  {% include "fragments/responsive_navigation.html" %}
 
   <div id="header" class="row-fuid">
     <div class="container">
@@ -102,8 +103,6 @@
   </div>
 {% endblock %}
 
-</div>
-<!-- /#wrap -->
 
 <!-- Javascripts -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
