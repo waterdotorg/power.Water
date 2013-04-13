@@ -12,14 +12,14 @@
     background-position: top center;
   }*/
 }
- 
+
 /* Large desktop */
 @media (min-width: 1200px) {
   .signin-heading { font-size: 86px; }
 	.thanks-heading { padding-top: 48px; }
   .thanks-text { padding-top: 46px; }
 }
- 
+
 /* Portrait tablet to landscape and desktop */
 @media (max-width: 979px) {
   #user-container { width: 38%; }
@@ -41,7 +41,7 @@
   .next-heading {font-size: 56px; }
   .next-button a { font-size: 14px; }
 }
- 
+
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   .container { max-width: 90%; }
@@ -68,16 +68,17 @@
   .next-heading {font-size: 42px; }
   .instagram li { width: 25%; }
 }
- 
+
 /* Landscape phones and down */
 @media (max-width: 480px) {
   .hero .container { max-width: 80%; }
   .mobile-nav { width: 160px; }
-  .wrap-nav-open { right: 160px; left: -160px; }
+  .wrap-hidden { left: -160px; right: 160px; }
   .close-mobile-nav { padding: 16px 0 16px 30px; }
   .mobile-nav a { font-size: 100%; }
   .mobile-nav span { padding-top: 0px; }
-  .hero-text h1 { width: 70%; font-size: 42px; }
+  .hero-text h1 { width: 70%; font-size: 44px; line-height: 1.1em; }
+  #featured-post h2 { font-size: 44px; }
   .hero-text p { width: 90%; font-size: 18px; margin-bottom: 20px; }
   .hero-text .small-btn { width: 46%; }
   .hero-text .blue-btn { width: 94%; margin-bottom: 18px; }

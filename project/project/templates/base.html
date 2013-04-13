@@ -44,13 +44,13 @@
 {% block top %}
 {{ block.super }}
 
+{% include "fragments/responsive_navigation.html" %}
 
+<div class="wrap">
   {% include "fragments/settings_form_success.html" %}
   {% if user.is_authenticated %}
       {% include "fragments/settings_form.html" %}
   {% endif %}
-
-  {% include "fragments/responsive_navigation.html" %}
 
   <div id="header" class="row-fuid">
     <div class="container">
@@ -58,7 +58,7 @@
         <div class="span12 relative">
           <a class="logo pull-left hidden-phone external" href="http://water.org"><img src="{{ STATIC_URL }}/image/logo.png" alt="water.org - Water Day"></a>
           <a class="logo pull-left visible-phone external" href="http://water.org"><img src="{{ STATIC_URL }}/image/logo@2x.png" alt="water.org - Water Day"></a>
-          
+
           {% if display_profile %}
             {% include "fragments/profile_ribbon.html" %}
           {% endif %}
@@ -78,7 +78,7 @@
     </div>
     <!-- /Main -->
 {% endblock %}
-    
+
 {% block footer %}
   <div id="footer-base-wrap">
     <div class="container">
@@ -102,7 +102,8 @@
     </div>
   </div>
 {% endblock %}
-
+</div>
+<!--/.wrap-->
 
 <!-- Javascripts -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

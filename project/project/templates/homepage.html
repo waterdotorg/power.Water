@@ -29,14 +29,14 @@
 	<div id="posts">
 
 			<div id="post-{{ post.pk }}" class="post">
-		
+
 			  <div class="hero area-full">
 			  	<div class="container relative">
 			  		<div class="hero-text row-fluid">
 			  			<div class="span8">
 						  	<h1>Will You Join Us?</h1>
 						  	<p>
-							  Donate your voice to help spread the word about the crisis and we'll post news and stories for you automatically. It's easy. Your voice really has the power to make a difference.	
+							  Donate your voice to help spread the word about the crisis and we'll post news and stories for you automatically. It's easy. Your voice really has the power to make a difference.
 							</p>
 						  	<a id="trackJoinEvent" class="small-btn blue-btn" href="{% url signin %}">JOIN</a>
 						  	<a id="trackPhotoScrollEvent" class="small-btn" href="#">GALLERY</a>
@@ -57,7 +57,7 @@
 		    </script>
 
 			  <!-- Story Toggle -->
-			  <div class="story-block">
+			  <div class="story-block backg">
 			    <div class="container">
 			    	<div class="row-fluid">
 				      <div class="story-toggle span12">
@@ -78,7 +78,7 @@
 								<aside>
 								  <h3>About Water.org</h3>
 									<p class="aside-text">
-										For more than twenty years <a target="_blank" href="http://water.org">Water.org</a> has worked with local partners and communities to solve the water and sanitation crisis. Over 75,000 people have donated their online voice to help inform and educate others online. 
+										For more than twenty years <a target="_blank" href="http://water.org">Water.org</a> has worked with local partners and communities to solve the water and sanitation crisis. Over 75,000 people have donated their online voice to help inform and educate others online.
 									</p>
 								</aside>
 								<a class="small-btn learn-btn" target="_blank" href="http://water.org/">LEARN MORE</a>
@@ -86,7 +86,7 @@
 				    </div>
 			    </div>
 			  </div>
-	
+
 			</div>
 	</div>
 
@@ -111,7 +111,7 @@
   {% endif %}
 
   <!-- Mobile Learn -->
-	<div id="mobile-learn" class="row-fluid visible-phone">
+	<div id="mobile-learn" class="row-fluid visible-phone backg">
 		<div class="container">
 			<p class="aside-text">
 				For more than twenty years <a target="_blank" href="http://water.org">Water.org</a> has worked with local partners and communities to solve the water and sanitation crisis. Over 50,000 people have donated their voice to our campaigns that inform and educate others online.
@@ -130,7 +130,7 @@
     </div>
   </div>
   <!-- Instagram Images -->
-  <div class="row-fluid instagram-background">
+  <div class="row-fluid instagram-background backg">
       <div class="span12">
           <ul class="instagram clearfix">
               {% for image in instagram_images %}

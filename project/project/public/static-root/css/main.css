@@ -1,9 +1,9 @@
 /*
 ==================================================================
-                  _    _    _    _    _    _    _    _    _  
-                 / \  / \  / \  / \  / \  / \  / \  / \  / \ 
-                ( w )( a )( t )( e )( r )( . )( o )( r )( g )
-                 \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/ 
+          _    _    _    _    _    _    _    _    _
+         / \  / \  / \  / \  / \  / \  / \  / \  / \
+        ( w )( a )( t )( e )( r )( . )( o )( r )( g )
+         \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/  \_/
 
 ==================================================================
 */
@@ -205,17 +205,26 @@ body{
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 2;
     -webkit-transition: all 0.2s ease-in;
     -moz-transition: all 0.2s ease-in;
     -o-transition: all 0.2s ease-in;
     transition: all 0.2s ease-in;
 }
 
+.wrap-hidden {
+    left: -220px;
+    right: 220px;
+}
+
+.backg {
+    background-color: #101010;
+}
+
 .mobile-nav-btn {
     position: absolute;
     top: 0;
-    right: 0px;
-    z-index: 10;
+    right: 10px;
     display: block;
     padding: 0;
     padding-top: 14px;
@@ -225,7 +234,6 @@ body{
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
-    z-index: 8;
     -webkit-transition: opacity 0.2s ease-in;
     -moz-transition: opacity 0.2s ease-in;
     -o-transition: opacity 0.2s ease-in;
@@ -235,19 +243,16 @@ body{
 .mobile-nav {
     position: fixed;
     top: 0;
-    right: -220px;
+    right: 0;
     bottom: 0;
     width: 220px;
     background: #232323 url(../image/stripe.png);
-    z-index: 14;
+    box-shadow: inset 0px 0px 20px rgba(0,0,0,0.8);
+    z-index: 1;
     -webkit-transition: all 0.2s ease-in;
     -moz-transition: all 0.2s ease-in;
     -o-transition: all 0.2s ease-in;
     transition: all 0.2s ease-in;
-}
-
-.mobile-nav-visible {
-    right: 0;
 }
 
 .close-mobile-nav {
@@ -395,15 +400,15 @@ body{
 }
 
 #settings-form .field {
-     margin: 14px 0; 
+     margin: 14px 0;
 }
 
 #settings-form .checkboxField {
-     margin: 0 0 14px 4px; 
+     margin: 0 0 14px 4px;
 }
 
 #settings-form .checkboxField:first-child {
-     margin: 34px 0 14px 4px; 
+     margin: 34px 0 14px 4px;
 }
 
 #settings-form label {
@@ -472,7 +477,7 @@ body{
 .checkboxField label {
     padding-top: 2px;
 }
- 
+
 div.checkboxField:not(#foo) > input[type='checkbox'] {
     opacity: 0;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
@@ -485,7 +490,7 @@ div.checkboxField:not(#foo) > input[type='checkbox'] + label {
     padding-left: 32px;
     width: 260px;
     height: 24px;
-    background: url(../image/checkbox.png) no-repeat 0px -4px; 
+    background: url(../image/checkbox.png) no-repeat 0px -4px;
 }
 
 div.checkboxField:not(#foo) > input[type='checkbox']:hover + label {
@@ -557,6 +562,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
     overflow: hidden;
     min-height: 480px;
     width: 100%;
+    background-color: #101010;
     background-position: center top;
     background-repeat: no-repeat;
     -webkit-box-shadow: inset 400px -60px 400px rgba(0,0,0,0.2);
@@ -911,7 +917,7 @@ span.alert-error:before {
 
 .signin-heading {
     margin: 80px 0 30px;
-    padding-bottom: 18px; 
+    padding-bottom: 18px;
     line-height: 1;
     color: white;
     text-align: center;
@@ -925,7 +931,7 @@ span.alert-error:before {
     background: rgba(0,0,0,0.7);
     *background: black;
 }
-    
+
 .signin-text {
     color: white;
     font-size: 18px;

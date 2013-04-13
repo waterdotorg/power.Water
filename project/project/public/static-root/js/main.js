@@ -1,4 +1,4 @@
-/*  
+/*
 ==================================================================
         AJAX FORM FUNCTIONS
 ==================================================================
@@ -60,7 +60,7 @@ function getCookie (name) {
 var csrftoken = getCookie('csrftoken');
 
 
-/*  
+/*
 ==================================================================
         SUBMIT AND SEND SETTINGS FORM
 ==================================================================
@@ -117,11 +117,11 @@ $(document).on("submit", "#settings-form", function(e) {
 });
 
 
-/*  
+/*
 ==================================================================
         BOOTSTRAP FUNCTIONS
 ==================================================================
-*/  
+*/
 
 $(document).ready(function () {
 
@@ -153,7 +153,7 @@ $(document).ready(function () {
             $areaFull = $('.area-full'),
             $heroText = $('.hero-text'),
             $postNav = $('.post-navigation a');
-        
+
         if (windowWidth > 767) {
             $areaFull.css({'height':(windowHeight-110)+'px'});
             $heroText.css({'top':(windowHeight*0.45)+'px'});
@@ -273,12 +273,12 @@ $(document).ready(function () {
     $('.mobile-nav-btn').click(function (e){
         e.preventDefault();
         if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
-            $('.mobile-nav').removeClass('mobile-nav-visible');
+            $('.wrap').removeClass('wrap-hidden');
             $(this).removeClass('.mobile-nav-btn-nav-visible');
             $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
-            
+
         } else {
-            $('.mobile-nav').addClass('mobile-nav-visible');
+            $('.wrap').addClass('wrap-hidden');
             $(this).addClass('.mobile-nav-btn-nav-visible');
             $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
         }
@@ -286,7 +286,7 @@ $(document).ready(function () {
 
     $('.close-mobile-nav').click(function (e){
         e.preventDefault();
-        $('.mobile-nav').removeClass("mobile-nav-visible");
+        $('.wrap').removeClass("wrap-hidden");
         $('.mobile-nav-btn').removeClass('.mobile-nav-btn-nav-visible');
         $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
     });
@@ -295,7 +295,7 @@ $(document).ready(function () {
 
 
 
-/*  
+/*
 ==================================================================
         TRACKING/SHARING FUNCTIONS
 ==================================================================
@@ -311,7 +311,7 @@ $(document).ready(function() {
     $('#signInTwitter').click(function () {
         _gaq.push(['_trackEvent', '2_signin_page', 'button_twitter']);
     });
-    
+
     // Other Tracking Functions
     $('#trackSupportEvent').click(function () {
         _gaq.push(['_trackEvent', '1_landing_page', 'button_right_signin', userPK ]);
