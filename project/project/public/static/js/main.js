@@ -272,21 +272,34 @@ $(document).ready(function () {
 
     $('.mobile-nav-btn').click(function (e){
         e.preventDefault();
-        if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
-            $('.wrap').removeClass('wrap-hidden');
-            $(this).removeClass('.mobile-nav-btn-nav-visible');
-            $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
+        if (Modernizr.csstransforms && Modernizr.csstransitions) {
+            if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
+                $('.wrap').removeClass('wrap-hidden');
+                $(this).removeClass('.mobile-nav-btn-nav-visible');
+                $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
 
+            } else {
+                $('.wrap').addClass('wrap-hidden');
+                $(this).addClass('.mobile-nav-btn-nav-visible');
+                $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
+            }
         } else {
-            $('.wrap').addClass('wrap-hidden');
-            $(this).addClass('.mobile-nav-btn-nav-visible');
-            $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
+            if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
+                $('.wrap').removeClass('wrap-hidden-nocss');
+                $(this).removeClass('.mobile-nav-btn-nav-visible');
+                $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
+
+            } else {
+                $('.wrap').addClass('wrap-hidden-nocss');
+                $(this).addClass('.mobile-nav-btn-nav-visible');
+                $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
+            }
         }
     });
 
     $('.close-mobile-nav').click(function (e){
         e.preventDefault();
-        $('.wrap').removeClass("wrap-hidden");
+        $('.wrap').removeClass("wrap-hidden").removeClass("wrap-hidden-nocss");
         $('.mobile-nav-btn').removeClass('.mobile-nav-btn-nav-visible');
         $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
     });
