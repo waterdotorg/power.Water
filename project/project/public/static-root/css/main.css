@@ -202,7 +202,7 @@ body{
 .wrap {
     position: absolute;
     top: 0;
-    right: 0;
+    width: 100%;
     bottom: 0;
     left: 0;
     z-index: 2;
@@ -213,8 +213,15 @@ body{
 }
 
 .wrap-hidden {
+    -webkit-transform: translateX(-260px);
+    -moz-transform: translateX(-260px);
+    -o-transform: translateX(-260px);
+    -ms-transform: translateX(-260px);
+    transform: translateX(-260px);
+}
+
+.wrap-hidden-nocss {
     left: -220px;
-    right: 220px;
 }
 
 .backg {
@@ -245,7 +252,7 @@ body{
     top: 0;
     right: 0;
     bottom: 0;
-    width: 220px;
+    width: 260px;
     background: #232323 url(../image/stripe.png);
     box-shadow: inset 0px 0px 20px rgba(0,0,0,0.8);
     z-index: 1;
@@ -257,7 +264,7 @@ body{
 
 .close-mobile-nav {
     margin: 10px 0 0;
-    padding: 12px 0 10px 30px;
+    padding: 12px 0 10px 45px;
     border-bottom: 1px solid black;
 }
 
@@ -278,10 +285,10 @@ body{
     text-decoration: none;
 }
 .mobile-nav span {
-    padding-top: 3px;
+    padding-top: 5px;
 }
 .mobile-nav li a {
-    padding: 24px 0 20px 30px;
+    padding: 24px 0 20px 40px;
 }
 
 .mobile-nav li:first-child {

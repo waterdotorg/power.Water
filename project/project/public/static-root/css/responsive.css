@@ -72,12 +72,8 @@
 /* Landscape phones and down */
 @media (max-width: 480px) {
   .hero .container { max-width: 80%; }
-  .mobile-nav { width: 160px; }
-  .wrap-hidden { left: -160px; right: 160px; }
-  .close-mobile-nav { padding: 16px 0 16px 30px; }
-  .mobile-nav a { font-size: 100%; }
-  .mobile-nav span { padding-top: 0px; }
-  .hero-text h1 { width: 70%; font-size: 44px; line-height: 1.1em; }
+  .mobile-nav span { padding-top: 6px; }
+  .hero-text h1 { width: 70%; font-size: 44px; line-height: 1.1em; margin-top: -24px; }
   #featured-post h2 { font-size: 44px; }
   .hero-text p { width: 90%; font-size: 18px; margin-bottom: 20px; }
   .hero-text .small-btn { width: 46%; }
