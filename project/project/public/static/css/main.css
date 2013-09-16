@@ -121,7 +121,14 @@ body{
 #header {
     padding-top: 14px;
     height: 52px;
-    background: black;
+    border-top: 1px solid #adadad;
+    border-bottom: 1px solid #adadad; /* stroke */
+    background-color: #fff; /* layer fill content */
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEzNTYgNzAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MC4xNDc0OTI2MjUzNjg3JSIgeTE9IjEwNi43ODU3MTQyODU3MTQlIiB4Mj0iNTAuMTQ3NDkyNjI1MzY4NyUiIHkyPSIyMS43ODU3MTQyODU3MTQzJSI+CjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlYmViZWIiIHN0b3Atb3BhY2l0eT0iMSIvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICA8L2xpbmVhckdyYWRpZW50PgoKPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEzNTYiIGhlaWdodD0iNzAiIGZpbGw9InVybCgjaGF0MCkiIC8+Cjwvc3ZnPg==); /* gradient overlay */
+    background-image: -moz-linear-gradient(bottom, #ebebeb -21.07%, #fff 63.93%); /* gradient overlay */
+    background-image: -o-linear-gradient(bottom, #ebebeb -21.07%, #fff 63.93%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(bottom, #ebebeb -21.07%, #fff 63.93%); /* gradient overlay */
+    background-image: linear-gradient(bottom, #ebebeb -21.07%, #fff 63.93%); /* gradient overlay */
 }
 
 .logo {
