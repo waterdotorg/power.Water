@@ -21,6 +21,7 @@ from fbauth.models import FacebookUser
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
+
 class Command(BaseCommand):
     help = 'Daemon to push facebook status updates'
     args = ''
@@ -56,6 +57,7 @@ class Command(BaseCommand):
                 start_date__lte=now,
                 end_date__gte=now,
             )
+
             if not facebook_status_updates.count():
                 logger.info("No FacebookStatusUpdates available.")
                 self.close_db_connection()
@@ -63,7 +65,12 @@ class Command(BaseCommand):
                 continue
 
             for facebook_status_update in facebook_status_updates:
-                facebook_users = FacebookUser.objects.filter(status=True)
+                facebook_users = FacebookUser.objects.filter(
+                    status=True,
+                    user__is_active=True,
+                    user__profile__semaphore_facebook=False,
+                    user__profile__enable_facebook_updates=True
+                ).exclude(user__facebookstatusupdatelog__facebook_status_update=facebook_status_update)
 
                 # Group Filtering
                 try:
@@ -72,42 +79,28 @@ class Command(BaseCommand):
                 except:
                     pass
 
-                # Exclude processed users
-                fb_log = FacebookStatusUpdateLog.objects.filter(facebook_status_update=facebook_status_update)
-                fb_log_users_pk_list = list(fb_log.values_list('user__pk', flat=True))
-                if fb_log_users_pk_list:
-                    facebook_users = facebook_users.exclude(user__pk__in=fb_log_users_pk_list)
+                facebook_users_list = list(facebook_users[:250])
 
-                facebook_users_pk_list = list(facebook_users.values_list('user__pk', flat=True))
-
-                if not facebook_users_pk_list:
+                if not facebook_users_list:
                     logger.info("No facebook users available for status update %s" % facebook_status_update)
                     continue
 
-                profiles = Profile.objects.filter(
-                    semaphore_facebook=False,
-                    enable_facebook_updates=True,
-                    user__is_active=True,
-                    user__pk__in=facebook_users_pk_list
+                user_id_list = [fu.pk for fu in facebook_users_list]
+
+                Profile.objects.filter(user__pk__in=user_id_list).update(
+                    semaphore_facebook=True
                 )
-                profiles_pk_list = list(profiles.values_list('pk', flat=True))
-                Profile.objects.filter(pk__in=profiles_pk_list).update(semaphore_facebook=True)
-                profiles = Profile.objects.filter(pk__in=profiles_pk_list)
 
-                for profile in profiles:
-                    logger.info('Facebook status update %d activated for profile %d' % (facebook_status_update.pk, profile.pk))
+                for facebook_user in facebook_users_list:
+                    logger.info('Facebook status update %d activated for facebook user %d' % (facebook_status_update.pk, facebook_user.pk))
+
                     try:
-                        # Double check for dupes
-                        dupe_check = FacebookStatusUpdateLog.objects.filter(user=profile.user, facebook_status_update=facebook_status_update)
-                        if dupe_check.count():
-                            raise Exception('Dupe facebook status update %d found for profile %d' % (facebook_status_update.pk, profile.pk))
-
                         bitly_connection = bitly_api.Connection(settings.BITLY_LOGIN, settings.BITLY_API_KEY)
                         url_query_params = {
-                            'ur': str(profile.user.pk),
+                            'ur': str(facebook_user.user.pk),
                             'utm_source': 'facebook',
                             'utm_medium': 'wall',
-                            'utm_content': str(profile.user.pk),
+                            'utm_content': str(facebook_user.user.pk),
                             'utm_campaign': 'facebook_status_update'
                         }
                         if facebook_status_update.link:
@@ -132,19 +125,19 @@ class Command(BaseCommand):
                             "caption": smart_str(facebook_status_update.caption).strip(),
                             "description": smart_str(facebook_status_update.description).strip(),
                         }
-                        facebook_user = FacebookUser.objects.get(user=profile.user)
                         graph = facebook.GraphAPI(self.app_access_token)
                         try:
                             graph.put_wall_post(message='', attachment=attachment, profile_id=facebook_user.uid)
                         except facebook.GraphAPIError, e:
                             self.graph_api_error_handle(e, facebook_user)
-                            raise Exception('Error pushing facebook post to wall of user id %d. Error: %s' % (profile.user.pk, str(e)))
+                            raise Exception('Error pushing facebook post to wall of user id %d. Error: %s' % (facebook_user.user.pk, str(e)))
 
-                        logger.info('Successfully sent facebook status update %d to profile %d' % (facebook_status_update.pk, profile.pk))
-                        FacebookStatusUpdateLog.objects.create(user=profile.user, facebook_status_update=facebook_status_update)
+                        logger.info('Successfully sent facebook status update %d to facebook user %d' % (facebook_status_update.pk, facebook_user.pk))
+                        FacebookStatusUpdateLog.objects.create(user=facebook_user.user, facebook_status_update=facebook_status_update)
                     except Exception, e:
                         logger.error('%s' % e)
                     finally:
+                        profile = Profile.objects.get(user=facebook_user.user)
                         profile.semaphore_facebook = False
                         profile.save()
                     time.sleep(1)
