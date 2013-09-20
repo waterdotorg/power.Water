@@ -49,7 +49,7 @@ class Command(BaseCommand):
             if not twitter_status_updates.count():
                 logger.info("No TwitterStatusUpdates available.")
                 self.close_db_connection()
-                time.sleep(300)
+                time.sleep(200)
                 continue
 
             for twitter_status_update in twitter_status_updates:
@@ -67,7 +67,7 @@ class Command(BaseCommand):
                 except:
                     pass
 
-                twitter_users_list = list(twitter_users[:250])
+                twitter_users_list = list(twitter_users[:150])
 
                 if not twitter_users_list:
                     logger.info("No twitter users available for status update %d" % twitter_status_update.pk)
@@ -127,4 +127,4 @@ class Command(BaseCommand):
                         profile.save()
                     time.sleep(1)
             self.close_db_connection()
-            time.sleep(300)
+            time.sleep(200)

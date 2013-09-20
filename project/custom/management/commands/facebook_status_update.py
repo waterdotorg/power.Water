@@ -61,7 +61,7 @@ class Command(BaseCommand):
             if not facebook_status_updates.count():
                 logger.info("No FacebookStatusUpdates available.")
                 self.close_db_connection()
-                time.sleep(300)
+                time.sleep(200)
                 continue
 
             for facebook_status_update in facebook_status_updates:
@@ -79,7 +79,7 @@ class Command(BaseCommand):
                 except:
                     pass
 
-                facebook_users_list = list(facebook_users[:250])
+                facebook_users_list = list(facebook_users[:150])
 
                 if not facebook_users_list:
                     logger.info("No facebook users available for status update %s" % facebook_status_update)
@@ -142,4 +142,4 @@ class Command(BaseCommand):
                         profile.save()
                     time.sleep(1)
             self.close_db_connection()
-            time.sleep(300)
+            time.sleep(200)
