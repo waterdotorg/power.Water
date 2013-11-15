@@ -73,7 +73,7 @@ class Command(BaseCommand):
                     logger.info("No twitter users available for status update %d" % twitter_status_update.pk)
                     continue
 
-                user_id_list = [tu.pk for tu in twitter_users_list]
+                user_id_list = [tu.user.pk for tu in twitter_users_list]
 
                 Profile.objects.filter(user__pk__in=user_id_list).update(
                     semaphore_twitter=True

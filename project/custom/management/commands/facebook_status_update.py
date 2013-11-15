@@ -85,7 +85,7 @@ class Command(BaseCommand):
                     logger.info("No facebook users available for status update %s" % facebook_status_update)
                     continue
 
-                user_id_list = [fu.pk for fu in facebook_users_list]
+                user_id_list = [fu.user.pk for fu in facebook_users_list]
 
                 Profile.objects.filter(user__pk__in=user_id_list).update(
                     semaphore_facebook=True
