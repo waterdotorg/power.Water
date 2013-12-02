@@ -112,11 +112,18 @@ class Command(BaseCommand):
                         auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
                         auth.set_access_token(twitter_user.oauth_token, twitter_user.oauth_token_secret)
                         api = tweepy.API(auth_handler=auth, api_root='/1.1')
-                        try:
-                            api.update_status(status=twitter_content)
-                        except tweepy.TweepError, e:
-                            self.status_update_error(e, twitter_user)
-                            raise Exception('Error pushing twitter status update for user id %d. Error: %s' % (twitter_user.user.pk, str(e)))
+                        if twitter_status_update.picture:
+                            try:
+                                api.update_with_media(smart_str(twitter_status_update.picture.file.name), status=twitter_content)
+                            except tweepy.TweepError, e:
+                                self.status_update_error(e, twitter_user)
+                                raise Exception('Error pushing twitter status update with media for user id %d. Error: %s' % (twitter_user.user.pk, str(e)))
+                        else:
+                            try:
+                                api.update_status(status=twitter_content)
+                            except tweepy.TweepError, e:
+                                self.status_update_error(e, twitter_user)
+                                raise Exception('Error pushing twitter status update for user id %d. Error: %s' % (twitter_user.user.pk, str(e)))
                         logger.info('Successfully sent twitter status update %d to twitter user %d' % (twitter_status_update.pk, twitter_user.pk))
                         TwitterStatusUpdateLog.objects.create(user=twitter_user.user, twitter_status_update=twitter_status_update)
                     except Exception, e:
