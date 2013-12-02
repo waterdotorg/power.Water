@@ -61,6 +61,7 @@ class TwitterStatusUpdate(models.Model):
         blank=True,
         help_text="Homepage url used if blank. Use absolute url's with "
                   "trailing slash - http://example.com/foobar/")
+    picture = models.ImageField(upload_to="twitter-status-update", blank=True)
     content = models.TextField(help_text="Context variables: {{ short_link }}")
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
