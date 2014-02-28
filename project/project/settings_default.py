@@ -170,6 +170,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # "custom.context_processors.returning_user",
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
+        'LOCATION': '127.0.0.1:11211',
+        'KEY_PREFIX': 'power',
+    }
+}
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
@@ -245,6 +253,8 @@ LOGGING = {
         },
     }
 }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 # easy_thumbnails config
 THUMBNAIL_SUBDIR = 'thumbs'
