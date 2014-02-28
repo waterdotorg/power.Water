@@ -28,7 +28,7 @@ def homepage(request, post_slug=None):
     display_user_pk = request.GET.get('du')
     source_referrer = request.session.get('sr', None)
     absolute_uri = request.build_absolute_uri()
-    instagram_images = Image.objects.order_by('-instagram_id')[:200]
+    instagram_images = Image.objects.order_by('-instagram_id')[:60]
 
     if display_user_pk:
         try:
