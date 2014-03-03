@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
 from django.http import HttpResponseBadRequest, HttpResponse
@@ -28,7 +29,11 @@ def homepage(request, post_slug=None):
     display_user_pk = request.GET.get('du')
     source_referrer = request.session.get('sr', None)
     absolute_uri = request.build_absolute_uri()
-    instagram_images = Image.objects.order_by('-instagram_id')[:60]
+
+    instagram_images = cache.get('instagram_images')
+    if not instagram_images:
+        instagram_images = Image.objects.order_by('-instagram_id')[:60]
+        cache.set('instagram_images', instagram_images)
 
     if display_user_pk:
         try:
@@ -63,20 +68,30 @@ def homepage(request, post_slug=None):
         elif user_referrer_profile:
             display_profile = user_referrer_profile
 
-    site = Site.objects.get_current()
-    total_followers_qs = Profile.objects.aggregate(Sum('followers'))
-    try:
-        total_followers = int(total_followers_qs['followers__sum'])
-    except:
-        total_followers = 0
+    site = cache.get('current_site')
+    if not site:
+        site = Site.objects.get_current()
+        cache.set('current_site', site)
+
+    total_followers = cache.get('total_followers')
+    if not total_followers:
+        total_followers_qs = Profile.objects.aggregate(Sum('followers'))
+        try:
+            total_followers = int(total_followers_qs['followers__sum'])
+        except:
+            total_followers = 0
+        cache.set('total_followers', total_followers)
 
     if not post_slug:
-        try:
-            post = Post.objects.filter(
-                homepage=True,
-                published_date__lte=now).order_by('-published_date')[0]
-        except:
-            post = None
+        post = cache.get('homepage_post')
+        if not post:
+            try:
+                post = Post.objects.filter(
+                    homepage=True,
+                    published_date__lte=now).order_by('-published_date')[0]
+            except:
+                post = None
+            cache.set('homepage_post', post)
     else:
         try:
             post = Post.objects.get(homepage=True, published_date__lte=now,
