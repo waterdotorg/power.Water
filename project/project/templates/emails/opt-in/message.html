@@ -1,0 +1,22 @@
+{% extends "emails/base.html" %}
+
+{% block main %}
+    <table width="100%" cellpadding="20" cellspacing="0" border="0">
+        <tr>
+            <td width="100%" bgcolor="#ffffff">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="color:#4E4E4E; padding: 5px 30px 0 20px; padding-top:5px; vertical-align: top;" bgcolor="#ffffff">
+                            Thank you for joining {{ site.name }}. If you would like to join the Water.org
+                            newsletter, please click on the following link:
+                            <br /><br />
+                            <a href="http://{{ site.domain }}/opt-in/{{ profile.hex_digi }}">
+                                http://{{ site.domain }}/opt-in/{{ profile.hex_digi }}
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

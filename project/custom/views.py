@@ -10,7 +10,7 @@ from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db.models import Sum
 from django.http import HttpResponseBadRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import simplejson as json
 from django.utils.timezone import utc
 
@@ -124,6 +124,13 @@ def homepage(request, post_slug=None):
     return response
 
 
+def hex_digi(request, hex_digi=None):
+    profile = get_object_or_404(Profile, hex_digi=hex_digi)
+    profile.email_opt_in = True
+    profile.save()
+    messages.success(request, 'Your settings have been updated.')
+    return redirect(reverse('homepage'))
+
 @login_required
 def dashboard(request):
     profile = request.user.get_profile()
@@ -163,6 +170,13 @@ def ajax_email_form(request):
         form = EmailForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             form.save()
+
+            profile = request.user.get_profile()
+            if not profile.email_opt_in_sent:
+                profile.send_opt_in_email()
+                profile.email_opt_in_sent = True
+                profile.save()
+
             return HttpResponse(json.dumps('success'),
                                 mimetype="application/json")
         else:

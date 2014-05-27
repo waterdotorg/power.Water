@@ -1,3 +1,5 @@
+import datetime
+import hashlib
 import os
 import requests
 import shutil
@@ -7,8 +9,11 @@ import urllib
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.signals import user_logged_in
+from django.contrib.sites.models import Site
 from django.core.files.base import File
+from django.core.mail import EmailMultiAlternatives
 from django.db import models
+from django.template.loader import render_to_string
 
 from fbauth.models import FacebookUser
 from twauth.models import TwitterUser
@@ -146,6 +151,9 @@ class Profile(models.Model):
     enable_facebook_updates = models.BooleanField(default=True)
     enable_twitter_updates = models.BooleanField(default=True)
     enable_email_updates = models.BooleanField(default=True)
+    email_opt_in = models.BooleanField(default=False)
+    email_opt_in_sent = models.BooleanField(default=False)
+    hex_digi = models.CharField(max_length=256, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -228,6 +236,24 @@ class Profile(models.Model):
         friend_profiles = Profile.objects.filter(user_referrer=self.user).order_by('-pk')[:limit]
         return friend_profiles
 
+    def send_opt_in_email(self):
+        dict_context = {
+            'site': Site.objects.get_current(),
+            'profile': self,
+        }
+        email_subject = render_to_string('emails/opt-in/subject.txt',
+                                         dict_context).strip()
+        email_txt = render_to_string('emails/opt-in/message.txt',
+                                     dict_context)
+        email_html = render_to_string('emails/opt-in/message.html',
+                                      dict_context)
+        email = EmailMultiAlternatives(
+            email_subject, email_txt, settings.DEFAULT_FROM_EMAIL,
+            [self.user.email]
+        )
+        email.attach_alternative(email_html, 'text/html')
+        email.send()
+
 
 class FacebookOGReferredLog(models.Model):
     user = models.ForeignKey(User, related_name='user')
@@ -280,7 +306,17 @@ def user_signed_in(sender, request, user, **kwargs):
             profile.source_referrer = source_referrer
         profile.save()
 
+    if not profile.hex_digi:
+        m = hashlib.md5(datetime.datetime.utcnow().isoformat() + profile.user.username)
+        profile.hex_digi = m.hexdigest()
+        profile.save()
+
     if not profile.social_data_completed:
         profile.social_data_process()
+
+    if not profile.email_opt_in_sent and user.email:
+        profile.send_opt_in_email()
+        profile.email_opt_in_sent = True
+        profile.save()
 
 user_logged_in.connect(user_signed_in)

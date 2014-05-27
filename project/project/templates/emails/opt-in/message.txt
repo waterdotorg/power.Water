@@ -1,0 +1,8 @@
+Thank you for joining power.water.org. If you would like join the Water.org
+newsletter, please click on the following link:
+
+
+http://{{ site.domain }}/opt-in/{{ profile.hex_digi }}
+
+--
+Water.org | 920 Main St., Kansas City, MO 64105 | 816.877.8400

@@ -6,6 +6,7 @@ urlpatterns = patterns('custom.views',
     url(r'^signout/$', 'signout', name='signout'),
     url(r'^signin/$', 'signin', name='signin'),
     url(r'^post/(?P<post_slug>[-\w]+)/$', 'homepage', name='homepage'),
+    url(r'^opt-in/(?P<hex_digi>[-\w]+)/$', 'hex_digi', name='hex_digi'),
     url(r'^dashboard/$', 'dashboard', name='dashboard'),
     url(r'^$', 'homepage', name='homepage'),
 )
