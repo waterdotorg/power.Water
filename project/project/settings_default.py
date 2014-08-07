@@ -260,7 +260,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 THUMBNAIL_SUBDIR = 'thumbs'
 
 # Facebook settings
-FACEBOOK_PERMISSIONS_SCOPE = ['publish_stream', 'email']
+FACEBOOK_PERMISSIONS_SCOPE = ['publish_actions', 'email']
 FACEBOOK_LOGIN_SUCCESS_REDIRECT = '/dashboard/'
 FACEBOOK_LOGIN_ERROR_REDIRECT = '/signin/'
 

@@ -18,11 +18,13 @@ from django.db.models import Q
 from django.utils.encoding import smart_str
 from django.utils.timezone import utc
 
-from custom.models import FacebookStatusUpdate, FacebookStatusUpdateLog, Profile
+from custom.models import FacebookStatusUpdate, FacebookStatusUpdateLog, \
+    Profile
 from fbauth.models import FacebookUser
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
 
 class Command(BaseCommand):
     help = 'Daemon to push facebook status updates'
@@ -41,7 +43,10 @@ class Command(BaseCommand):
             'client_secret': settings.FACEBOOK_API_SECRET,
             'grant_type': 'client_credentials',
         }
-        r = requests.get('https://graph.facebook.com/oauth/access_token', params=params)
+        r = requests.get(
+            'https://graph.facebook.com/v2.0/oauth/access_token',
+            params=params
+        )
         return r.text.replace('access_token=', '')
 
     def graph_api_error_handle(self, e, facebook_user):
@@ -55,8 +60,13 @@ class Command(BaseCommand):
             try:
                 queue = self.work_queue.get_nowait()
                 profile = Profile.objects.get(pk=queue['profile_pk'])
-                facebook_status_update = FacebookStatusUpdate.objects.get(pk=queue['facebook_status_update_pk'])
-                logger.info('Facebook status update %d activated for profile %d' % (facebook_status_update.pk, profile.pk))
+                facebook_status_update = FacebookStatusUpdate.objects.get(
+                    pk=queue['facebook_status_update_pk']
+                )
+                logger.info(
+                    'Facebook status update %d activated for profile %d'
+                    % (facebook_status_update.pk, profile.pk)
+                )
             except:
                 logger.info('No facebook status updates found in queue')
                 time.sleep(30)
@@ -64,11 +74,18 @@ class Command(BaseCommand):
 
             try:
                 # Double check for dupes
-                dupe_check = FacebookStatusUpdateLog.objects.filter(user=profile.user, facebook_status_update=facebook_status_update)
+                dupe_check = FacebookStatusUpdateLog.objects.filter(
+                    user=profile.user,
+                    facebook_status_update=facebook_status_update
+                )
                 if dupe_check.count():
-                    raise Exception('Dupe facebook status update %d found for profile %d' % (facebook_status_update.pk, profile.pk))
+                    raise Exception(
+                        'Dupe facebook status update %d found for profile %d'
+                        % (facebook_status_update.pk, profile.pk)
+                    )
 
-                bitly_connection = bitly_api.Connection(settings.BITLY_LOGIN, settings.BITLY_API_KEY)
+                bitly_connection = bitly_api.Connection(settings.BITLY_LOGIN,
+                                                        settings.BITLY_API_KEY)
                 url_query_params = {
                     'ur': str(profile.user.pk),
                     'utm_source': 'facebook',
@@ -85,16 +102,20 @@ class Command(BaseCommand):
                         url_parts[4] = urllib.urlencode(query)
                         url = urlparse.urlunparse(url_parts)
                 else:
-                    url = 'http://%s?%s' % (self.domain, urllib.urlencode(url_query_params))
+                    url = 'http://%s?%s' % (self.domain,
+                                            urllib.urlencode(url_query_params))
                 bitly_results = bitly_connection.shorten(url)
                 if not bitly_results.get('url'):
-                    raise Exception("Unable to get url, %s, shortend with bit.ly" % url)
+                    raise Exception(
+                        "Unable to get url, %s, shortend with bit.ly"
+                        % url
+                    )
                 short_link = bitly_results.get('url')
 
                 attachment = {
                     "name": smart_str(facebook_status_update.name).strip(),
                     "link": short_link,
-                    "picture": "http://%s%s" % (self.domain, facebook_status_update.picture.url),
+                    "picture": "http://%s%s" % (self.domain,facebook_status_update.picture.url),
                     "caption": smart_str(facebook_status_update.caption).strip(),
                     "description": smart_str(facebook_status_update.description).strip(),
                 }

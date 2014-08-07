@@ -176,7 +176,7 @@ class Profile(models.Model):
                 user=self.user, status=True)
 
             # FB Profile Image
-            fb_image_url = 'http://graph.facebook.com/' + str(facebook_user.uid) + '/picture?type=large'
+            fb_image_url = 'http://graph.facebook.com/v2.0/' + str(facebook_user.uid) + '/picture?type=large'
             fb_image = urllib.urlretrieve(fb_image_url)
             if fb_image[0]:
                 fb_image_contents = File(open(fb_image[0]))
@@ -186,7 +186,7 @@ class Profile(models.Model):
 
             # FB Followers Count
             fql_query = 'SELECT friend_count FROM user WHERE uid=me()'
-            r = requests.get('https://graph.facebook.com/fql', params={'q': fql_query, 'access_token': facebook_user.access_token})
+            r = requests.get('https://graph.facebook.com/v2.0/fql', params={'q': fql_query, 'access_token': facebook_user.access_token})
             if r.json['data'][0]['friend_count']:
                 self.followers = int(r.json['data'][0]['friend_count'])
 

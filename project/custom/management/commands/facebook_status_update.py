@@ -37,7 +37,7 @@ class Command(BaseCommand):
             'client_secret': settings.FACEBOOK_API_SECRET,
             'grant_type': 'client_credentials',
         }
-        r = requests.get('https://graph.facebook.com/oauth/access_token', params=params)
+        r = requests.get('https://graph.facebook.com/v2.0/oauth/access_token', params=params)
         return r.text.replace('access_token=', '')
 
     def graph_api_error_handle(self, e, facebook_user):

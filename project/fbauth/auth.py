@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 
 from fbauth.models import FacebookUser
 
+
 class FbAuth(object):
     """
     Facebook Oauth2 Authentication Backend
@@ -28,7 +29,10 @@ class FbAuth(object):
             'client_secret': settings.FACEBOOK_API_SECRET,
             'code': verification_code,
         }
-        access_token_url = "https://graph.facebook.com/oauth/access_token?" + urllib.urlencode(args)
+        access_token_url = (
+            "https://graph.facebook.com/v2.0/oauth/access_token?"
+            + urllib.urlencode(args)
+        )
 
         fb_response = cgi.parse_qs(urllib.urlopen(access_token_url).read())
 
