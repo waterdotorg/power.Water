@@ -95,6 +95,9 @@ class Command(BaseCommand):
                     logger.info('Facebook status update %d activated for facebook user %d' % (facebook_status_update.pk, facebook_user.pk))
 
                     try:
+                        """
+                        ### Disable bit.ly due to API rate limitations ###
+
                         bitly_connection = bitly_api.Connection(settings.BITLY_LOGIN, settings.BITLY_API_KEY)
                         url_query_params = {
                             'ur': str(facebook_user.user.pk),
@@ -117,10 +120,11 @@ class Command(BaseCommand):
                         if not bitly_results.get('url'):
                             raise Exception("Unable to get url, %s, shortend with bit.ly" % url)
                         short_link = bitly_results.get('url')
+                        """
 
                         attachment = {
                             "name": smart_str(facebook_status_update.name).strip(),
-                            "link": short_link,
+                            "link": facebook_status_update.link,
                             "picture": "http://%s%s" % (self.domain, facebook_status_update.picture.url),
                             "caption": smart_str(facebook_status_update.caption).strip(),
                             "description": smart_str(facebook_status_update.description).strip(),
