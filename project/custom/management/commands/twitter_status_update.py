@@ -83,6 +83,9 @@ class Command(BaseCommand):
                     logger.info('Twitter status update %d activated for twitter user %d' % (twitter_status_update.pk, twitter_user.pk))
 
                     try:
+                        """
+                        ### Disable bit.ly due to API rate limitations ###
+
                         bitly_connection = bitly_api.Connection(settings.BITLY_LOGIN, settings.BITLY_API_KEY)
                         url_query_params = {
                             'ur': str(twitter_user.user.pk),
@@ -108,7 +111,8 @@ class Command(BaseCommand):
 
                         context = Context({"short_link": short_link})
                         template = Template(twitter_status_update.content)
-                        twitter_content = smart_str(template.render(context)).strip()
+                        """
+                        twitter_content = smart_str(twitter_status_update.content).strip()
                         auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
                         auth.set_access_token(twitter_user.oauth_token, twitter_user.oauth_token_secret)
                         api = tweepy.API(auth_handler=auth, api_root='/1.1')

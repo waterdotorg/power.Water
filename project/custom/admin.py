@@ -21,9 +21,9 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class TwitterStatusUpdateAdmin(admin.ModelAdmin):
-    list_display = ['content', 'link', 'start_date', 'end_date',
+    list_display = ['content', 'start_date', 'end_date',
                     'created_date']
-    search_fields = ['content', 'link']
+    search_fields = ['content']
     ordering = ['-created_date']
     filter_horizontal = ('groups',)
 

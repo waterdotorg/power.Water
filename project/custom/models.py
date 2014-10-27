@@ -62,10 +62,12 @@ class FacebookStatusUpdateLog(models.Model):
 
 
 class TwitterStatusUpdate(models.Model):
+    """
     link = models.URLField(
-        blank=True,
-        help_text="Homepage url used if blank. Use absolute url's with "
-                  "trailing slash - http://example.com/foobar/")
+        help_text="Use absolute url's with trailing slash - http://example.com/foobar/"
+                  " If you need tracking use a link shortner."
+                  " Tracking example - http://example.com/?utm_source=twitter&utm_medium=tweet&utm_campaign=twitter_status_update")
+    """
     picture = models.ImageField(upload_to="twitter-status-update", blank=True)
     content = models.TextField(help_text="Context variables: {{ short_link }}")
     start_date = models.DateTimeField()
