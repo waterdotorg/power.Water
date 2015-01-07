@@ -1,12 +1,13 @@
 Django==1.4.2
 Markdown==2.2.0
 South==0.7.6
--e git+https://github.com/bitly/bitly-api-python.git@3b19d8ab89e0ba821c4b413676cd0c8d157a33fa#egg=bitly_api-dev
-distribute==0.6.24
+git+https://github.com/bitly/bitly-api-python.git@3b19d8ab89e0ba821c4b413676cd0c8d157a33fa#egg=bitly_api-dev
 django-debug-toolbar==0.9.4
 easy-thumbnails==1.1
--e git+https://github.com/pythonforfacebook/facebook-sdk.git@2fd825ba0b1121bc76b84c829b6cb43c7094cdc4#egg=facebook_sdk-dev
-gunicorn==0.14.6
+git+https://github.com/pythonforfacebook/facebook-sdk.git@2fd825ba0b1121bc76b84c829b6cb43c7094cdc4#egg=facebook_sdk-dev
+gunicorn==18.0
+httplib2==0.8
 python-instagram==0.8.0
 requests==0.14.1
-tweepy==2.1
+tweepy==2.2
+simplejson==3.1.2
