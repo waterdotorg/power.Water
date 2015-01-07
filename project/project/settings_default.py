@@ -7,6 +7,8 @@ PROJECT_ROOT = path.dirname(path.abspath(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+ALLOWED_HOSTS = ['*']
+
 ############################################################################################
 # Set following variables in settings_dev_private.py and/or settings_production_private.py #
 ############################################################################################
