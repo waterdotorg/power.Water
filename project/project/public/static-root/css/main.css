@@ -106,7 +106,7 @@ html { -webkit-font-smoothing: antialiased; }
 body{
     margin: 0;
     padding: 0;
-    background: #111111;
+    background: #959595;
     color: #363636;
     font-weight: 400;
     font-size: 14px;
@@ -707,7 +707,6 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
 
 #featured-post .aside-text {
     margin: 18px 0;
-    color: #c1c2c2;
     font-size: 16px;
 }
 
