@@ -61,6 +61,13 @@
   .next-image { width: 50%; margin-left: 23%; padding: 2%; margin-bottom: 20px; margin-top: 0; }
   .next-heading {font-size: 42px; }
   .instagram li { width: 25%; }
+
+  .water-footer { min-height: 320px; }
+  .water-footer-header { width: 100%; }
+  .water-footer-logo { float: none; width: 30%; margin-left: 35%; }
+  .water-footer-text { float: none; padding-left: 20%; padding-right: 20%; text-align: center; font-size: 20px; }
+  .water-footer-links li { margin-bottom: 10px; }
+
 }
 
 /* Landscape phones and down */
@@ -84,4 +91,14 @@
   #footer-base-wrap p { font-size: 12px; line-height: 21px; }
   #mobile-user-img { margin-left: 25%; padding: 2%; width: 48%; }
   #mobile-learn .small-btn { width: 80%; margin-left: 10%; padding: 18px 0; }
+
+  .water-footer-logo { width: 45%; margin-left: 27.5%; }
+
 }
+
+/* Landscape phones and down */
+@media (max-width: 386px) {
+  .water-footer-text { float: none; padding-left: 10%; padding-right: 10%; }
+  .water-footer { min-height: 380px; }
+}
+
