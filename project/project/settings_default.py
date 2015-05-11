@@ -152,7 +152,6 @@ INSTALLED_APPS = (
     'fbauth',
     'twauth',
     'custom',
-    'instagallery',
 )
 
 AUTHENTICATION_BACKENDS = (

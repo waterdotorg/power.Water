@@ -17,8 +17,8 @@
     {% block styles %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome-ie7.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.min.1.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome-ie7.min.css">
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/responsive.css">
@@ -92,29 +92,50 @@
     <!-- /Main -->
 {% endblock %}
 
-{% block footer %}
+  {% block footer_wrap %}
+  {% block footer %}
+  <div class="row-fluid water-footer">
+    <div class="water-footer-header clearfix">
+      <img class="water-footer-logo pull-left" src="{{ STATIC_URL }}image/logo-footer@2x.png" alt="" >
+      <p class="water-footer-text pull-right">Safe water and the dignity of a toilet for all</p>
+    </div>
+    <ul class="water-footer-links">
+      <li><a class="js-external" href="//www.facebook.com/water"><i class="icon-facebook-sign"></i>FACEBOOK</a></li>
+      <li><a class="js-external" href="//twitter.com/water"><i class="icon-twitter"></i>TWITTER</a></li>
+      <li><a class="js-external" href="//pinterest.com/waterdotorg/"><i class="icon-pinterest"></i>PINTEREST</a></li>
+      <li><a class="js-external" href="//www.youtube.com/user/water"><i class="icon-youtube-play"></i>YOUTUBE</a></li>
+      <li><a class="js-external" href="//instagram.com/water"><i class="icon-instagram"></i>INSTAGRAM</a></li>
+      <li><a class="js-external" href="//www.flickr.com/photos/waterdotorg/"><i class="icon-flickr"></i>FLICKR</a></li>
+      <li><a class="js-external" href="//plus.google.com/+water/posts"><i class="icon-google-plus-sign"></i>GOOGLE PLUS</a></li>
+    </ul>
+  </div>
   <div id="footer-base-wrap">
     <div class="container">
       <div class="row-fluid">
-        <div id="footer-base_general" class="span6">
+        <div class="span3">
+          <a class="btn btn-footer-donate" href="http://water.org/donate/">Contribute</a>
+        </div>
+        <div id="footer-base_general" class="span5">
           <p class="general-links">
-            <a href="http://water.org/contact/">Contact Us</a> |
-            <a href="http://water.org/about/finance/">Financial Reporting</a> |
-            <a href="http://water.org/privacy/">Privacy Policy</a> |
-            <a href="http://water.org/terms/">Terms of Use</a>
-            <br>
-            copyright &copy; 1990-{% now "Y" %} Water.org
+          <a href="http://water.org/contact/">Contact Us |</a>
+          <a href="http://water.org/about/finance/">Financial Reporting |</a>
+          <a href="http://water.org/privacy/">Privacy Policy |</a>
+          <a href="http://water.org/terms/">Terms of Use</a>
+          <br>
+          copyright &copy; 1990-{% now "Y" %} Water.org
           </p>
         </div>
-        <div id="footer-base_license" class="span6">
+        <div id="footer-base_license" class="span4">
           <p>
-            This site, unless otherwise noted, is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 United States License.</a>
+          This site, unless otherwise noted, is licensed under a <a href="http://creativecommons.org/licenses/by-sa/3.0/us/">Creative Commons Attribution-Share Alike 3.0 United States License.</a>
           </p>
         </div>
       </div>
     </div>
   </div>
-{% endblock %}
+  {% endblock %}
+  {% endblock %}
+
 </div>
 <!--/.wrap-->
 

@@ -16,8 +16,6 @@
 /* Large desktop */
 @media (min-width: 1200px) {
   .signin-heading { font-size: 86px; }
-	.thanks-heading { padding-top: 48px; }
-  .thanks-text { padding-top: 46px; }
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -35,8 +33,6 @@
   .instagram li { width: 20%; }
   .signin-heading { font-size: 56px; }
   .social-posts-heading { font-size: 56px; }
-  .thanks-heading { font-size: 60px; padding-top: 36px; }
-  .thanks-text { font-size: 16px; padding-top: 18px; }
   #dashboard-user-img { margin-top: 14px; }
   .next-heading {font-size: 56px; }
   .next-button a { font-size: 14px; }
@@ -61,9 +57,7 @@
   #signin .overlay { border-radius: 0; }
   .social-posts-heading { font-size: 48px; }
   .mobile-nav .container { max-width: 100%; }
-  .thanks-heading { font-size: 68px; padding: 0 0 18px; text-align: center; }
   #dashboard-user-img { width: 40%; margin-left: 30%; }
-  .thanks-text { font-size: 18px; width: 70%; padding-top: 4px; margin-left: 15%; text-align: center; }
   .next-image { width: 50%; margin-left: 23%; padding: 2%; margin-bottom: 20px; margin-top: 0; }
   .next-heading {font-size: 42px; }
   .instagram li { width: 25%; }
@@ -82,7 +76,6 @@
   .signin-heading { font-size: 58px; margin: 36px 0 18px; }
   .signin-text { font-size: 16px; line-height: 1.4; }
   .social-posts-text { font-size: 16px; line-height: 1.4; }
-  .thanks-text { font-size: 16px; font-weight: 400; width: 90%; margin-left: 5%; }
   .next-text { font-size: 16px; font-weight: 400; }
   .next-button a span { font-size: 48px; }
   .next-button a { font-size: 14px; font-weight: normal; }

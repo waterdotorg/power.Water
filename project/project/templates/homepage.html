@@ -33,17 +33,15 @@
 			  <div class="hero area-full">
 			  	<div class="container relative">
 			  		<div class="hero-text row-fluid">
-			  			<div class="span8">
+			  			<div class="span6">
 						  	<h1>Will You Join Us?</h1>
 						  	<p>
 							  Donate your voice to help spread the word about the crisis and we'll post news and stories for you automatically. It's easy. Your voice really has the power to make a difference.
 							</p>
-						  	<a id="trackJoinEvent" class="small-btn blue-btn" href="{% url signin %}">JOIN</a>
-						  	<a id="trackPhotoScrollEvent" class="small-btn" href="#">GALLERY</a>
-						  	<a id="trackDonateEvent" class="small-btn" target="_blank" href="http://water.org/donate/?utm_source=power_water&utm_medium=web&utm_campaign=homepage">DONATE</a>
+						  	<a id="trackJoinEvent" class="small-btn blue-btn" href="{% url twauth %}">SIGN UP</a>
 						  	<div id="join-hover" class="visible-desktop">
                   <p>
-                  	It only takes a second to sign up and we'll help you share stories about the water crisis on Facebook or Twitter.
+                  	It only takes a second to sign up and we'll help you share stories about the water crisis on Twitter.
                   </p>
                 </div>
 						  </div>
@@ -57,7 +55,7 @@
 		    </script>
 
 			  <!-- Story Toggle -->
-			  <div class="story-block backg">
+			  <div class="story-block">
 			    <div class="container">
 			    	<div class="row-fluid">
 				      <div class="story-toggle span12">
@@ -81,7 +79,7 @@
 										For more than twenty years <a target="_blank" href="http://water.org">Water.org</a> has worked with local partners and communities to solve the water and sanitation crisis. Over 75,000 people have donated their online voice to help inform and educate others online.
 									</p>
 								</aside>
-								<a class="small-btn learn-btn" target="_blank" href="http://water.org/">LEARN MORE</a>
+								<a class="small-btn learn-btn blue-btn" target="_blank" href="http://water.org/">LEARN MORE</a>
 							</div>
 				    </div>
 			    </div>
@@ -118,30 +116,6 @@
 			</p>
 			<a class="small-btn learn-btn" target="_blank" href="http://water.org/">LEARN MORE</a>
   	</div>
-  </div>
-
-
-  <!-- Instagram Banner -->
-  <div id="instagallery" class="blue-stripe">
-    <div class="container">
-        <p>
-        	<span class="icon-camera-retro instagram-icon"></span>&nbsp;&nbsp;Show your support on Instagram by using the hashtag <span class="instagram-hash">#water</span>
-        </p>
-    </div>
-  </div>
-  <!-- Instagram Images -->
-  <div class="row-fluid instagram-background backg">
-      <div class="span12">
-          <ul class="instagram clearfix">
-              {% for image in instagram_images %}
-              <li id="{{ image.instagram_id }}" class="instagram-placeholder">
-                  <a target="_blank" href="{{ image.link }}">
-                    <img class="instagram-image" src="{{ image.thumbnail_url }}" />
-                  </a>
-              </li>
-              {% endfor %}
-          </ul>
-      </div>
   </div>
 {% endblock %}
 

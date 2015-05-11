@@ -30,11 +30,6 @@ def homepage(request, post_slug=None):
     source_referrer = request.session.get('sr', None)
     absolute_uri = request.build_absolute_uri()
 
-    instagram_images = cache.get('instagram_images')
-    if not instagram_images:
-        instagram_images = Image.objects.order_by('-instagram_id')[:60]
-        cache.set('instagram_images', instagram_images)
-
     if display_user_pk:
         try:
             display_profile = Profile.objects.get(user__pk=display_user_pk)
@@ -112,7 +107,6 @@ def homepage(request, post_slug=None):
         'FACEBOOK_APP_NAMESPACE': settings.FACEBOOK_APP_NAMESPACE,
         'FACEBOOK_APP_ID': settings.FACEBOOK_APP_ID,
         'absolute_uri': absolute_uri,
-        'instagram_images': instagram_images,
     }
 
     response = render(request, 'homepage.html', dict_context)
@@ -144,11 +138,9 @@ def dashboard(request):
     }
     settings_form = SettingsForm(initial=settings_form_initial,
                                  user=request.user)
-    instagram_images = Image.objects.order_by('-instagram_id')[:200]
     return render(request, 'dashboard.html', {
         'profile': profile,
         'settings_form': settings_form,
-        'instagram_images': instagram_images,
     })
 
 
