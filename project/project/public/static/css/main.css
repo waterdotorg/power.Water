@@ -698,7 +698,7 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
 }
 
 #featured-post p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.4em;
 }
 
