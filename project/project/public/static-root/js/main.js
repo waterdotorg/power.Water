@@ -138,11 +138,11 @@ $(document).ready(function () {
     // });
 
     // set panels equal to window size
-    setPanelSize();
+    // setPanelSize();
     setBackgroundImage();
 
     $(window).resize(function () {
-        setPanelSize();
+        // setPanelSize();
         setBackgroundImage();
     });
 
@@ -189,7 +189,7 @@ $(document).ready(function () {
         $('.area-full').each(function () {
             var windowWidth = $(window).width();
 
-            if (windowWidth > 480) {
+            if (windowWidth > 767) {
                 $(this).css('background-image', desktopImg);
             } else {
                 $(this).css('background-image', mobileImg);

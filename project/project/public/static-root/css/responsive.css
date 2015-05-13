@@ -24,7 +24,7 @@
   #settings-form { padding: 10px 0; }
   #settings-form .close { top: 176px; right: 0px; }
   #ajax-form .close { top: 20px; }
-  .hero-text h1 { width: 100%; font-size: 60px; }
+  .hero-text h1 { width: 100%; font-size: 40px; }
   .small-btn { margin:0 1% 0 0; width: 31%; }
   .hero .container { max-width: 86%; }
   .hero-text p { width: 100%; font-size: 20px; }
@@ -48,8 +48,7 @@
   div.checkboxField:not(#foo) > input[type='checkbox'] + label { margin-left: 0; padding-left: 0; width: auto; height: auto; background: none; }
   #settings-form input[type="submit"] { margin-left: 0; font-size: 18px; padding: 10px 20px; }
   #settings-form .close { bottom: 30px; right: 0; top: auto; }
-  .hero-text { position: absolute; top: 50%; left: 0; margin-top: -150px; z-index: 12; }
-  .hero-text h1 { width: 70%; font-size: 54px; }
+  .hero-text h1 { width: 70%; font-size: 34px; }
   .hero-text p { width: 90%; font-size: 20px; }
   .post-navigation a { width: 38px; height: 480px; background-color: rgba(0,0,0,0.6); background-image: url(../image/arrows_mobile.png); }
   .post-navigation .next { right: 0; }
@@ -74,7 +73,7 @@
 @media (max-width: 480px) {
   .hero .container { max-width: 80%; }
   .mobile-nav span { padding-top: 6px; }
-  .hero-text h1 { width: 70%; font-size: 44px; line-height: 1.1em; margin-top: -24px; }
+  .hero-text h1 { width: 70%; font-size: 34px; line-height: 1.1em; }
   #featured-post h2 { font-size: 44px; }
   .hero-text p { width: 90%; font-size: 18px; margin-bottom: 20px; }
   .hero-text .small-btn { width: 46%; }
@@ -100,5 +99,6 @@
 @media (max-width: 386px) {
   .water-footer-text { float: none; padding-left: 10%; padding-right: 10%; }
   .water-footer { min-height: 380px; }
+  .hero-text h1 { font-size: 28px; }
 }
 

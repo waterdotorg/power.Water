@@ -576,20 +576,18 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
 
 .hero {
     overflow: hidden;
-    min-height: 480px;
-    width: 100%;
-    background-color: #101010;
-    background-position: center top;
-    background-repeat: no-repeat;
-    -webkit-box-shadow: inset 400px -60px 400px rgba(0,0,0,0.2);
-    box-shadow: inset 400px -60px 400px rgba(0,0,0,0.2);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
+    background: #101010 url("../image/hero-1280.jpg") center center no-repeat;
     background-size: cover;
+    -webkit-box-shadow: inset 520px 0px 200px rgba(0,0,0,0.3);
+    box-shadow: inset 520px 0px 200px rgba(0,0,0,0.3);
+    height: 70%;
+    position: relative;
+    width: 100%;
 }
 
 .hero .container {
     max-width: 90%;
+    min-height: 580px;
 }
 
 .visible-post {
@@ -598,18 +596,17 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
 
 .hero-text {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 0;
-    margin-top: -150px;
     z-index: 12;
 }
 
 .hero-text h1 {
     width: 100%;
     color: #feffff;
-    font-size: 72px;
+    font-size: 48px;
     font-family: 'Lato', sans-serif;
-    line-height: 0.85em;
+    line-height: 1.2;
     text-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
 
