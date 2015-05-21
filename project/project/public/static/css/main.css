@@ -99,6 +99,24 @@ hr { margin: 0 auto 30px; width: 80%; }
 .last { margin-right: 0; }
 .relative { position: relative; }
 
+/* Video */
+.embed-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%; 
+}
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* ==========================================================================
    PAGE STYLES
 ============================================================================= */
@@ -167,7 +185,7 @@ body{
 }
 .nav li a .label {
     position: absolute;
-    top: 6px;
+    top: 0px;
     left: -110px;
     display: block;
     width: 100px;
@@ -304,7 +322,7 @@ body{
 
 .mobile-nav a:active, .mobile-nav a:hover, .mobile-nav a:active, .mobile-nav-btn:active, .mobile-nav-btn:focus,
 .mobile-nav-btn:hover, .mobile-settings-btn:hover, .mobile-settings-btn:active, .mobile-settings-btn:focus {
-    color: white;
+    color: #00bff3;
     text-decoration: none;
     opacity: 0.8;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
@@ -336,6 +354,9 @@ body{
     text-transform: uppercase;
     font-weight: 900;
     font-size: 16px;
+}
+.hero .small-btn {
+    width: 190px;
 }
 .small-btn:hover {
     background-color: #D4D5D9;
@@ -400,6 +421,19 @@ body{
     filter: alpha(opacity=80);
 }
 
+/* Messaging */
+.alert-wrapper {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    height: 0;
+    text-align: center;
+    z-index: 999;
+}
+.alert-wrapper .container {
+    text-align: left;
+}
 
 /* ==================================================================
     SETTINGS FORM STYLES
@@ -879,6 +913,7 @@ form {
     background: #118DC0;
     color: white;
     font-family: 'Lato', sans-serif;
+    font-weight: 700;
 }
 
 #ajax-form .btn {
@@ -1041,6 +1076,7 @@ span.alert-error:before {
     font-weight: 900;
     font-size: 60px;
     font-family: 'Lato', sans-serif;
+    line-height: 1em;
 }
 
 .thanks-text {
