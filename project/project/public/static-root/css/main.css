@@ -423,7 +423,7 @@ body{
 
 /* Messaging */
 .alert-wrapper {
-    position: fixed;
+    position: absolute;
     top: 70px;
     left: 0;
     right: 0;
@@ -786,12 +786,13 @@ div.checkboxField:not(#foo) > input[type='checkbox']:checked + label {
 }
 
 #mobile-learn {
-    padding: 18px 0 36px;
+    background: url("../image/greypaper.jpg");
+    padding: 0 0 36px;
 }
 
 #mobile-learn .aside-text {
     margin: 18px 0;
-    color: #c1c2c2;
+    color: #555;
     font-size: 16px;
 }
 

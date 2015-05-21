@@ -86,33 +86,13 @@
 			</div>
 	</div>
 
-	{% if display_profile %}
-		<!-- Mobile Profile -->
-		<div id="mobile-user-profile" class="row-fluid visible-phone">
-			<div class="container">
-				<div id="mobile-user-img">
-			    {% if display_profile.image %}
-			      <img src="{% thumbnail display_profile.image 140x140 crop %}" alt="{{ display_profile.user.get_full_name }}" />
-			      <!-- <img src="{{ STATIC_URL }}image/avatar.png" width="140" height="140" /> -->
-			    {% else %}
-			      <img src="{{ STATIC_URL }}image/avatar.png" width="140" height="140" />
-			    {% endif %}
-		  	</div>
-
-		  	<h2 class="mobile-profile-name">{{ display_profile.user.get_full_name }}</h2>
-
-		    <h4 class="mobile-profile-heading">and <span>{{ total_followers|intcomma }}</span> others are listening</h4>
-	  	</div>
-	  </div>
-  {% endif %}
-
   <!-- Mobile Learn -->
-	<div id="mobile-learn" class="row-fluid visible-phone backg">
+	<div id="mobile-learn" class="row-fluid visible-phone">
 		<div class="container">
 			<p class="aside-text">
 				For more than twenty years <a target="_blank" href="http://water.org">Water.org</a> has worked with local partners and communities to solve the water and sanitation crisis. Over 50,000 people have donated their voice to our campaigns that inform and educate others online.
 			</p>
-			<a class="small-btn learn-btn" target="_blank" href="http://water.org/">LEARN MORE</a>
+			<a class="small-btn learn-btn blue-btn" target="_blank" href="http://water.org/">LEARN MORE</a>
   	</div>
   </div>
 {% endblock %}

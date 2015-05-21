@@ -64,7 +64,7 @@
   .next-image { width: 50%; margin-left: 23%; padding: 2%; margin-bottom: 20px; margin-top: 0; }
   .next-heading {font-size: 42px; }
   .instagram li { width: 25%; }
-
+  #featured-post { padding-bottom: 0px; }
   .water-footer { min-height: 320px; }
   .water-footer-header { width: 100%; }
   .water-footer-logo { float: none; width: 30%; margin-left: 35%; }
