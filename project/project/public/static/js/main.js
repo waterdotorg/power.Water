@@ -277,22 +277,24 @@ $(document).ready(function () {
                 $('.wrap').removeClass('wrap-hidden');
                 $(this).removeClass('.mobile-nav-btn-nav-visible');
                 $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
-
+                $(".mobile-nav").removeAttr('style');
             } else {
                 $('.wrap').addClass('wrap-hidden');
                 $(this).addClass('.mobile-nav-btn-nav-visible');
                 $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
+                $(".mobile-nav").css("max-height", "none");
             }
         } else {
             if ($(this).hasClass('.mobile-nav-btn-nav-visible')) {
                 $('.wrap').removeClass('wrap-hidden-nocss');
                 $(this).removeClass('.mobile-nav-btn-nav-visible');
                 $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
-
+                $(".mobile-nav").removeAttr('style');
             } else {
                 $('.wrap').addClass('wrap-hidden-nocss');
                 $(this).addClass('.mobile-nav-btn-nav-visible');
                 $('.mobile-settings-btn').addClass('mobile-settings-btn-hidden');
+                $(".mobile-nav").css("max-height", "none");
             }
         }
     });
@@ -302,6 +304,7 @@ $(document).ready(function () {
         $('.wrap').removeClass("wrap-hidden").removeClass("wrap-hidden-nocss");
         $('.mobile-nav-btn').removeClass('.mobile-nav-btn-nav-visible');
         $('.mobile-settings-btn').removeClass('mobile-settings-btn-hidden');
+        $(".mobile-nav").removeAttr('style');
     });
 
 });

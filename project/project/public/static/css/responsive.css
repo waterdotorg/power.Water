@@ -39,7 +39,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 979px) {
-  .mobile-nav { max-height: 800px; }
+  .mobile-nav { max-height: 700px; }
 }
 
 /* Landscape phone to portrait tablet */
