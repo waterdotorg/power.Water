@@ -371,9 +371,12 @@ body{
 .blue-btn, .blue-btn:visited {
     border-top: 1px solid rgba(255,255,255,0.6);
     background-color: #00bff3;
+    color: #fff;
 }
-.blue-btn:hover {
+.blue-btn:hover,
+.blue-btn:focus {
     background-color: #00C7FF;
+    color: #fff;
 }
 
 #share-section {
