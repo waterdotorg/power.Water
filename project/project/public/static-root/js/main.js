@@ -321,32 +321,32 @@ $(document).ready(function () {
 $(document).ready(function() {
     // Sign In Tracking
     $('#signInFacebook').click(function () {
-        _gaq.push(['_trackEvent', '2_signin_page', 'button_facebook']);
+        ga('send', 'event', '2_signin_page', 'button_facebook');
     });
 
     $('#signInTwitter').click(function () {
-        _gaq.push(['_trackEvent', '2_signin_page', 'button_twitter']);
+        ga('send', 'event', '2_signin_page', 'button_twitter');
     });
 
     // Other Tracking Functions
     $('#trackSupportEvent').click(function () {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_right_signin', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_right_signin', userPK);
     });
 
     $('#trackSupportEventLarge').click(function () {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_bottom_signin', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_bottom_signin', userPK);
     });
 
     $('#trackDonateEvent').click(function () {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_right_donate', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_right_donate', userPK);
     });
 
     $('#trackSubscribeEvent').click(function () {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_right_subscribe', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_right_subscribe', userPK);
     });
 
     $('#trackInstagramEvent').click(function () {
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_instagram_click', userPK ]);
+        ga('send', 'event', '3_dashboard_page', 'button_instagram_click', userPK);
     });
 
     // Sharing Buttons with Tracking Functions
@@ -383,37 +383,37 @@ $(document).ready(function() {
     // Dashboard Tracking Functions
     $('#trackFacebookInviteEvent').click(function (e) {
         window.open('https://www.facebook.com/dialog/feed?app_id=195104123845921&' + shareLink + '&picture=http://power.water.org/static/image/dashboard_well.jpg&name=Will%20You%20Join%20Us?&caption=Water.org%20and%20the%20water%20crisis&description=Donating%20your%20voice%20to%20the%20cause%20is%20easy%20and%20can%20make%20a%20difference.&redirect_uri=http://power.water.org/dashboard/','Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_facebook_invite', userPK ]);
+        ga('send', 'event', '3_dashboard_page', 'button_facebook_invite', userPK);
         e.preventDefault();
     });
 
     $('.trackPhotoScrollEvent').click(function (e) {
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_share_photo', userPK ]);
+        ga('send', 'event', '3_dashboard_page', 'button_share_photo', userPK);
         $('html, body').delay(300).animate({scrollTop: $(".blue-stripe").offset().top-200}, 500);
         e.preventDefault();
     });
 
     $('#trackPhotoScrollEvent').click(function (e) {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_share_photo', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_share_photo', userPK);
         $('html, body').delay(300).animate({scrollTop: $(".blue-stripe").offset().top-200}, 500);
         e.preventDefault();
     });
 
     $('#trackDonateEvent').click(function () {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_donate', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_donate', userPK);
     });
 
     $('#trackJoinEvent').click(function () {
-        _gaq.push(['_trackEvent', '1_landing_page', 'button_join', userPK ]);
+        ga('send', 'event', '1_landing_page', 'button_join', userPK);
     });
 
     $('#trackLearnEvent').click(function () {
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_share_photo', userPK ]);
+        ga('send', 'event', '3_dashboard_page', 'button_share_photo', userPK);
     });
 
     $('#trackTwitterInvite').click(function (e) {
         window.open('http://twitter.com/home?status=' + tweetTitle + '+' + shareLink,'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        _gaq.push(['_trackEvent', '3_dashboard_page', 'button_twitter_invite', userPK ]);
+        ga('send', 'event', '3_dashboard_page', 'button_twitter_invite', userPK);
         e.preventDefault();
     });
 });
