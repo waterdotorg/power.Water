@@ -5,4 +5,4 @@ newsletter, please click on the following link:
 http://{{ site.domain }}/opt-in/{{ profile.hex_digi }}
 
 --
-Water.org | 920 Main St., Kansas City, MO 64105 | 816.877.8400
+Water.org | 117 West 20th Street, Suite 203, Kansas City, MO 64108 USA | PH: 816.877.8400
